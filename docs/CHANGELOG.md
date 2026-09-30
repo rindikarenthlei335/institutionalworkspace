@@ -1,5 +1,29 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 1] - Service Store, Prepaid Checkout, Dynamic DOCX Templates, ETA Engine & Fulfillment Console
+### Added
+- **Database Migrations:**
+  - `00004_service_store.sql`: Created unified `service_catalog`, `service_variants`, `service_prices`, `service_bundles`, `service_orders`, `service_order_items`, `service_item_documents`, `service_item_events`, `service_subscriptions`, `holidays`, and `platform_settings` with strict tenant RLS.
+  - `00005_service_store_seed.sql`: Seeded 14 institutional services across 4 plan tiers, document requirements, and bundle configurations.
+- **Working-Day ETA Engine (`apps/web/src/features/services/lib/eta.ts`):**
+  - Business-day arithmetic skipping Saturdays, Sundays, and national holidays.
+  - Turnaround clock rule: clock starts only when prepaid payment is confirmed and all required documents are approved.
+  - Overdue and delay calculation with mandatory statutory disclaimer.
+  - Authored unit test suite in `tests/service_eta.test.ts` (all 14 unit tests pass).
+- **Dynamic Pre-Filled DOCX Template Generator (`apps/web/src/features/services/lib/docx-templates.ts`):**
+  - Instant in-browser compilation of pre-filled School Authorisation Letters, App Store / Play Store Publisher Authorisation Letters, and ERNET Domain Declarations using `docx`.
+- **School-Side Service Store UI (`apps/web/src/features/services/`):**
+  - `ServiceCatalogView.tsx`: Interactive tick cards across 5 categories, automatic Pro/Ultimate entitlement discounts, search filter, and sticky bottom cart bar.
+  - `ServiceDetailsDrawer.tsx`: Deliverables breakdown, requirements, and cancellation/refund policies.
+  - `ServiceCheckoutModal.tsx`: 5-step checkout wizard with document dossier uploading, terms acceptance (v2.1), and prepaid Platform Razorpay payment context (`PLATFORM_RAZORPAY_*`).
+  - `ServiceOrderTrackerView.tsx`: Real-time order and item tracking with live ETA countdown, document approval/rejection status with re-upload, printable tax invoices (SAC 998313), and interactive support messaging thread.
+- **Platform-Owner Fulfillment Console (`apps/web/src/app/platform/services/page.tsx`):**
+  - Operations queue with status/category filters, assignee controls, and document approval/rejection with client notifications.
+  - Automated dependency provisioning upon order completion (creates `tenant_domains` and 1-year auto-renewing `service_subscriptions`).
+  - One-click CSV export of queue data.
+- **Bilingual Translations:** Full 100% key parity across English (`en.json`) and Mizo (`lus.json`), verified via `pnpm i18n:check`.
+- **Architecture Documentation:** Authored comprehensive reference in `docs/SERVICE_STORE.md`.
+
 ## [Phase 2 - Milestone 0] - Audit, 4-Tier Plan Entitlement Engine, Feature Keys & Bilingual CI Gate
 ### Added
 - Saved master Phase 2 specification in `docs/PROJECT_SPEC_PHASE2.md`.

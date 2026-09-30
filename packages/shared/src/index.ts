@@ -7,11 +7,12 @@ export * from './schemas/admission';
 export * from './schemas/fee';
 
 import en from './i18n/en.json';
-import mizo from './i18n/mizo.json';
+import lus from './i18n/lus.json';
 
 export const DICTIONARIES: Record<string, typeof en> = {
   en,
-  mizo
+  lus,
+  mizo: lus
 };
 
 export function getDictionary(locale: string = 'en') {

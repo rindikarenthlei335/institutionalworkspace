@@ -35,5 +35,45 @@
     "subtitle": "Look up your pending fee dues by Admission Number or Student ID.",
     "payNow": "Pay Fee Online",
     "totalDue": "Total Outstanding Due"
+  },
+  "services": {
+    "title": "Services & Add-ons Store",
+    "subtitle": "Order institutional domain registrations, mobile apps, and search engine indexation",
+    "disclaimer": "Durations are estimates and depend on third parties (registries, Google, Apple) and on documents being complete. Rank, approval and review outcomes are not guaranteed.",
+    "categories": {
+      "all": "All Services",
+      "domains": "Domains & DNS",
+      "google_seo": "Google & SEO",
+      "mobile_apps": "Mobile Apps",
+      "data_storage": "Data & Storage",
+      "ai": "AI Copilot"
+    },
+    "cart": {
+      "selectedServices": "Selected Services",
+      "subtotal": "Subtotal",
+      "discounts": "Plan Discounts",
+      "tax": "Estimated Tax (GST)",
+      "total": "Total Amount Payable",
+      "checkout": "Proceed to Checkout",
+      "emptyCart": "No services selected. Tick any service card above to add to cart."
+    },
+    "checkout": {
+      "stepReview": "1. Review Services",
+      "stepDocs": "2. Documents & Details",
+      "stepTerms": "3. Terms & Refund Policy",
+      "stepPay": "4. Prepaid Payment",
+      "stepConfirmation": "5. Order Confirmed",
+      "prefilledTemplateDownload": "Download Pre-filled Word (.docx) Template",
+      "uploadFile": "Upload Completed & Signed File",
+      "termsAgreement": "I understand and agree to the Service Store Terms, cancellation rules, and refund policy. Work commences upon payment and document approval.",
+      "payButton": "Complete Prepaid Payment"
+    },
+    "tracking": {
+      "timeline": "Status Timeline",
+      "expectedCompletion": "Estimated Completion",
+      "actionNeeded": "Action Needed From You",
+      "downloadInvoice": "Download Platform Receipt / Invoice (PDF)",
+      "supportThread": "Order Support Messages"
+    }
   }
 }

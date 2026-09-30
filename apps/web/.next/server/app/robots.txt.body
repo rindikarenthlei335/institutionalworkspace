@@ -1,7 +1,0 @@
-User-Agent: *
-Allow: /
-Disallow: /admin/
-Disallow: /portal/
-Disallow: /platform/
-
-Sitemap: eduportal.com/sitemap.xml

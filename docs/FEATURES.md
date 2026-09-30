@@ -17,8 +17,8 @@ This file maintains the complete list of platform features across Phase 1 and Ph
 | `parent_portal` | Parent / Student PWA Portal | Done (P1 M4) | Essential | Parent, Student | `/portal/*` | All | `apps/web/src/app/portal/` |
 | `custom_domain` | Custom Domain Connection | Done (P1 M6) | Basic | `school_super_admin` | `/admin/settings` | `tenant_domains` | `apps/web/src/features/domains/` |
 | `domain_registration` | Managed Domain Service & Renewal | Done (P1 M6) | Basic | `school_super_admin`, Platform Owner | `/admin/settings`, `/platform/domains` | `domain_requests` | `apps/web/src/features/domains/` |
-| `service_store` | Service Store & Prepaid Checkout | Planned (P2 M1) | Basic | `school_super_admin` | `/admin/services`, `/platform/services` | `service_catalog`, `service_orders` | `apps/web/src/features/services/` |
-| `app_publishing` | App Store / Play Store Publishing | Planned (P2 M5) | Basic | `school_super_admin`, Platform Owner | `/admin/services`, `/platform/apps` | `tenant_apps`, `app_builds` | `apps/web/src/features/apps/` |
+| `service_store` | Service Store & Prepaid Checkout | Done (P2 M1) | Basic | `school_super_admin` | `/admin/services`, `/platform/services` | `service_catalog`, `service_orders`, `service_order_items`, `service_item_documents`, `service_subscriptions` | `apps/web/src/features/services/` |
+| `app_publishing` | App Store / Play Store Publishing | In Progress (P2 M1/M5) | Basic | `school_super_admin`, Platform Owner | `/admin/services`, `/platform/apps` | `tenant_apps`, `app_builds` | `apps/web/src/features/apps/` |
 | `website_analytics` | First-Party Privacy Analytics | Done (P1 M5) | Pro | `school_super_admin`, Platform Owner | `/admin/analytics` | `site_events` | `apps/web/src/features/analytics/` |
 | `principal_dashboard` | Executive Dashboard & Funnel | Done (P1 M5) | Pro | `school_super_admin` | `/admin/principal` | SQL Views / RPCs | `apps/web/src/features/principal/` |
 | `data_hub` | Data Hub Master Records | Planned (P2 M2) | Pro | `school_super_admin`, `school_admin` | `/admin/data-hub` | Master academic tables | `apps/web/src/features/data-hub/` |

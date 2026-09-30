@@ -35,5 +35,46 @@
     "subtitle": "I fee bat te awlsam takin zawng rawh.",
     "payNow": "Fee Peksak Rawh",
     "totalDue": "Pek Tur Zawng Zawng"
+  },
+  "services": {
+    "title": "Service Dawr & Add-on Te",
+    "subtitle": "Sikul domain registration, mobile app, leh Google search indexation chahna hmun",
+    "disclaimer": "Hahhhurna hunbi te hi chhutlawk mai a ni a, third party (registries, Google, Apple) leh lehkha pawimawh fel dan a zirin a danglam thei. Rank hmuh ngei ngei leh approval hi intiam theih a ni lo.",
+    "categories": {
+      "all": "Service Zawng Zawng",
+      "domains": "Domains & DNS",
+      "google_seo": "Google & SEO",
+      "mobile_apps": "Mobile App Te",
+      "data_storage": "Data & Storage",
+      "ai": "AI Copilot"
+    },
+    "cart": {
+      "selectedServices": "Service Thlan Chhuah Te",
+      "subtotal": "Belhkhawm Hmasa",
+      "discounts": "Plan Discount",
+      "tax": "Chhiah (GST) Chhutlawk",
+      "total": "Pek Tur Zawng Zawng",
+      "checkout": "Pekna Lam Pan Rawh",
+      "emptyCart": "Service thlan a la awm lo. Chah duh thlang rawh le."
+    },
+    "checkout": {
+      "stepReview": "1. Service Ennawnna",
+      "stepDocs": "2. Lehkha Pawimawh & Details",
+      "stepTerms": "3. Dan & Refund Policy",
+      "stepPay": "4. Pawisa Pek Lawkna",
+      "stepConfirmation": "5. Order Tling Tla",
+      "prefilledTemplateDownload": "Word (.docx) Template Khah Sa Download Rawh",
+      "uploadFile": "Lehkha Hming Ziah Hnan Upload Rawh",
+      "termsAgreement": "Service Dawr Dan, cancel theih dan, leh refund policy ka pawm e. Pawisa pek leh lehkha pawm a nih hnuah chauh hna tan a ni ang.",
+      "payButton": "Pawisa Pekna Fel Rawh"
+    },
+    "tracking": {
+      "timeline": "Hmalakna Timeline",
+      "expectedCompletion": "Zawhfel Hun Chhutlawk",
+      "actionNeeded": "I Lam Atanga Mamawh",
+      "downloadInvoice": "Platform Receipt / Invoice (PDF) Download Rawh",
+      "supportThread": "Order Tanpui Zawnna"
+    }
   }
 }
+
