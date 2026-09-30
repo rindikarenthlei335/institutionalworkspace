@@ -58,6 +58,57 @@ app.post('/api/storage/sign-url', async (c) => {
   });
 });
 
+// Versioned Mobile App Runtime Entitlements & Tenant Config API
+app.get('/v1/tenant/config', async (c) => {
+  const tenantSlug = c.req.query('tenant') || c.req.query('code') || 'mountcarmel';
+  const clientVersion = c.req.query('version') || '1.0.0';
+  const clientPlatform = c.req.query('platform') || 'android';
+  const isMountCarmel = tenantSlug.toLowerCase().includes('mount') || tenantSlug.toLowerCase().includes('mc');
+
+  return c.json({
+    tenant: {
+      id: isMountCarmel ? '00000000-0000-0000-0000-000000000001' : '00000000-0000-0000-0000-000000000002',
+      slug: isMountCarmel ? 'mountcarmel' : 'stmarys',
+      name: isMountCarmel ? 'Mount Carmel Higher Secondary School' : "St. Mary's Academy",
+      schoolCode: isMountCarmel ? 'MC-AIZAWL' : 'SMA-KOLKATA',
+      plan: isMountCarmel ? 'pro' : 'basic',
+      status: 'active'
+    },
+    branding: {
+      primaryColor: isMountCarmel ? '#163A2B' : '#235A78',
+      secondaryColor: isMountCarmel ? '#C9A84C' : '#F59E0B',
+      crestInitials: isMountCarmel ? 'MC' : 'SM'
+    },
+    entitlements: {
+      planId: isMountCarmel ? 'pro' : 'basic',
+      modulesEnabled: {
+        fees: isMountCarmel,
+        exams: isMountCarmel,
+        digitalId: isMountCarmel,
+        notices: true
+      }
+    },
+    appVersioning: {
+      clientVersion,
+      clientPlatform,
+      latestVersion: '1.0.0',
+      minSupportedVersion: '1.0.0',
+      forceUpdate: false
+    },
+    compliance: {
+      privacyPolicyUrl: 'https://mountcarmel.eduportal.com/about#privacy',
+      termsOfServiceUrl: 'https://mountcarmel.eduportal.com/about#terms',
+      accountDeletionUrl: 'https://mountcarmel.eduportal.com/portal/profile#delete-account'
+    },
+    reviewerDemoAccount: {
+      isAvailable: true,
+      username: 'apple.reviewer@mountcarmel.edu.in',
+      passwordHint: 'ReviewerDemo2025!',
+      role: 'parent'
+    }
+  });
+});
+
 // Custom Domain Connect (Cloudflare for SaaS Custom Hostnames)
 app.post('/api/domains/connect', async (c) => {
   try {

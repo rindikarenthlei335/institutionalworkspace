@@ -1,5 +1,32 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 4] - Mobile App (Expo / React Native), Runtime Entitlements & Store Compliance
+### Added
+- **Mobile Application Architecture (`apps/mobile/`):**
+  - Cross-platform React Native + Expo app supporting dual deployment:
+    1. Multi-tenant shared app (`APP_VARIANT=shared`, ID: `com.eduportal.app`) with dynamic school code lookup.
+    2. Dedicated white-label app (`APP_VARIANT=whitelabel`, ID: `in.edu.<slug>.portal`) pre-configured with institutional identity.
+- **Dynamic Runtime Entitlement Gating (`useTenantConfig.ts` & `/v1/tenant/config`):**
+  - Client queries `/api/v1/tenant/config` at boot.
+  - Dynamically renders colors, crest initials, and feature tabs (`fees`, `exams`, `digitalId`, `notices`, `attendance`) according to subscription plan (`basic`, `essential`, `pro`, `ultimate`) without requiring app store resubmission.
+  - Semantic version gating (`minSupportedVersion`): enforces mandatory updates when client is out-of-date via non-dismissible `ForceUpdateModal`.
+- **Database Migrations:**
+  - `supabase/migrations/00010_mobile_app_and_versions.sql`: Created `app_versions`, `app_review_demo_accounts`, `account_deletion_requests`, and `push_notification_tokens`.
+- **Core Mobile Screens:**
+  - `FindSchoolScreen.tsx`: School code resolution (`MC-AIZAWL` → `mountcarmel`) with quick demo presets.
+  - `LoginScreen.tsx`: Role selector (`parent`, `student`, `staff`) with 1-tap App Reviewer Demo Account autofill per Apple Guideline 2.1.
+  - `HomeScreen.tsx`: Branded institutional header, student ID strip, dynamic service grid, and priority announcement banner.
+  - `ResultsScreen.tsx`: Academic term selector, subject breakdown, GPA, merit rank, and offline cached view.
+  - `DigitalIDScreen.tsx`: CR80 ISO/IEC 7810 dual-sided card flip with photo, emergency details, official seal, verification QR token, and Apple/Google Wallet integration.
+  - `FeesScreen.tsx`: Outstanding dues breakdown, payment history, 256-bit encrypted online checkout modal, and tax receipt view.
+  - `ProfileScreen.tsx`: Demographics, English ↔ Mizo (`lus`) language switch, push notification toggles, compliance links, and in-app account deletion.
+- **App Store & Legal Compliance:**
+  - Apple Review Guideline 2.1: Dedicated reviewer demo account (`apple.reviewer@mountcarmel.edu.in`) with preloaded academic and billing state.
+  - Apple Review Guideline 5.1.1: Direct in-app Account Deletion Request modal with 30-day grace period, explicit confirmation typing, and statutory educational archive disclosure.
+- **Automated Verification:**
+  - `tests/mobile_runtime_entitlements.test.ts`: 7 unit tests verifying semantic version gating, tiered plan entitlement resolution, reviewer account invariants, and school code normalization.
+- **Documentation:** Authored comprehensive architectural and compliance guide in `docs/MOBILE_APP.md`.
+
 ## [Phase 2 - Milestone 3] - Exams, Marks, Marksheets & ID Card Generator
 ### Added
 - **Database Migrations:**
