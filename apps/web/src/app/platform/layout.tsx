@@ -18,6 +18,9 @@ export default function PlatformOwnerLayout({ children }: { children: React.Reac
           <Link href="/platform/plans" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-800 text-slate-300">
             <span>Plans & Feature Flags</span>
           </Link>
+          <Link href="/platform/billing" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-800 text-slate-300">
+            <span>SaaS Billing Tracker</span>
+          </Link>
           <Link href="/platform/domains" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-800 text-slate-300">
             <span>Managed Domains Queue</span>
           </Link>

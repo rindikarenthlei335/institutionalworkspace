@@ -16,7 +16,7 @@ This file maintains the complete list of platform features, plan availability, a
 | `online_admission` | Student Admission Portal | Ready | Essential | Anon, Staff | `/admission` | `admission_settings`, `applications`, `application_documents` | `apps/web/src/app/(public)/admission/` |
 | `parent_portal` | Parent / Student PWA Portal | Done (M2 Basic) | Essential | Parent, Student | `/portal/*` | All | `apps/web/src/app/portal/` |
 | `custom_domain` | Custom Domain Connection | Done (M2 Basic) | Basic | `school_super_admin` | `/admin/settings` | `tenant_domains` | `apps/web/src/features/settings/components/DomainSettingsForm.tsx` |
-| `domain_registration` | Managed Domain Service | Ready | Basic | `school_super_admin`, Platform Owner | `/platform/domains` | `domain_requests` | `apps/web/src/app/platform/domains/` |
+| `domain_registration` | Managed Domain Service | Done (M3 Platform) | Basic | `school_super_admin`, Platform Owner | `/platform/domains` | `domain_requests` | `apps/web/src/app/platform/domains/` |
 | `website_analytics` | First-Party Privacy Analytics | Ready | Pro | `school_super_admin`, Platform Owner | `/api/track` | `site_events` | `apps/api/src/index.ts` |
 | `principal_dashboard` | Executive Dashboard & Funnel | Done (M2 Basic) | Pro | `school_super_admin` | `/admin/principal` | SQL Views / RPCs | `apps/web/src/app/admin/principal/` |
-| `platform_panel` | SaaS Platform Owner Dashboard | Done (M2 Basic) | Platform Owner | `platform_owner` | `/platform/*` | Platform tables | `apps/web/src/app/platform/` |
+| `platform_panel` | SaaS Platform Owner Dashboard | Done (M3 Platform) | Platform Owner | `platform_owner` | `/platform/*` | Platform tables | `apps/web/src/features/platform/` |

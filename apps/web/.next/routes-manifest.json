@@ -135,6 +135,12 @@
       "namedRegex": "^/pay\\-fee(?:/)?$"
     },
     {
+      "page": "/platform/billing",
+      "regex": "^/platform/billing(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/platform/billing(?:/)?$"
+    },
+    {
       "page": "/platform/domains",
       "regex": "^/platform/domains(?:/)?$",
       "routeKeys": {},
