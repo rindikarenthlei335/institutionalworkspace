@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Card } from '@/components/ui/Card';
 import { Button } from '@/components/ui/Button';
 import { Select } from '@/components/ui/Select';
@@ -212,6 +213,90 @@ export function PrincipalDashboardView() {
           </div>
         </Card>
       </div>
+
+      {/* Academic & Examination Performance Overview */}
+      <Card className="p-5 border-emerald-600/30 bg-emerald-50/10">
+        <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-2 mb-4">
+          <div>
+            <span className="text-[10px] font-bold text-emerald-800 uppercase tracking-wider block">
+              Term 1 Academic Intelligence
+            </span>
+            <h3 className="font-display font-bold text-base text-[var(--text-primary)]">
+              Examination & Result Performance Overview
+            </h3>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="text-xs font-mono font-bold bg-emerald-100 text-emerald-800 px-2.5 py-1 rounded-full border border-emerald-300">
+              Overall Pass Rate: 96.8%
+            </span>
+            <Link
+              href="/admin/exams"
+              className="text-xs font-semibold text-[var(--brand-primary)] hover:underline"
+            >
+              Open Exams Center ↗
+            </Link>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {/* Top Rankers / Merit Roll */}
+          <div className="space-y-2">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide">
+              🌟 School Top Achievers (Class X)
+            </h4>
+            <div className="space-y-1.5 text-xs">
+              {[
+                { name: 'Lalrintluanga Sailo', class: 'Class X-A', pct: '94.2%', rank: '#1', badge: 'Gold' },
+                { name: 'Vanlalhruaii Pachuau', class: 'Class X-A', pct: '88.0%', rank: '#2', badge: 'Silver' },
+                { name: 'Zonunmawia Ralte', class: 'Class X-A', pct: '82.5%', rank: '#3', badge: 'Bronze' }
+              ].map((r, i) => (
+                <div key={i} className="p-2 bg-white rounded-lg border border-slate-200 flex items-center justify-between shadow-xs">
+                  <div>
+                    <span className="font-bold text-slate-900 block">{r.name}</span>
+                    <span className="text-[10px] text-slate-500">{r.class} · Rank {r.rank}</span>
+                  </div>
+                  <span className="font-mono font-black text-xs text-emerald-800 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                    {r.pct}
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Subject-Wise Pass Rates */}
+          <div className="space-y-2 md:col-span-2">
+            <h4 className="text-xs font-bold text-slate-800 uppercase tracking-wide">
+              📊 Subject-Wise Pass Rates & Benchmarks
+            </h4>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+              {[
+                { subject: 'Mizo Vernacular', passRate: 100, distinctions: 48 },
+                { subject: 'Computer Applications', passRate: 99, distinctions: 44 },
+                { subject: 'English Literature', passRate: 98, distinctions: 42 },
+                { subject: 'Social Sciences', passRate: 97, distinctions: 39 },
+                { subject: 'Integrated Science', passRate: 94, distinctions: 36 },
+                { subject: 'Mathematics', passRate: 91, distinctions: 31 }
+              ].map((s, i) => (
+                <div key={i} className="p-2.5 bg-white rounded-lg border border-slate-200 space-y-1">
+                  <div className="flex justify-between font-semibold">
+                    <span className="text-slate-800">{s.subject}</span>
+                    <span className="font-mono font-bold text-emerald-700">{s.passRate}%</span>
+                  </div>
+                  <div className="h-1.5 bg-slate-100 rounded-full overflow-hidden">
+                    <div
+                      className="h-full bg-emerald-600 rounded-full"
+                      style={{ width: `${s.passRate}%` }}
+                    />
+                  </div>
+                  <span className="text-[10px] text-slate-500 block">
+                    {s.distinctions} students scored distinction (A1/A2)
+                  </span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </Card>
 
       {/* Class Dues Breakdown & Actionable Defaulter Table */}
       <div className="grid md:grid-cols-2 gap-6">

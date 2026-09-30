@@ -108,5 +108,31 @@
     "department": "Department",
     "qualification": "Educational Qualification",
     "status": "Employment Status"
+  },
+  "exams": {
+    "title": "Exams, Marks & Marksheets",
+    "subtitle": "Keyboard-friendly marks entry, automatic grading, moderation audit trail, and tamper-proof verification marksheets.",
+    "marksEntry": "Marks Entry Grid",
+    "marksheets": "Marksheets & Report Cards",
+    "examCycles": "Exam Cycles & Grading",
+    "moderationAudit": "Moderation Audit Trail",
+    "publishResults": "Publish Marksheets",
+    "saveDraft": "Save Draft",
+    "printMarksheet": "Print Marksheet",
+    "batchPrint": "Batch Print (A4 Sheet)",
+    "verificationSeal": "Verified Digital Marksheet",
+    "withholdNotice": "Marksheet withheld pending fee clearance."
+  },
+  "id_cards": {
+    "title": "ID Card Generator & Print Center",
+    "subtitle": "Design CR80 identity cards, detect missing photos, batch print on A4 multi-up sheets, and issue QR-verified digital cards.",
+    "batchWizard": "Batch Generation Wizard",
+    "printCenter": "Print Center (A4 Multi-Up & Single)",
+    "templateCustomizer": "Template Customizer",
+    "reprintTracker": "Reprint Tracker & Audit Log",
+    "generateBatch": "Generate & Issue Cards",
+    "missingDataAlert": "Records with missing photos or demographic details detected",
+    "digitalId": "Digital Identity Card",
+    "tapToVerify": "Tap to scan & verify online"
   }
 }

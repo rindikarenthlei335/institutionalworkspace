@@ -1,5 +1,43 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 3] - Exams, Marks, Marksheets & ID Card Generator
+### Added
+- **Database Migrations:**
+  - `00008_exams_and_id_cards.sql`: Created `subjects`, `exam_types`, `grading_schemes`, `class_subjects`, `student_marks`, `marksheets`, `id_card_templates`, `id_cards`, and `id_card_reprint_logs` with strict tenant RLS and minor data protection policies.
+  - `00009_exams_and_id_cards_seed.sql`: Seeded Class X subjects (English, Mizo, Math, Science, Social, Computer, PE), CBSE 9-point scale, percentage scale, Half-Yearly 2024–2025 exam cycle, sample published student marksheets with frozen snapshots, and CR80 ID card templates.
+- **Result Computation Engine (`apps/web/src/features/exams/lib/computation.ts`):**
+  - Pure calculation engine for percentage score to grade mapping, scholastic aggregate totals, GPA, and pass/fail/compartment determinations.
+  - Standard competition ranking (`1224`) handling ties accurately across cohorts.
+  - Absent (`AB`) and Exempt (`EX`) special evaluations.
+  - Moderation adjustments with mandatory audit reason logging.
+  - Immutable marksheet snapshot generator (`freezeMarksheetSnapshot`) and cryptographically random tamper-proof verification tokens (`generateVerificationToken`).
+  - Authored unit test suite in `tests/exam_computation.test.ts` (11 unit tests pass).
+- **Marksheet & Report Card Components:**
+  - `MarksheetCardView.tsx`: Figma-styled official report card with school crest, student demographics, scholastic subject marks table, co-scholastic grading, grand totals, merit rank, QR verification seal, and teacher/principal signatures.
+  - `ExamsMasterView.tsx`: Master administrative dashboard at `/admin/exams` featuring 4 tabs:
+    1. Keyboard-friendly tabular marks entry grid with Arrow/Enter row advancement, instant max-mark validation, and moderation modal.
+    2. Class marksheets roster with single report card preview and batch A4 print stream.
+    3. Exam cycles & grading scheme manager.
+    4. Moderation audit log.
+- **ID Card Generator & Print Center (`apps/web/src/features/id-cards/`):**
+  - `CR80CardPreview.tsx`: Dual-sided (front/back flip) standard ISO/IEC 7810 CR80 card preview in vertical or horizontal orientation.
+  - `IDCardMasterView.tsx`: Administrative console at `/admin/id-cards` featuring:
+    1. Batch issuance wizard for students and staff with pre-generation missing-data audit (missing photos, blood groups, phone numbers).
+    2. Multi-up A4 print sheet rendering 8 cards per page with 0.5pt corner cutting crop marks.
+    3. Template customizer (brand color picking, field visibility toggles).
+    4. Reprint tracker & security audit log with incrementing counters.
+- **Public Privacy-Preserving Verification Endpoints:**
+  - `/verify/marksheet/[token]`: Minimal public verification confirming institution authenticity, student name, examination, and overall grade while withholding granular minor demographics.
+  - `/verify/id/[token]`: Validates identity credentials (active/expired/revoked), cardholder name, and role.
+- **Parent & Student Portal Integration:**
+  - `/portal/results`: Student examination summary, subject breakdown progress bars, printable report cards, and fee defaulter withholding notice.
+  - `/portal/id-card`: Digital identity card with gate pass QR code and offline save.
+  - Updated `/portal/dashboard` and `/portal/layout` with quick links and bottom navigation tabs.
+- **Principal Dashboard Additions (`/admin/principal`):**
+  - Executive Academic & Examination Performance card with overall pass rate (96.8%), top achievers merit roll, and subject-wise distinction rates.
+- **Bilingual Coverage:** Added 22 new Mizo keys in `packages/shared/src/i18n/lus.json`, `en.json`, and `mizo.json`. Verified with `pnpm i18n:check` (106/106 keys passing).
+- **Documentation:** Authored comprehensive architectural guide in `docs/EXAMS.md`.
+
 ## [Phase 2 - Milestone 2] - Institutional Data Hub, Excel Import/Export Center & Staff Module
 ### Added
 - **Database Migrations:**

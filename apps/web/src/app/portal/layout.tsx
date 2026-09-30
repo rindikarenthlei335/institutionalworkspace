@@ -14,18 +14,26 @@ export default function PortalLayout({ children }: { children: React.ReactNode }
       <main className="flex-1 p-4 overflow-y-auto">{children}</main>
 
       {/* Bottom Tab Bar */}
-      <nav className="h-16 bg-[var(--bg-surface)] border-t border-[var(--border-default)] flex items-center justify-around px-2 text-[11px] font-medium text-[var(--text-secondary)]">
+      <nav className="h-16 bg-[var(--bg-surface)] border-t border-[var(--border-default)] flex items-center justify-around px-2 text-[10px] font-medium text-[var(--text-secondary)]">
         <Link href="/portal/dashboard" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
+          <span>🏠</span>
           <span>Home</span>
         </Link>
+        <Link href="/portal/results" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
+          <span>📜</span>
+          <span>Results</span>
+        </Link>
         <Link href="/portal/fees" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
-          <span>Fee Dues</span>
+          <span>💳</span>
+          <span>Fees</span>
+        </Link>
+        <Link href="/portal/id-card" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
+          <span>🪪</span>
+          <span>Digital ID</span>
         </Link>
         <Link href="/portal/notices" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
+          <span>📢</span>
           <span>Notices</span>
-        </Link>
-        <Link href="/portal/profile" className="flex flex-col items-center hover:text-[var(--brand-primary)]">
-          <span>Profile</span>
         </Link>
       </nav>
     </div>

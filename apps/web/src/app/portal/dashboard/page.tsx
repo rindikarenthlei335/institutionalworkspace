@@ -30,6 +30,38 @@ export default function PortalDashboardPage() {
           </Button>
         </Link>
       </Card>
+
+      {/* Latest Exam Result Card */}
+      <Card className="border-emerald-600/30 bg-emerald-50/20 space-y-2">
+        <div className="flex justify-between items-center">
+          <span className="text-xs font-bold text-emerald-800">Latest Exam: Half-Yearly 2024</span>
+          <span className="font-mono text-xs font-bold text-emerald-800 bg-emerald-100 px-2 py-0.5 rounded">
+            Rank #1 (94.2%)
+          </span>
+        </div>
+        <p className="text-[11px] text-slate-600">
+          Result published: Passed with Distinction · Grade A1
+        </p>
+        <Link href="/portal/results">
+          <Button variant="secondary" size="sm" className="w-full mt-1">
+            View Official Marksheet 📄
+          </Button>
+        </Link>
+      </Card>
+
+      {/* Digital ID Card Link */}
+      <Link href="/portal/id-card" className="block">
+        <Card className="flex items-center justify-between p-3 hover:border-[var(--brand-primary)] transition-colors">
+          <div className="flex items-center gap-2.5">
+            <span className="text-xl">🪪</span>
+            <div>
+              <span className="font-display font-bold text-xs text-slate-900 block">Digital Identity Card</span>
+              <span className="text-[10px] text-slate-500">Tap to show gate pass & QR verification</span>
+            </div>
+          </div>
+          <span className="text-xs font-bold text-[var(--brand-primary)]">Open ↗</span>
+        </Card>
+      </Link>
     </div>
   );
 }

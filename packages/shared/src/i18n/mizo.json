@@ -108,5 +108,31 @@
     "department": "Department",
     "qualification": "Zirna Lam Thiamna",
     "status": "Hnathawh Dinhmun"
+  },
+  "exams": {
+    "title": "Exam, Marks & Marksheet Te",
+    "subtitle": "Keyboard hmanga marks luhna awlsam, grading leh rank chhutna, moderation audit trail leh marksheet rintlak siamna.",
+    "marksEntry": "Marks Luhna Grid",
+    "marksheets": "Marksheet & Report Card Te",
+    "examCycles": "Exam Hunbi & Grading Kalphung",
+    "moderationAudit": "Moderation & Grace Marks Record",
+    "publishResults": "Marksheet Tlangzarhna",
+    "saveDraft": "Draft Save-na",
+    "printMarksheet": "Marksheet Print-na",
+    "batchPrint": "Pawl Pum Print-na (A4 Sheet)",
+    "verificationSeal": "Rintlak Digital Marksheet Seal",
+    "withholdNotice": "Fee ba la awm avangin marksheet la hren a ni."
+  },
+  "id_cards": {
+    "title": "ID Card Siamna & Print Center",
+    "subtitle": "CR80 identity card design, thlalak kimlo hriat vatna, A4 sheet-a rual taka print-na, leh QR seal thlunzawmna.",
+    "batchWizard": "ID Card Siam Rualna Wizard",
+    "printCenter": "Print Center (A4 Sheet & Card Mal)",
+    "templateCustomizer": "Card Design Thlakna",
+    "reprintTracker": "Print Nawn Record & Security Log",
+    "generateBatch": "Card Siam & Pek Chhuahna",
+    "missingDataAlert": "Thlalak leh details kimlo la awm te hriattirna",
+    "digitalId": "Digital Identity Card",
+    "tapToVerify": "Hmet la online-ah a dik leh dikloh fiah rawh"
   }
 }

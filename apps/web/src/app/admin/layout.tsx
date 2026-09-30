@@ -33,6 +33,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
             <span>Staff & Teachers</span>
             <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/30 text-emerald-300 font-bold">PRO</span>
           </Link>
+          <Link href="/admin/exams" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+            <span>Exams & Marksheets</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/30 text-emerald-300 font-bold">PRO</span>
+          </Link>
+          <Link href="/admin/id-cards" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+            <span>ID Card Generator</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/30 text-emerald-300 font-bold">PRO</span>
+          </Link>
           <Link href="/admin/students" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Students & Guardians</span>
           </Link>
