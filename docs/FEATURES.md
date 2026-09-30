@@ -21,9 +21,9 @@ This file maintains the complete list of platform features across Phase 1 and Ph
 | `app_publishing` | App Store / Play Store Publishing | In Progress (P2 M1/M5) | Basic | `school_super_admin`, Platform Owner | `/admin/services`, `/platform/apps` | `tenant_apps`, `app_builds` | `apps/web/src/features/apps/` |
 | `website_analytics` | First-Party Privacy Analytics | Done (P1 M5) | Pro | `school_super_admin`, Platform Owner | `/admin/analytics` | `site_events` | `apps/web/src/features/analytics/` |
 | `principal_dashboard` | Executive Dashboard & Funnel | Done (P1 M5) | Pro | `school_super_admin` | `/admin/principal` | SQL Views / RPCs | `apps/web/src/features/principal/` |
-| `data_hub` | Data Hub Master Records | Planned (P2 M2) | Pro | `school_super_admin`, `school_admin` | `/admin/data-hub` | Master academic tables | `apps/web/src/features/data-hub/` |
-| `excel_import` | Excel Import / Export Center | Planned (P2 M2) | Pro | Staff | `/admin/data-hub/import` | `import_batches` | `apps/web/src/features/data-hub/` |
-| `staff_module` | Staff & Teacher Master Module | Planned (P2 M2) | Pro | `school_super_admin`, `school_admin` | `/admin/staff` | `staff_profiles` | `apps/web/src/features/staff/` |
+| `data_hub` | Data Hub Master Records | Done (P2 M2) | Pro | `school_super_admin`, `school_admin` | `/admin/data-hub` | Master academic tables, `staff_profiles` | `apps/web/src/features/data-hub/` |
+| `excel_import` | Excel Import / Export Center | Done (P2 M2) | Pro | Staff | `/admin/data-hub` | `import_batches`, `import_errors` | `apps/web/src/features/data-hub/` |
+| `staff_module` | Staff & Teacher Master Module | Done (P2 M2) | Pro | `school_super_admin`, `school_admin` | `/admin/staff` | `staff_profiles`, `faculty` sync | `apps/web/src/features/staff/` |
 | `exams_module` | Exams, Marks & Marksheets | Planned (P2 M3) | Pro | `school_super_admin`, `teacher` | `/admin/exams`, `/verify/marksheet` | `exams`, `marks`, `marksheets` | `apps/web/src/features/exams/` |
 | `id_card_module` | ID Card Generator | Planned (P2 M3) | Pro | `school_super_admin`, `school_admin` | `/admin/id-cards`, `/verify/id` | `id_cards` | `apps/web/src/features/id-cards/` |
 | `ai_copilot` | AI Copilot (Mizo + English) | Planned (P2 M8) | Ultimate | Staff, Parents (flag) | `/admin/copilot`, Floating dock | `ai_usage`, `ai_conversations` | `apps/web/src/features/copilot/` |

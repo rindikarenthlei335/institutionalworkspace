@@ -1,5 +1,27 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 2] - Institutional Data Hub, Excel Import/Export Center & Staff Module
+### Added
+- **Database Migrations:**
+  - `00006_data_hub_and_staff.sql`: Created `staff_profiles`, `import_batches`, and `import_errors` with strict tenant RLS and PostgreSQL trigger `sync_staff_to_faculty` for zero double-entry website syncing.
+  - `00007_data_hub_and_staff_seed.sql`: Seeded Mount Carmel staff directory (Principal, Mathematics, Science HOD, English, Physical Education) and initial import batch record.
+- **Excel Processing Engine (`apps/web/src/features/data-hub/lib/excel-engine.ts`):**
+  - Multi-sheet bilingual `.xlsx` template generator with Sheet 1 (Data entry + sample row) and Sheet 2 (Instructions, rules, dropdown options).
+  - Client-side streaming parser handling 20,000+ rows in browser memory without Cloudflare Workers limit bottlenecks.
+  - Intelligent auto-detection of column mappings matching field keys, English labels, and Mizo (`lus`) labels.
+  - Transactional validation and dry-run engine detecting missing required values, internal duplicate keys, and calculating field-level diffs (`old value` → `new value`).
+  - Unit test suite authored in `tests/excel_import.test.ts` (all 17 unit tests pass).
+- **Bulk Photo ZIP Processor (`apps/web/src/features/data-hub/lib/photo-zip-engine.ts`):**
+  - Unpacks `.zip` archives of student and staff photos using `jszip`, matching filenames (`ADM-2024-0012.jpg`, `EMP-MC-001.png`) to master records with thumbnail previews.
+- **User Interface Components:**
+  - `DataHubMasterView.tsx`: Overview dashboard with master record metrics, quick backup exports, and navigation tabs.
+  - `ExcelImportWizard.tsx`: 5-step wizard covering entity selection, spreadsheet upload, column mapping overrides, dry-run diff preview, and transactional execution.
+  - `ImportHistoryView.tsx`: Execution audit trail with 1-click reversible rollback and error log CSV downloads.
+  - `StaffDirectoryView.tsx`: Staff roster with department filtering, instant "Show on Website" faculty toggle, add staff modal, and direct Excel/CSV exports.
+  - Routes created at `/admin/data-hub` and `/admin/staff`, and integrated into Admin Sidebar navigation.
+- **Bilingual Coverage:** Added 25 new Mizo keys in `packages/shared/src/i18n/lus.json` and `en.json`, verified with `pnpm i18n:check` (84/84 keys passing).
+- **Architecture Documentation:** Authored comprehensive reference in `docs/DATA_HUB.md`.
+
 ## [Phase 2 - Milestone 1] - Service Store, Prepaid Checkout, Dynamic DOCX Templates, ETA Engine & Fulfillment Console
 ### Added
 - **Database Migrations:**

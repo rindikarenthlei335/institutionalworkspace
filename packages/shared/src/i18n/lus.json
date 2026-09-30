@@ -75,6 +75,39 @@
       "downloadInvoice": "Platform Receipt / Invoice (PDF) Download Rawh",
       "supportThread": "Order Tanpui Zawnna"
     }
+  },
+  "data_hub": {
+    "title": "Sikul Data Hub & Hriatna Khawl",
+    "subtitle": "Zirlai, zirtirtute, nu leh pa, leh pawl master data awmkhawmna hmunpui",
+    "importCenter": "Excel atanga Lakluhna Hmun",
+    "exportCenter": "Excel-a Thawnchhuahna Hmun",
+    "tabs": {
+      "overview": "Hmuhchhuahna & Master Roster",
+      "staff": "Zirtirtute & Thawktute",
+      "import": "Excel Import Wizard",
+      "history": "Lakluh Tawh & Rollback"
+    },
+    "import": {
+      "selectEntity": "Dah Luhna Tur Thlang Rawh",
+      "downloadTemplate": "Template (.xlsx) Download Rawh",
+      "uploadFile": "Spreadsheet (.xlsx, .csv) Upload Rawh",
+      "columnMapping": "Column Inmil Dan Ennawn Rawh",
+      "dryRun": "Endikna Hmasa (Dry Run)",
+      "commitImport": "Data Lakluh Hlenna",
+      "rollback": "A Hlum A Zaa Sutna (Rollback)",
+      "photoZip": "Thlalak ZIP-a Dah Luh"
+    }
+  },
+  "staff": {
+    "title": "Zirtirtute & Thawktute Master Directory",
+    "subtitle": "Zirtirtu chanchin, zirlai zirtir tur, leh website-a tihlan dan enkawlna",
+    "addStaff": "Thawktu Thar Dahna",
+    "syncWebsite": "Website Faculty Mipuia Tihlan",
+    "employeeId": "Employee ID",
+    "designation": "Hna / Designation",
+    "department": "Department",
+    "qualification": "Zirna Lam Thiamna",
+    "status": "Hnathawh Dinhmun"
   }
 }
 

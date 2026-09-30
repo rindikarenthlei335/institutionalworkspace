@@ -75,5 +75,38 @@
       "downloadInvoice": "Download Platform Receipt / Invoice (PDF)",
       "supportThread": "Order Support Messages"
     }
+  },
+  "data_hub": {
+    "title": "Institutional Data Hub",
+    "subtitle": "Single source of truth for students, staff, guardians, classes, and master academics",
+    "importCenter": "Excel Import Center",
+    "exportCenter": "Data Export Center",
+    "tabs": {
+      "overview": "Overview & Master Directory",
+      "staff": "Staff & Faculty Roster",
+      "import": "Excel Import Wizard",
+      "history": "Import History & Rollback"
+    },
+    "import": {
+      "selectEntity": "Select Target Entity",
+      "downloadTemplate": "Download Template (.xlsx)",
+      "uploadFile": "Upload Spreadsheet (.xlsx, .csv)",
+      "columnMapping": "Verify Column Mapping",
+      "dryRun": "Validate & Dry Run",
+      "commitImport": "Execute Batch Import",
+      "rollback": "Rollback Batch",
+      "photoZip": "Bulk Photo Upload (ZIP)"
+    }
+  },
+  "staff": {
+    "title": "Staff & Faculty Master Directory",
+    "subtitle": "Manage teacher credentials, teaching assignments, and website faculty synchronization",
+    "addStaff": "Add Staff Member",
+    "syncWebsite": "Publish to Public Website Faculty",
+    "employeeId": "Employee ID",
+    "designation": "Designation",
+    "department": "Department",
+    "qualification": "Educational Qualification",
+    "status": "Employment Status"
   }
 }
