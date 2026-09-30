@@ -105,6 +105,12 @@
       "namedRegex": "^/faculty(?:/)?$"
     },
     {
+      "page": "/find-school",
+      "regex": "^/find\\-school(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/find\\-school(?:/)?$"
+    },
+    {
       "page": "/gallery",
       "regex": "^/gallery(?:/)?$",
       "routeKeys": {},
