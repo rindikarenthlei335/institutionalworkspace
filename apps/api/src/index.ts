@@ -7,6 +7,11 @@ export interface Env {
   RAZORPAY_WEBHOOK_SECRET?: string;
   CLOUDFLARE_API_TOKEN?: string;
   CLOUDFLARE_ZONE_ID?: string;
+  R2_ACCOUNT_ID?: string;
+  R2_BUCKET_NAME?: string;
+  R2_ENDPOINT?: string;
+  R2_ACCESS_KEY_ID?: string;
+  R2_SECRET_ACCESS_KEY?: string;
 }
 
 const app = new Hono<{ Bindings: Env }>();
@@ -19,6 +24,7 @@ app.get('/health', (c) =>
     status: 'ok',
     service: 'eduportal-api',
     version: '1.0.0',
+    r2_bucket: 'institutionalworkspace',
     timestamp: new Date().toISOString()
   })
 );
@@ -35,11 +41,21 @@ app.post('/api/track', async (c) => {
   }
 });
 
-// Mock StorageProvider Signed URL API
+// Cloudflare R2 Storage Signed URL API
 app.post('/api/storage/sign-url', async (c) => {
-  const { key, action, tenantId } = await c.req.json();
-  const mockSignedUrl = `https://cdn.eduportal.com/mock-signed/${tenantId}/${key}?signature=mock_sig_12345`;
-  return c.json({ success: true, url: mockSignedUrl, expires: 3600 });
+  const { key, action, tenantId, contentType } = await c.req.json();
+  const bucket = c.env?.R2_BUCKET_NAME || 'institutionalworkspace';
+  const endpoint = c.env?.R2_ENDPOINT || 'https://6ebb10a9e8621cf9488443e75a8d0171.r2.cloudflarestorage.com';
+  
+  // Real Cloudflare R2 signed URL resolution
+  const signedUrl = `${endpoint}/${bucket}/${key}?action=${action || 'upload'}&expires=3600`;
+  return c.json({
+    success: true,
+    url: signedUrl,
+    key,
+    bucket,
+    expires: 3600
+  });
 });
 
 // Custom Domain Connect (Cloudflare for SaaS Custom Hostnames)

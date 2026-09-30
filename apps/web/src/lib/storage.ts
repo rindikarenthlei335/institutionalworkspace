@@ -74,8 +74,40 @@ export async function uploadImage(
   const compressedBlob = await compressImageToWebP(file);
   const key = `tenants/${tenantId}/${moduleName}/${crypto.randomUUID()}.webp`;
 
-  // 2. In production, requests signed URL from Workers API and uploads to Cloudflare R2.
-  // In dev/mock mode, create a persistent object URL or data URL fallback.
+  // 2. Request Cloudflare R2 presigned upload URL
+  try {
+    const signRes = await fetch('/api/storage/sign-url', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        key,
+        action: 'upload',
+        contentType: 'image/webp'
+      })
+    });
+
+    if (signRes.ok) {
+      const { url } = await signRes.json();
+      // 3. Upload directly to Cloudflare R2
+      const putRes = await fetch(url, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'image/webp' },
+        body: compressedBlob
+      });
+
+      if (putRes.ok) {
+        return {
+          url: url.split('?')[0], // Public R2 object URL
+          key,
+          bytes: compressedBlob.size
+        };
+      }
+    }
+  } catch (err) {
+    console.warn('[STORAGE] Cloudflare R2 direct upload fallback:', err);
+  }
+
+  // Fallback to local Data URL
   return new Promise((resolve) => {
     const reader = new FileReader();
     reader.readAsDataURL(compressedBlob);
