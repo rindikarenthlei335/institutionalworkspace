@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "home": "Kawtchhuah",
+    "activities": "Thiltih Thuhmun",
+    "faculty": "Zirtirtute & Thawktute",
+    "facilities": "Hmun Hma le Khawvel",
+    "about": "Kan Chungchang",
+    "notices": "Thuchhuah",
+    "gallery": "Lalzu Thlalak",
+    "admission": "Dilna Thok",
+    "payFee": "School Fee Pekna",
+    "login": "Luhna (Login)"
+  },
+  "common": {
+    "welcome": "{{schoolName}}-ah Chibai",
+    "viewMore": "Kimchang Zawk Enna",
+    "search": "Zawnna...",
+    "submit": "Thawh",
+    "cancel": "Sutna",
+    "loading": "Lo nghak lawk...",
+    "save": "Vawng tha tiar"
+  },
+  "admission": {
+    "title": "Kool Luhna Dilna Form",
+    "subtitle": "Form hi dik takin tikhat rawh.",
+    "studentInfo": "Zirlai Chanchin",
+    "guardianInfo": "Nu leh Pa / Nu-pa Chanchin",
+    "residenceType": "Avel Chensat",
+    "dayScholar": "Day Scholar",
+    "hosteller": "Hosteller",
+    "consentText": "Privancy policy ka pawm e."
+  },
+  "fee": {
+    "title": "School Fee Pekna Portal",
+    "subtitle": "I fee bat te awlsam takin zawng rawh.",
+    "payNow": "Fee Peksak Rawh",
+    "totalDue": "Pek Tur Zawng Zawng"
+  }
+}

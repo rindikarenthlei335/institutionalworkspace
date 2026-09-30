@@ -1,5 +1,20 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 0] - Audit, 4-Tier Plan Entitlement Engine, Feature Keys & Bilingual CI Gate
+### Added
+- Saved master Phase 2 specification in `docs/PROJECT_SPEC_PHASE2.md`.
+- Authored comprehensive Phase 2 codebase audit and refactoring roadmap in `docs/PHASE2_PLAN.md`.
+- Expanded plan tier system to 4 tiers: Basic (₹1,499), Essential (₹3,999), Pro (₹8,000), and Ultimate (₹9,999/mo with 50 GB storage, AI Copilot, Module Manager, and Custom Module Builder).
+- Registered 12 new Phase 2 feature keys: `service_store`, `data_hub`, `excel_import`, `staff_module`, `exams_module`, `id_card_module`, `app_publishing`, `ai_copilot`, `ai_monthly_message_quota`, `module_manager`, `custom_module_builder`, and `optional_modules`.
+- Updated `PLAN_DEFAULTS` in `packages/shared/src/constants/plans.ts` and `PlanTier` in `packages/shared/src/types/index.ts`.
+- Built Mizo school and product terms glossary in `packages/shared/src/i18n/glossary.lus.json`.
+- Standardized Mizo locale dictionary in `packages/shared/src/i18n/lus.json` matching all English keys.
+- Authored automated bilingual verification script `scripts/i18n_check.js` and wired `"i18n:check"` command into `package.json`.
+- Upgraded Platform Owner Plan Feature Matrix Editor (`apps/web/src/features/platform/components/PlanFeatureEditor.tsx`) to support 4 tiers and all 22 platform capabilities.
+- Recorded Architectural Decisions ADR-006 through ADR-009 in `docs/DECISIONS.md`.
+- Updated `tests/feature_gating.test.ts` to test 4-tier plan hierarchy and entitlement lifecycle (immediate upgrade unlock, 30-day read-only downgrade grace, 90-day cancellation retention).
+- Verified test suite (`pnpm test`), bilingual parity (`pnpm i18n:check`), workspace typecheck (`pnpm typecheck`), and production build (`pnpm build`).
+
 ## [Milestone 7] - Hardening, Test Suites, Security Audit & Delivery
 ### Added
 - Expanded multi-tenant RLS isolation tests in `supabase/tests/rls_test.sql` to verify cross-tenant data isolation across notices, students, fee invoices, payments, online admissions, and site settings.

@@ -1,4 +1,4 @@
-export type PlanTier = 'basic' | 'essential' | 'pro';
+export type PlanTier = 'basic' | 'essential' | 'pro' | 'ultimate';
 
 export type UserRole =
   | 'platform_owner'
@@ -25,6 +25,18 @@ export type FeatureKey =
   | 'custom_domain'
   | 'domain_registration'
   | 'audit_logs'
+  | 'service_store'
+  | 'data_hub'
+  | 'excel_import'
+  | 'staff_module'
+  | 'exams_module'
+  | 'id_card_module'
+  | 'app_publishing'
+  | 'ai_copilot'
+  | 'ai_monthly_message_quota'
+  | 'module_manager'
+  | 'custom_module_builder'
+  | 'optional_modules'
   | 'sms_reminders'
   | 'attendance'
   | 'report_cards'

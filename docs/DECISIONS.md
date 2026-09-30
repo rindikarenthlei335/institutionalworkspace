@@ -46,3 +46,34 @@ This document records key decisions, Sensible Defaults, and trade-offs made duri
   - Public bucket for WebP transformed images via CDN.
   - Private bucket for admission documents & receipts accessible only via Worker signed URLs.
 - **Rationale:** Provides high security for sensitive minor student data while maintaining fast image loading for public school sites.
+
+---
+
+## ADR-006: 4-Tier Plan Structure & Entitlement Lifecycle (Phase 2)
+- **Decision:** Introduce a 4th tier: **Ultimate (₹9,999/mo)** with 50 GB storage, AI Copilot, Module Manager, and Custom Module Builder.
+- **Entitlement Rules:**
+  - Upgrades take effect immediately without requiring code redeployments or mobile store releases.
+  - Downgrades transition locked features into a 30-day read-only grace period before being hidden. Data is never deleted on downgrade.
+  - Cancellations preserve data for at least 90 days before archiving, during which the institution can request a full data export.
+- **Rationale:** Aligns platform monetization with feature complexity while safeguarding institutional data continuity.
+
+---
+
+## ADR-007: Unified Service Store Architecture & Migration
+- **Decision:** Consolidate Phase 1 discrete domain requests and service requests into a unified Service Store ordering engine (`service_catalog`, `service_variants`, `service_prices`, `service_orders`, `service_order_items`, `service_item_documents`).
+- **Rationale:** Provides a unified cart & checkout experience for schools to tick add-ons, preview ETAs, upload compliance documents, and pay in advance.
+
+---
+
+## ADR-008: Dual Payment Gateway Contexts
+- **Decision:** Separate platform revenue from student fee collection:
+  - Student tuition & admission fees flow through the school's linked Razorpay Route account.
+  - Service Store purchases and SaaS subscriptions flow directly into the SaaS platform's Razorpay account (`PLATFORM_RAZORPAY_*`).
+- **Rationale:** Prevents commingling of platform SaaS revenue with institutional school tuition collections.
+
+---
+
+## ADR-009: Bilingual en / lus (Mizo) Strict Parity
+- **Decision:** Mandate complete bilingual parity across all user-facing strings in English (`en`) and Mizo (`lus`).
+- **Enforcement:** Automated `pnpm i18n:check` script validates that zero English keys are missing Mizo translations in CI/test pipelines.
+- **Rationale:** Ensures native cultural suitability for schools across Mizoram and Northeast India from day one.

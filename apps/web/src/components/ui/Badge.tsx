@@ -34,7 +34,8 @@ export function PlanBadge({ plan }: { plan: PlanTier }) {
   const badges: Record<PlanTier, { label: string; variant: BadgeProps['variant'] }> = {
     basic: { label: 'Basic Plan', variant: 'neutral' },
     essential: { label: 'Essential Plan', variant: 'brand' },
-    pro: { label: 'Pro Plan', variant: 'warning' }
+    pro: { label: 'Pro Plan', variant: 'warning' },
+    ultimate: { label: 'Ultimate Plan', variant: 'success' }
   };
 
   const badge = badges[plan] || badges.basic;
