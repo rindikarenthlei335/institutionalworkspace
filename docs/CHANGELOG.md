@@ -1,5 +1,23 @@
 # Project Changelog
 
+## [Milestone 6] - Custom Domains, Managed Registrations & Add-on Services
+### Added
+- Created `apps/web/src/features/domains/` module:
+  - `ConnectDomainCard.tsx`: Connect own custom domain with apex validation (`www.` recommendation), DNS CNAME/TXT generation, copy helpers, and live DNS verification polling.
+  - `RequestDomainModal.tsx`: Assisted school domain registration request form with TLD selector (`.edu.in`, `.ac.in`, `.in`, `.com`, `.org.in`), ERNET accreditation document checklist, and 5-stage lifecycle progress tracker (`Requested` → `Documents received` → `Registered` → `DNS setup` → `Live`).
+  - `DomainRenewalCard.tsx`: Domain expiration monitor with automated 60/30/15/7-day notice alert indicators and auto-renew toggle.
+  - Updated `DomainSettingsForm.tsx` integrating all domain management components.
+- Created `apps/web/src/features/services/` module:
+  - `ServiceCatalogView.tsx`: School Admin add-on services catalog for Google Search Console, Google Maps verification, SEO Bundles, and White-label mobile apps with automatic Pro Plan zero-cost discount deduction.
+  - `/admin/services` page route and navigation link in admin sidebar.
+- Enhanced Platform Owner Panels:
+  - `/platform/domains`: Domain registration requests queue with document verification, status advancement, and active domain expiration monitor.
+  - `/platform/services`: Assisted service orders queue with status workflow (`pending`, `in_progress`, `completed`), filtering, and completion proof URL submission.
+- Extended Cloudflare Worker (`apps/api`):
+  - Added endpoints `/api/domains/connect`, `/api/domains/verify`, `/api/domains/request`, `/api/services/request`.
+  - Added `/api/cron/domain-renewals` endpoint and integrated automated renewal checking in scheduled cron worker (triggers alerts at 60, 30, 15, and 7 days).
+- Verified workspace with clean `pnpm typecheck` and successful `pnpm build` across all 35 static routes.
+
 ## [Milestone 5] - Pro Plan Analytics & Principal Dashboard
 ### Added
 - Created `apps/web/src/features/analytics/` module:

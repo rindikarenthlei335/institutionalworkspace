@@ -31,13 +31,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/fees" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Fees & Receipts</span>
           </Link>
+          <Link href="/admin/services" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
+            <span>Add-on Services</span>
+          </Link>
           <Link href="/admin/settings" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>School Settings & Domain</span>
           </Link>
           <Link href="/admin/audit-logs" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Audit Logs</span>
           </Link>
-          <div className="pt-4 border-t border-white/10">
+          <div className="pt-4 border-t border-white/10 space-y-1">
+            <Link href="/admin/analytics" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+              <span>Website Analytics</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-white/20">PRO</span>
+            </Link>
             <Link href="/admin/principal" className="flex items-center justify-between px-3 py-2 rounded-[6px] bg-white/10 text-yellow-300 font-semibold hover:bg-white/20 transition-colors">
               <span>Principal Dashboard</span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-yellow-400/20">PRO</span>

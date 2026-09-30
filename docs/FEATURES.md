@@ -15,8 +15,9 @@ This file maintains the complete list of platform features, plan availability, a
 | `online_payment` | Parent Online Fee Collection | Done (M4 Essential) | Essential | Parent, Anon | `/pay-fee`, `/portal/fees` | `payments`, `receipts`, `payment_gateway_accounts` | `apps/web/src/app/(public)/pay-fee/` |
 | `online_admission` | Student Admission Portal | Done (M4 Essential) | Essential | Anon, Staff | `/admission`, `/admin/admissions` | `admission_settings`, `applications`, `application_documents` | `apps/web/src/features/admission/` |
 | `parent_portal` | Parent / Student PWA Portal | Done (M4 Essential) | Essential | Parent, Student | `/portal/*` | All | `apps/web/src/app/portal/` |
-| `custom_domain` | Custom Domain Connection | Done (M2 Basic) | Basic | `school_super_admin` | `/admin/settings` | `tenant_domains` | `apps/web/src/features/settings/components/DomainSettingsForm.tsx` |
-| `domain_registration` | Managed Domain Service | Done (M3 Platform) | Basic | `school_super_admin`, Platform Owner | `/platform/domains` | `domain_requests` | `apps/web/src/app/platform/domains/` |
+| `custom_domain` | Custom Domain Connection | Done (M6 Domains) | Basic | `school_super_admin` | `/admin/settings` | `tenant_domains` | `apps/web/src/features/domains/` |
+| `domain_registration` | Managed Domain Service & Renewal | Done (M6 Domains) | Basic | `school_super_admin`, Platform Owner | `/admin/settings`, `/platform/domains` | `domain_requests` | `apps/web/src/features/domains/` |
+| `service_requests` | Add-on Services (SEO, Maps, Apps) | Done (M6 Services) | Basic | `school_super_admin`, Platform Owner | `/admin/services`, `/platform/services` | `service_requests` | `apps/web/src/features/services/` |
 | `website_analytics` | First-Party Privacy Analytics | Done (M5 Pro) | Pro | `school_super_admin`, Platform Owner | `/admin/analytics` | `site_events` | `apps/web/src/features/analytics/` |
 | `principal_dashboard` | Executive Dashboard & Funnel | Done (M5 Pro) | Pro | `school_super_admin` | `/admin/principal` | SQL Views / RPCs | `apps/web/src/features/principal/` |
 | `platform_panel` | SaaS Platform Owner Dashboard | Done (M3 Platform) | Platform Owner | `platform_owner` | `/platform/*` | Platform tables | `apps/web/src/features/platform/` |

@@ -81,6 +81,12 @@
       "namedRegex": "^/admin/principal(?:/)?$"
     },
     {
+      "page": "/admin/services",
+      "regex": "^/admin/services(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/admin/services(?:/)?$"
+    },
+    {
       "page": "/admin/settings",
       "regex": "^/admin/settings(?:/)?$",
       "routeKeys": {},

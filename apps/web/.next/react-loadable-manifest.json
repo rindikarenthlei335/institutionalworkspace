@@ -2,13 +2,13 @@
   "..\\..\\..\\node_modules\\.pnpm\\next@15.5.26_@types+node@22_680858d116ddb552d96f0558888e5bb1\\node_modules\\next\\dist\\client\\index.js -> ../pages/_app": {
     "id": 1087,
     "files": [
-      "static/chunks/87.7723e8fe9a79365b.js"
+      "static/chunks/1087.c5feb6d0007d2680.js"
     ]
   },
   "..\\..\\..\\node_modules\\.pnpm\\next@15.5.26_@types+node@22_680858d116ddb552d96f0558888e5bb1\\node_modules\\next\\dist\\client\\index.js -> ../pages/_error": {
     "id": 9898,
     "files": [
-      "static/chunks/898.2d4e7a84e89b91ab.js"
+      "static/chunks/9898.36c63280e9305ad9.js"
     ]
   }
 }
