@@ -1,5 +1,18 @@
 # Project Changelog
 
+## [Milestone 5] - Pro Plan Analytics & Principal Dashboard
+### Added
+- Created `apps/web/src/features/analytics/` module:
+  - `TrackerScript.tsx`: Lightweight pageview & visitor tracking client component embedded in public website layout.
+  - `AnalyticsDashboardView.tsx`: Pro Tier analytics view with period selector (`7d`, `30d`, `90d`), KPI cards, top visited pages progress bars, referrer source breakdown, and device distribution metrics.
+  - `/admin/analytics` page route.
+- Created `apps/web/src/features/principal/` module:
+  - `UILevel2Card.tsx`: Interactive executive stat card with expandable Level 2 drilldown detail modal.
+  - `PrincipalDashboardView.tsx`: Interactive executive dashboard with monthly fee collection vs target bar chart, admission conversion funnel, class dues collection matrix, actionable fee defaulters list with 1-click SMS/WhatsApp reminders, and executive report export trigger.
+  - `/admin/principal` page route.
+- Built reusable `Select` UI component in `apps/web/src/components/ui/Select.tsx`.
+- Verified workspace with clean `pnpm typecheck` and successful `pnpm build` across all 34 static routes.
+
 ## [Milestone 4] - Essential Plan Modules & Academic Core
 ### Added
 - Created `apps/web/src/features/students/` module:

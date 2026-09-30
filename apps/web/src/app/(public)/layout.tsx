@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/Button';
+import { TrackerScript } from '@/features/analytics/components/TrackerScript';
 
 export default function PublicWebsiteLayout({
   children
@@ -9,6 +10,7 @@ export default function PublicWebsiteLayout({
 }) {
   return (
     <div className="min-h-screen flex flex-col bg-[var(--bg-base)]">
+      <TrackerScript />
       {/* Top Header */}
       <header className="sticky top-0 z-40 bg-[#163A2B] text-white border-b border-[#0F2A1F]">
         <div className="max-w-7xl mx-auto px-4 h-16 flex items-center justify-between gap-4">
