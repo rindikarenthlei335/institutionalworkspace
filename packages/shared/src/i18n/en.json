@@ -1,0 +1,39 @@
+{
+  "nav": {
+    "home": "Home",
+    "activities": "Activities",
+    "faculty": "Faculty & Staff",
+    "facilities": "Facilities",
+    "about": "About Us",
+    "notices": "Notices",
+    "gallery": "Gallery",
+    "admission": "Apply Online",
+    "payFee": "Pay Fee",
+    "login": "Portal Login"
+  },
+  "common": {
+    "welcome": "Welcome to {{schoolName}}",
+    "viewMore": "View Details",
+    "search": "Search...",
+    "submit": "Submit",
+    "cancel": "Cancel",
+    "loading": "Loading...",
+    "save": "Save Changes"
+  },
+  "admission": {
+    "title": "Online Admission Application",
+    "subtitle": "Fill out the form below to apply for admission.",
+    "studentInfo": "Student Details",
+    "guardianInfo": "Guardian Details",
+    "residenceType": "Residence Type",
+    "dayScholar": "Day Scholar",
+    "hosteller": "Hosteller",
+    "consentText": "I agree to the privacy policy and consent to the processing of minor student data in accordance with DPDP Act 2023."
+  },
+  "fee": {
+    "title": "School Fee Payment",
+    "subtitle": "Look up your pending fee dues by Admission Number or Student ID.",
+    "payNow": "Pay Fee Online",
+    "totalDue": "Total Outstanding Due"
+  }
+}

@@ -1,0 +1,55 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --bg-base: #EAEFEC;
+    --bg-surface: #FFFFFF;
+    --bg-elevated: #E3EAE6;
+    --brand-primary: #1F4D3A;
+    --brand-primary-hover: #163A2B;
+    --brand-primary-soft: #D5E6DC;
+    --brand-on-primary: #FFFFFF;
+    --text-primary: #0F1A14;
+    --text-secondary: #46574E;
+    --border-subtle: #C5D2CB;
+    --border-default: #A9BAB1;
+    --border-strong: #7F958A;
+    --status-success: #2E9E6B;
+    --status-warning: #D9A23A;
+    --status-error: #C9504A;
+    --status-pending: #7A8A82;
+  }
+
+  .dark {
+    --bg-base: #0F1F18;
+    --bg-surface: #16291F;
+    --bg-elevated: #1F3A2C;
+    --brand-primary: #4FA37A;
+    --brand-primary-hover: #63B88E;
+    --brand-primary-soft: #1D3A2B;
+    --brand-on-primary: #0F1F18;
+    --text-primary: #F2F7F4;
+    --text-secondary: #93A79C;
+    --border-subtle: #2E4A3D;
+    --border-default: #3F6151;
+    --border-strong: #5C8570;
+    --status-success: #43B982;
+    --status-warning: #E8B957;
+    --status-error: #E06B65;
+    --status-pending: #9AACA3;
+  }
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-inter, system-ui, sans-serif);
+}
+
+.font-display {
+  font-family: var(--font-serif, serif);
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
