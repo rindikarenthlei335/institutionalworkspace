@@ -1,22 +1,33 @@
 # Project Changelog
 
+## [Milestone 2] - Basic Plan Modules & CMS System
+### Added
+- Client-side WebP image resize & compression engine (`apps/web/src/lib/storage.ts`).
+- Created `apps/web/src/features/cms/` feature module for all 6 public website modules:
+  - `CMSNoticeManager.tsx`: Create, edit, delete, pin, and categorize school notices.
+  - `CMSFacultyManager.tsx`: Manage faculty profiles, designations, qualifications, experience.
+  - `CMSFacilityManager.tsx`: Campus facilities management with image previews.
+  - `CMSGalleryManager.tsx`: Gallery album creation & image lightbox viewer.
+  - `CMSHomeSlideManager.tsx`: Homepage banner slide editor with CTA link mapping.
+- Created `apps/web/src/features/settings/` feature module:
+  - `SchoolProfileForm.tsx`: School profile & SEO parameters.
+  - `ThemeSelector.tsx`: Interactive theme selector supporting 8 preset palettes.
+  - `StorageMeter.tsx`: Tenant cloud storage usage tracking meter.
+  - `DomainSettingsForm.tsx`: Subdomain status & custom hostname CNAME/TXT connection.
+- SEO & PWA System:
+  - Dynamic per-tenant sitemap generator (`/sitemap.xml`).
+  - Per-tenant `robots.txt` generator (`/robots.txt`).
+  - Dynamic PWA Webmanifest endpoint (`/manifest.webmanifest`).
+  - Offline PWA Service Worker (`/sw.js`).
+  - Schema.org/School JSON-LD component (`JsonLd.tsx`).
+- Verified workspace with clean `pnpm typecheck` and successful `pnpm build` across all 31 static routes.
+
 ## [Milestone 1] - Foundation Architecture
 ### Added
 - Created `pnpm` monorepo with `apps/web`, `apps/api`, `packages/shared`, `supabase/`.
-- Rebuilt shared UI Kit (`Button`, `Badge`, `Card`, `Input`, `StatCard`, `Skeleton`, `LockedFeature`) matching Figma design tokens.
-- Authored comprehensive Supabase SQL migrations:
-  - `00001_platform_identity.sql`: Private schema, `private.current_tenant_id()`, `private.current_role()`, `private.is_platform_owner()`, `private.has_feature()`, platform & profile tables, RLS.
-  - `00002_cms.sql`: CMS tables (`site_settings`, `notices`, `faculty`, `facilities`, `gallery`, `contact_messages`) & RLS.
-  - `00003_academic_fees_admission_analytics.sql`: Academic, fees, admission, analytics tables, race-safe sequence functions & RLS.
-- Created `supabase/seed.sql` with 2 demo tenants: Mount Carmel School (Pro) & St Mary's School (Basic).
-- Created `supabase/tests/rls_test.sql` SQL isolation verification test.
-- Implemented tenant resolution middleware (`apps/web/src/middleware.ts`) handling subdomains, custom domains, `localhost:3000`, and `?tenant=slug` override.
-- Implemented feature-flag engine (`apps/web/src/lib/features.ts`) and theme system (`apps/web/src/lib/theme.ts`).
-- Built complete App Router layout & page architecture across Public Website, Admin Panel, Principal Dashboard, Parent PWA Portal, and Platform Owner Panel.
-- Verified workspace with clean `pnpm typecheck` and successful `pnpm build` (28 routes).
+- Rebuilt shared UI Kit (`Button`, `Badge`, `Card`, `Input`, `StatCard`, `Skeleton`, `LockedFeature`).
+- Authored Supabase SQL migrations `00001_platform_identity.sql`, `00002_cms.sql`, `00003_academic_fees_admission_analytics.sql`, `seed.sql`, and `rls_test.sql`.
 
 ## [Milestone 0] - Audit and Master Planning
 ### Added
 - Saved master brief as permanent source of truth in `docs/PROJECT_SPEC.md`.
-- Preserved original Figma export prototype in `design-export/` (read-only reference).
-- Completed audit report in `docs/AUDIT.md`.

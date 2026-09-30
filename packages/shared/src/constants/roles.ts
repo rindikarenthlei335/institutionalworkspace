@@ -1,4 +1,4 @@
-import { UserRole } from '../types/index.js';
+import { UserRole } from '../types/index';
 
 export interface PermissionDefinition {
   manageUsers: boolean;
@@ -84,7 +84,7 @@ export const ROLE_PERMISSIONS: Record<UserRole, PermissionDefinition> = {
     editCMS: false,
     manageStudents: false,
     manageFees: false,
-    collectFees: true, // online payment
+    collectFees: true,
     manageAdmissions: false,
     viewPrincipalDashboard: false,
     accessPlatformOwner: false,

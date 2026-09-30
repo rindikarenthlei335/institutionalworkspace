@@ -1,10 +1,10 @@
-export * from './types/index.js';
-export * from './constants/plans.js';
-export * from './constants/roles.js';
-export * from './constants/themes.js';
-export * from './schemas/tenant.js';
-export * from './schemas/admission.js';
-export * from './schemas/fee.js';
+export * from './types/index';
+export * from './constants/plans';
+export * from './constants/roles';
+export * from './constants/themes';
+export * from './schemas/tenant';
+export * from './schemas/admission';
+export * from './schemas/fee';
 
 import en from './i18n/en.json';
 import mizo from './i18n/mizo.json';

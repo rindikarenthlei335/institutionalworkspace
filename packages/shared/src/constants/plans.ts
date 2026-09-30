@@ -1,4 +1,4 @@
-import { PlanConfig, PlanTier } from '../types/index.js';
+import { PlanConfig, PlanTier } from '../types/index';
 
 export const PLAN_DEFAULTS: Record<PlanTier, PlanConfig> = {
   basic: {
