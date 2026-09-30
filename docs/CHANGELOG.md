@@ -1,5 +1,21 @@
 # Project Changelog
 
+## [Milestone 7] - Hardening, Test Suites, Security Audit & Delivery
+### Added
+- Expanded multi-tenant RLS isolation tests in `supabase/tests/rls_test.sql` to verify cross-tenant data isolation across notices, students, fee invoices, payments, online admissions, and site settings.
+- Authored comprehensive automated TypeScript unit test suites in `tests/`:
+  - `fee_calculation.test.ts`: Day Scholar vs Hosteller fee differentiation, flat concessions, and percentage scholarships.
+  - `late_fee.test.ts`: Grace period calculations, daily penalties, and statutory caps.
+  - `sequence_generator.test.ts`: Race-safe formatting for Admission No (`ADM-YYYY-XXXX`), Receipt No (`RCP-YYYY-XXXXX`), and Application No (`APP-YYYY-XXXX`).
+  - `feature_gating.test.ts`: Plan tier feature hierarchy enforcement (Basic, Essential, Pro) and tenant feature overrides.
+  - `payment_idempotency.test.ts`: Payment gateway webhook deduplication preventing duplicate invoices or double-processing.
+- Added Playwright end-to-end smoke test specifications in `tests/e2e_smoke.spec.ts`.
+- Authored comprehensive `docs/SECURITY_AUDIT.md` certifying adherence to Section 4 (RLS security definer helpers, zero client trust, role-based least privilege, DPDP Act 2023 minor data protection, signed storage URLs).
+- Authored complete `docs/DEPLOYMENT.md` manual covering one-command setup, Supabase migrations, Cloudflare Pages/Workers deployments, secret provisioning, and wildcard domain setup.
+- Updated `docs/EDIT_GUIDE.md` with verified module paths and extension points.
+- Wired `"test": "node --test --experimental-strip-types tests/*.test.ts"` into root `package.json`.
+- Ran full test suite (`pnpm test`), workspace typecheck (`pnpm typecheck`), and production build (`pnpm build`).
+
 ## [Milestone 6] - Custom Domains, Managed Registrations & Add-on Services
 ### Added
 - Created `apps/web/src/features/domains/` module:
