@@ -1,5 +1,32 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 5] - App Publishing Pipeline, Store Package Export & Operator Runbook
+### Added
+- **Database Migrations:**
+  - `00011_app_publishing.sql`: Created `tenant_apps`, `store_asset_specs`, `tenant_app_assets`, `app_builds`, and `app_releases` with strict tenant RLS.
+  - `00012_app_publishing_seed.sql`: Seeded official Google Play & Apple App Store asset specifications (512x512 icon, 1024x500 feature graphic, 1024x1024 no-alpha icon), Mount Carmel HSS white-label Android & iOS apps, production EAS builds in Cloudflare R2, and live production releases.
+- **Store Asset Specification Validator (`apps/web/src/features/apps/lib/asset-validator.ts`):**
+  - Validates dimension tolerances (exact vs range), file formats (PNG/JPEG/WebP), maximum file sizes, and alpha channel detection (Apple App Store icon no-transparency rule).
+- **Store Package ZIP Export Engine (`apps/web/src/features/apps/lib/store-package.ts`):**
+  - Generates downloadable ZIP archive containing:
+    1. `app.config.json`: Baked white-label Expo configuration for the institution.
+    2. `metadata/listing_en.json` & `metadata/listing_lus.json`: Bilingual store listings.
+    3. `metadata/data_safety_answers.json`: Full Google Play Data Safety form questionnaire answers.
+    4. `metadata/apple_privacy_nutrition_labels.json`: Apple Privacy Nutrition Labels mapping.
+    5. `metadata/content_rating_questionnaire.json`: IARC age rating responses (utility for parents/faculty).
+    6. `credentials/KEYSTORE_INSTRUCTIONS.md`: Release keystore generation command lines.
+    7. `README.md`: Step-by-step publisher upload instructions.
+- **Platform-Owner App Publishing Console (`/platform/apps` & `AppPublishingMasterView.tsx`):**
+  - Intake checklist & bilingual metadata editor.
+  - Interactive Store Asset Validator.
+  - EAS Build & Cloudflare R2 artifacts viewer with direct signed `.aab` / `.ipa` download.
+  - Release & track tracker (Google Play & Apple App Store live links).
+  - 1-click **Export Store Package (ZIP)** generator.
+- **Operator Runbook (`docs/APP_PUBLISHING_RUNBOOK.md`):**
+  - Step-by-step manual for non-developer operators covering D-U-N-S registration, organization accounts, adult utility target audience classification, Apple Guideline 2.1 & 5.1.1 compliance, rejection troubleshooting playbook, OTA update workflows, and plan change matrix.
+- **Automated Verification:**
+  - `tests/store_package_export.test.ts`: 6 unit tests verifying asset validation rules and complete ZIP package structure. All 48 tests pass monorepo-wide.
+
 ## [Phase 2 - Milestone 4] - Mobile App (Expo / React Native), Runtime Entitlements & Store Compliance
 ### Added
 - **Mobile Application Architecture (`apps/mobile/`):**

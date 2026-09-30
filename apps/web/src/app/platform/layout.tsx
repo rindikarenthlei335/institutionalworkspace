@@ -27,6 +27,9 @@ export default function PlatformOwnerLayout({ children }: { children: React.Reac
           <Link href="/platform/services" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-800 text-slate-300">
             <span>Service Requests</span>
           </Link>
+          <Link href="/platform/apps" className="flex items-center gap-3 px-3 py-2 rounded hover:bg-slate-800 text-slate-300">
+            <span>App Publishing & Stores</span>
+          </Link>
         </nav>
       </aside>
 
