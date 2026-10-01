@@ -1,5 +1,37 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 7] - Custom Module Builder (No-Code), 6 Templates & Installable Attendance / Certificates
+### Added
+- **Database Migrations:**
+  - `00015_custom_builder_and_modules.sql`: Created `custom_entities`, `custom_fields`, `custom_records` (with GIN index for fast JSONB querying), `attendance_sessions`, `student_attendance`, `staff_attendance`, `certificate_templates`, and `issued_certificates` with strict tenant RLS.
+  - `00016_custom_builder_seed.sql`: Seeded Library, Transport, and Events custom entities, custom fields, sample records, and official Transfer Certificate (TC) and Bonafide Certificate templates.
+- **Custom Module Builder (`apps/web/src/features/builder/`):**
+  - No-code entity designer supporting 16 field types (`text`, `long_text`, `number`, `currency`, `date`, `datetime`, `boolean`, `select`, `multiselect`, `phone`, `email`, `url`, `file`, `image`, `relation`, `calculated`).
+  - 6 One-Click Institutional Templates:
+    1. `Library`: Books catalogue, ISBN tracking, genre, available copies.
+    2. `Transport`: Bus routes, vehicle numbers, driver contacts, monthly fares.
+    3. `Homework`: Assignments, subject mapping, deadlines, instructions.
+    4. `Events`: School calendar, sports meet, exhibitions, holidays.
+    5. `Visitors`: Campus gate visitor check-in, phone, purpose, pass numbers.
+    6. `Inventory`: Lab equipment, classroom assets, serial numbers, locations.
+  - Administrative console at `/admin/builder` (`CustomBuilderMasterView.tsx`) with entity selector, schemaless record tables, and dynamic entry creation forms.
+- **First-Class Installable Modules:**
+  - **Attendance Module (`/admin/attendance` & `AttendanceMasterView.tsx`):**
+    - Student daily attendance grid by Class & Section with quick "Mark All Present".
+    - 4-state statuses: Present (`P`), Absent (`A`), Late (`L`, weighted 0.5), Excused (`E`).
+    - Monthly aggregated turnout percentages feeding directly into marksheets.
+    - Low-attendance audit triggering alerts for students below the statutory 75% threshold.
+  - **Certificates Module (`/admin/certificates` & `CertificatesMasterView.tsx`):**
+    - Transfer Certificate (TC), Bonafide Certificate, Character Certificate.
+    - Pure merge-field interpolation engine (`{{student_name}}`, `{{admission_no}}`, `{{class}}`, `{{leaving_reason}}`, `{{conduct}}`).
+    - Sequential auto-incrementing serial numbering (`TC-MC-2024-001`).
+    - Official printable A4 deed layout with school crest, double gold border, principal signature line, and security QR seal.
+  - **Public Certificate Verification:**
+    - Privacy-preserving public endpoint at `/verify/certificate/[token]` confirming genuine institutional issue while withholding minor personal contact details.
+- **Automated Verification:**
+  - `tests/custom_builder.test.ts`: 5 unit tests validating field types, required constraints, and select options.
+  - `tests/attendance_certificates.test.ts`: 4 unit tests validating attendance rate weighting, low-attendance alerts, template merge resolution, and serial numbering. Total 64 tests pass monorepo-wide.
+
 ## [Phase 2 - Milestone 6] - Module Manager, ModuleManifest Standard & Guided Install Wizard
 ### Added
 - **ModuleManifest Standard (`packages/shared/src/types/modules.ts`):**
