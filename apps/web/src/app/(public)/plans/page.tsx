@@ -6,6 +6,7 @@ import React, { useState } from 'react';
 import Link from 'next/link';
 import { Check, Zap, ArrowRight, ShieldCheck, Sparkles, Plus, CheckSquare, Square } from 'lucide-react';
 import { Button } from '@/components/ui/Button';
+import { TemplateSelectorSection } from '@/features/templates/components/TemplateSelectorSection';
 
 export interface PlanDetail {
   name: string;
@@ -26,6 +27,8 @@ const PLANS: Record<'basic' | 'essential' | 'pro', PlanDetail> = {
     tagline: 'Core digital services for standard schools',
     color: '#8A9BA0',
     features: [
+      '1 Website Design Template (Heritage Classic Campus)',
+      'Unlimited Brand Theme Colors (Change in any plan)',
       'School website with 6 public modules',
       'Logo & theme customisation (8 presets)',
       'Admin panel & CMS notice board',
@@ -34,6 +37,7 @@ const PLANS: Record<'basic' | 'essential' | 'pro', PlanDetail> = {
       'EduPortal subdomain (e.g. school.eduportal.com)'
     ],
     locked: [
+      'Access to 4 Essential & 10 Pro website templates',
       'Online fee payment & Razorpay',
       'Student CRUD & admissions',
       'Principal dashboard & KPIs',
@@ -49,6 +53,9 @@ const PLANS: Record<'basic' | 'essential' | 'pro', PlanDetail> = {
     tagline: 'Essential school administration & fee processing',
     color: '#BB9877',
     features: [
+      '4 Website Design Templates (Includes Basic + 3 Premium Designs)',
+      'Interactive Template Switcher & Live Previews',
+      'Unlimited Brand Theme Colors (Any plan)',
       'Everything in Basic',
       'Fee payment with UPI (Day scholar & Hosteller)',
       'Online admission with instant fee collection',
@@ -58,6 +65,7 @@ const PLANS: Record<'basic' | 'essential' | 'pro', PlanDetail> = {
       'Bank statement CSV auto-match'
     ],
     locked: [
+      'Access to 10 Pro & 15 Pro+ website templates',
       'Principal executive dashboard & KPIs',
       'Website analytics & visitor telemetry',
       'White-label mobile app publishing',
@@ -71,6 +79,9 @@ const PLANS: Record<'basic' | 'essential' | 'pro', PlanDetail> = {
     tagline: 'Comprehensive institutional management with AI',
     color: '#163A2B',
     features: [
+      '10 Website Design Templates (All 4 Essential + 6 Advanced Designs)',
+      'Interactive Template Switcher & Live Previews',
+      'Unlimited Brand Theme Colors (Any plan)',
       'Everything in Essential',
       'Principal dashboard with 10 real-time KPIs',
       'Website analytics & visitor telemetry',
@@ -393,6 +404,12 @@ export default function PlansPricingPage() {
           })}
         </div>
       </section>
+
+      {/* Multi-Tier Website Templates & Theme Customizer Section */}
+      <TemplateSelectorSection
+        currentPlan={selectedPlan}
+        onPlanSelect={(tier) => setSelectedPlan(tier === 'pro_plus' ? 'pro' : tier)}
+      />
 
       {/* Floating Real-Time Plan Summary Bar */}
       <div className="fixed bottom-0 inset-x-0 bg-white border-t border-slate-200 shadow-2xl p-4 z-40">
