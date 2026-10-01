@@ -134,5 +134,36 @@
     "missingDataAlert": "Records with missing photos or demographic details detected",
     "digitalId": "Digital Identity Card",
     "tapToVerify": "Tap to scan & verify online"
+  },
+  "copilot": {
+    "title": "AI Copilot Assistant",
+    "subtitle": "Bilingual school operations assistant for administrators and teachers",
+    "askPlaceholder": "Ask anything about your school operations...",
+    "quota": "Monthly Message Quota",
+    "draftNotice": "Draft School Notice",
+    "confirmAction": "Confirm & Apply",
+    "applied": "Applied",
+    "pendingConfirmation": "Pending Confirmation"
+  },
+  "attendance": {
+    "title": "Daily Attendance",
+    "subtitle": "Record student and staff attendance and track low-attendance alerts",
+    "markPresent": "Mark Present",
+    "markAbsent": "Mark Absent",
+    "alertThreshold": "Low Attendance Alert (< 75%)"
+  },
+  "certificates": {
+    "title": "Certificates & Transfer Deeds",
+    "subtitle": "Issue Transfer Certificates and Bonafide deeds with verification QR codes",
+    "issueTc": "Issue Transfer Certificate",
+    "issueBonafide": "Issue Bonafide Certificate",
+    "verified": "Verified Institutional Document"
+  },
+  "builder": {
+    "title": "Custom Module Builder",
+    "subtitle": "Design custom data entities, dynamic forms, and schemaless records",
+    "createEntity": "Create Custom Entity",
+    "addField": "Add Custom Field",
+    "installTemplate": "Install Template"
   }
 }

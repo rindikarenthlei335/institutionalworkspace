@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { CopilotFloatingDock } from '@/features/copilot/components/CopilotFloatingDock';
 
 export default function AdminLayout({ children }: { children: React.ReactNode }) {
   return (
@@ -18,7 +19,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           </Link>
         </div>
 
-        <nav className="flex-1 p-3 space-y-1 text-xs font-medium">
+        <nav className="flex-1 p-3 space-y-1 text-xs font-medium overflow-y-auto">
           <Link href="/admin/dashboard" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Dashboard</span>
           </Link>
@@ -44,6 +45,14 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <Link href="/admin/students" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Students & Guardians</span>
           </Link>
+          <Link href="/admin/attendance" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+            <span>Daily Attendance</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-bold">ULTIMATE</span>
+          </Link>
+          <Link href="/admin/certificates" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+            <span>Certificates & TC</span>
+            <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-bold">ULTIMATE</span>
+          </Link>
           <Link href="/admin/fees" className="flex items-center gap-3 px-3 py-2 rounded-[6px] hover:bg-white/10 transition-colors">
             <span>Fees & Receipts</span>
           </Link>
@@ -65,9 +74,20 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <span>Principal Dashboard</span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-yellow-400/20">PRO</span>
             </Link>
-            <Link href="/admin/modules" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
-              <span>Modules & Extensions</span>
+            <Link href="/admin/builder" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+              <span>Custom Builder</span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-bold">ULTIMATE</span>
+            </Link>
+            <Link href="/admin/modules" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+              <span>Module Manager</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-bold">ULTIMATE</span>
+            </Link>
+            <Link href="/admin/copilot" className="flex items-center justify-between px-3 py-2 rounded-[6px] bg-emerald-500/20 text-emerald-200 font-semibold hover:bg-emerald-500/30 transition-colors">
+              <span className="flex items-center gap-1.5">
+                <span>✨</span>
+                <span>AI Copilot</span>
+              </span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-400/30 text-emerald-300 font-bold">ULTIMATE</span>
             </Link>
           </div>
         </nav>
@@ -90,6 +110,9 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
 
         <main className="flex-1 p-6 overflow-y-auto">{children}</main>
       </div>
+
+      {/* Persistent AI Copilot Floating Dock */}
+      <CopilotFloatingDock />
     </div>
   );
 }

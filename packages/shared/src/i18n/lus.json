@@ -134,6 +134,37 @@
     "missingDataAlert": "Thlalak leh details kimlo la awm te hriattirna",
     "digitalId": "Digital Identity Card",
     "tapToVerify": "Hmet la online-ah a dik leh dikloh fiah rawh"
+  },
+  "copilot": {
+    "title": "AI Copilot Tanpuitu",
+    "subtitle": "Sikul enkawlna leh zirtirtute tanpuitu bilingual (English & Mizo)",
+    "askPlaceholder": "Sikul chungchang zawt rawh le...",
+    "quota": "Thla Tin Message Quota",
+    "draftNotice": "Sikul Thuchhuah Duanna",
+    "confirmAction": "Pawm & Tichhuak",
+    "applied": "Tlangzarh Tawh",
+    "pendingConfirmation": "Nemngheh Nghah Mek"
+  },
+  "attendance": {
+    "title": "Ni Tin Kallam",
+    "subtitle": "Zirlai leh thawktute kallam chhinchhiahna leh 75% tlinglo hriattirna",
+    "markPresent": "Kal Chhinchhiah",
+    "markAbsent": "Kallo Chhinchhiah",
+    "alertThreshold": "Kallam Tlem Hriattirna (< 75%)"
+  },
+  "certificates": {
+    "title": "Certificates leh Insaun Hriatpuina",
+    "subtitle": "Transfer Certificate leh Bonafide QR code rintlak nena pekchhuahna",
+    "issueTc": "Transfer Certificate Pechhuak",
+    "issueBonafide": "Bonafide Certificate Pechhuak",
+    "verified": "Sikul Hriatpuina Dikleh Rintlak"
+  },
+  "builder": {
+    "title": "Custom Module Siamsa",
+    "subtitle": "Module thar, record vawnna, leh list siam chawpna",
+    "createEntity": "Module Thar Siam",
+    "addField": "Field Thar Dah",
+    "installTemplate": "Template Dah Lut"
   }
 }
 
