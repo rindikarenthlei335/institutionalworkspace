@@ -77,3 +77,34 @@ This document records key decisions, Sensible Defaults, and trade-offs made duri
 - **Decision:** Mandate complete bilingual parity across all user-facing strings in English (`en`) and Mizo (`lus`).
 - **Enforcement:** Automated `pnpm i18n:check` script validates that zero English keys are missing Mizo translations in CI/test pipelines.
 - **Rationale:** Ensures native cultural suitability for schools across Mizoram and Northeast India from day one.
+
+---
+
+## ADR-010: Zero Double-Entry Architecture (Data Hub as Master)
+- **Decision:** All modules—including Student Profiles, Guardians, Staff & Faculty, Subjects, Exam Marks, ID Cards, Marksheets, Certificates, and Website Public Faculty—read and write directly from the Data Hub foundation.
+- **Rationale:** Eliminates data duplication, eliminates synchronization drift, and guarantees institutional facts are always in sync.
+
+---
+
+## ADR-011: Mobile Architecture & Regulatory Strategy
+- **Decision:** Build a single Expo / React Native codebase (`apps/mobile/`) supporting both shared app and white-label standalone publishing. Runtime entitlements are fetched via `GET /api/v1/tenant/config` so plan upgrades/downgrades never require app store redeployments.
+- **Regulatory Strategy:** For Apple and Google store compliance, classify the app strictly as an Adult/Parent/Faculty Utility (18+) to avoid child-directed COPPA and Google Families Policy burdens; provide a 1-tap demo reviewer login account; and provide an in-app account deletion request with a 30-day grace period.
+
+---
+
+## ADR-012: Minor Student Privacy & Minimal Verification Endpoints
+- **Decision:** Public verification routes (`/verify/marksheet/[token]`, `/verify/id/[token]`, `/verify/certificate/[token]`) expose minimal verification facts only (student name, school name, verification status) and strictly withhold private phone numbers, home addresses, dates of birth, and parents' personal details.
+- **Rationale:** Protects minor student safety and complies with India's Digital Personal Data Protection (DPDP) Act 2023.
+
+---
+
+## ADR-013: Core Module Protection Invariant
+- **Decision:** In the Module Manager, foundational modules (`settings`, `data_hub`) are marked `isCore = true` and are hard-locked against being disabled or uninstalled.
+- **Rationale:** Prevents tenant administrators from accidentally bricking school settings or master data pipelines.
+
+---
+
+## ADR-014: AI Copilot: Zero Auto-Apply Invariant & Quotas
+- **Decision:** AI Copilot operates in 4 modes (Guide, Data, Action, General) with an official Mizo glossary injected into prompts. In Action mode, drafts are created with `pending_confirmation` status and can ONLY be applied when an authorized human operator clicks "Confirm & Apply". Quota is governed at 3,000 monthly messages on the Ultimate plan.
+- **Rationale:** Prevents hallucinated or unauthorized automated state changes in school databases while enabling administrators to leverage generative AI safely.
+

@@ -37,3 +37,10 @@ NEXT_PUBLIC_TURNSTILE_SITE_KEY=mock_turnstile_site_key
 | `CLOUDFLARE_ZONE_ID` | Cloudflare Worker (`apps/api`) | Cloudflare Zone ID for `ROOT_DOMAIN` |
 | `RESEND_API_KEY` | Cloudflare Worker (`apps/api`) | Resend Email API Key |
 | `TURNSTILE_SECRET_KEY` | Cloudflare Worker (`apps/api`) | Cloudflare Turnstile bot verification secret |
+| `PLATFORM_RAZORPAY_KEY_ID` | Next.js Server & Worker | Platform Razorpay Key ID for prepaid service add-ons & subscriptions |
+| `PLATFORM_RAZORPAY_KEY_SECRET` | Next.js Server & Worker | Platform Razorpay Secret Key for prepaid service add-ons & subscriptions |
+| `PLATFORM_RAZORPAY_WEBHOOK_SECRET` | Next.js Server & Worker | Platform Razorpay Webhook Secret for order fulfillment verification |
+| `ANTHROPIC_API_KEY` | Next.js Server & Worker | Anthropic Claude API Key for AI Copilot (Claude Haiku 4.5 & Sonnet 5.5) |
+| `EXPO_TOKEN` | Platform CI / Worker | Expo EAS deployment token for automated white-label app compilation |
+| `EAS_PROJECT_ID` | Platform CI / Mobile | Expo Application Services project identifier |
+

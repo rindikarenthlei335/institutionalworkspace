@@ -34,3 +34,33 @@ All tables enforce `tenant_id uuid not null references tenants(id)` (except plat
 | `applications` | Yes | Insert (Turnstile protected) | Staff | `tenant_id = private.current_tenant_id()` |
 | `domain_requests` | Yes | **NO ACCESS** | Super Admin & Platform Owner | `tenant_id = private.current_tenant_id()` |
 | `audit_logs` | Yes | **NO ACCESS** | Super Admin & Platform Owner | `tenant_id = private.current_tenant_id()` |
+| `service_catalog` | No | Read-only | Platform Owner only | Global add-on catalog |
+| `service_orders` | Yes | **NO ACCESS** | Super Admin & Platform Owner | `tenant_id = private.current_tenant_id()` |
+| `service_order_items`| Yes | **NO ACCESS** | Super Admin & Platform Owner | Inherited via order tenant_id |
+| `service_item_documents`| Yes | **NO ACCESS** | Super Admin & Platform Owner | Private R2 bucket, signed URLs |
+| `service_subscriptions`| Yes | **NO ACCESS** | Super Admin & Platform Owner | `tenant_id = private.current_tenant_id()` |
+| `staff_profiles` | Yes | Public Faculty Sync | Super Admin & Admin | Sensitive fields hidden from public |
+| `import_batches` | Yes | **NO ACCESS** | Super Admin & Data Entry | `tenant_id = private.current_tenant_id()` |
+| `exam_types` | Yes | Read-only for Parent | Super Admin & Admin | `tenant_id = private.current_tenant_id()` |
+| `grading_schemes` | Yes | Read-only for Parent | Super Admin & Admin | `tenant_id = private.current_tenant_id()` |
+| `student_marks` | Yes | **NO ACCESS** | Teachers (assigned) & Admin | `tenant_id = private.current_tenant_id()` |
+| `marksheets` | Yes | Public Verification Token | Super Admin & Admin | Minimal confirmation at `/verify/marksheet/[token]` |
+| `id_card_templates` | Yes | **NO ACCESS** | Super Admin & Admin | `tenant_id = private.current_tenant_id()` |
+| `id_cards` | Yes | Public Verification Token | Super Admin & Admin | Minimal confirmation at `/verify/id/[token]` |
+| `app_versions` | No | Public / Client App | Platform Owner | Global mobile version management |
+| `tenant_apps` | Yes | **NO ACCESS** | Super Admin & Platform Owner | Store credentials encrypted in Vault |
+| `app_builds` | Yes | **NO ACCESS** | Platform Owner | Private R2 build artifact storage |
+| `app_releases` | Yes | **NO ACCESS** | Platform Owner | Release track status & audit |
+| `tenant_modules` | Yes | **NO ACCESS** | Super Admin | `tenant_id = private.current_tenant_id()` |
+| `custom_entities` | Yes | **NO ACCESS** | Super Admin & Admin | `tenant_id = private.current_tenant_id()` |
+| `custom_fields` | No (entity) | **NO ACCESS** | Super Admin & Admin | Cascades from entity |
+| `custom_records` | Yes | **NO ACCESS** | Role-permission gated | GIN indexed JSONB; `tenant_id` isolated |
+| `attendance_sessions`| Yes | **NO ACCESS** | Teachers & Admin | `tenant_id = private.current_tenant_id()` |
+| `student_attendance`| Yes | Parent Portal View | Teachers & Admin | Minor student attendance isolation |
+| `certificate_templates`| Yes | **NO ACCESS** | Super Admin & Admin | `tenant_id = private.current_tenant_id()` |
+| `issued_certificates`| Yes | Public Verification Token | Super Admin & Admin | Minimal confirmation at `/verify/certificate/[token]` |
+| `ai_usage` | Yes | **NO ACCESS** | Super Admin & Platform Owner | Usage token tracking & monthly quota |
+| `ai_conversations` | Yes | **NO ACCESS** | User (Self) | Private tenant conversation history |
+| `ai_messages` | No (conv) | **NO ACCESS** | User (Self) | Cascades from conversation |
+| `help_articles` | No | Read-only (Auth) | Platform Staff | Searchable knowledge base (en + lus) |
+

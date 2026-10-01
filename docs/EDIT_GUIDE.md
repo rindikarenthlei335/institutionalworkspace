@@ -100,3 +100,76 @@
   - `apps/web/src/app/platform/tenants/page.tsx`
   - `apps/web/src/app/platform/plans/page.tsx`
   - `apps/web/src/app/platform/billing/page.tsx`
+
+---
+
+## 11. Data Hub & Excel Import Center
+- **To modify spreadsheet parsing, column mapping, or dry-run validation:**
+  - `apps/web/src/features/data-hub/lib/excel-engine.ts`
+  - `apps/web/src/features/data-hub/components/DataHubMasterView.tsx`
+- **To modify bulk photo ZIP unpacker:**
+  - `apps/web/src/features/data-hub/components/BulkPhotoUploadModal.tsx`
+
+---
+
+## 12. Exams, Marks Entry & Report Cards
+- **To change grading logic, pass/fail rules, or rank tie-breaking:**
+  - `apps/web/src/features/exams/lib/computation.ts`
+- **To adjust report card marksheet templates, CR80 layouts, or QR seals:**
+  - `apps/web/src/features/exams/components/ExamsMasterView.tsx`
+  - `apps/web/src/features/id-cards/components/CR80CardPreview.tsx`
+- **To adjust public verification endpoints:**
+  - `apps/web/src/app/(public)/verify/marksheet/[token]/page.tsx`
+  - `apps/web/src/app/(public)/verify/id/[token]/page.tsx`
+
+---
+
+## 13. Mobile App & App Publishing Pipeline
+- **To edit mobile screens (Home, Fees, Digital ID, Results, Profile):**
+  - `apps/mobile/src/screens/`
+- **To adjust store asset validation rules (512x512 icon, alpha channel check):**
+  - `apps/web/src/features/apps/lib/asset-validator.ts`
+- **To adjust Store Package ZIP export generator:**
+  - `apps/web/src/features/apps/lib/store-package.ts`
+  - `apps/web/src/features/apps/components/AppPublishingMasterView.tsx`
+
+---
+
+## 14. Module Manager & Custom Builder
+- **To scaffold or define new first-class modules:**
+  - `packages/shared/src/types/modules.ts`
+  - `apps/web/src/features/modules/registry.ts`
+  - `scripts/gen-module.js`
+- **To adjust Custom Module Builder no-code entity forms and JSONB storage:**
+  - `apps/web/src/features/builder/lib/builder-engine.ts`
+  - `apps/web/src/features/builder/components/CustomBuilderMasterView.tsx`
+
+---
+
+## 15. Attendance & Certificates Modules
+- **To change daily attendance computation or low-attendance alerts (< 75%):**
+  - `apps/web/src/features/attendance/lib/attendance-computation.ts`
+  - `apps/web/src/features/attendance/components/AttendanceMasterView.tsx`
+- **To adjust Transfer Certificate (TC) merge fields, serial numbering, or printable A4 layouts:**
+  - `apps/web/src/features/certificates/lib/certificate-engine.ts`
+  - `apps/web/src/features/certificates/components/CertificatesMasterView.tsx`
+  - `apps/web/src/app/(public)/verify/certificate/[token]/page.tsx`
+
+---
+
+## 16. AI Copilot (English + Mizo)
+- **To adjust prompt instructions, glossary injection, or provider selection:**
+  - `apps/web/src/features/copilot/lib/copilot-engine.ts`
+  - `apps/web/src/features/copilot/lib/glossary-injector.ts`
+  - `apps/web/src/features/copilot/lib/llm-provider.ts`
+- **To add new read-only data tools or action draft types:**
+  - `apps/web/src/features/copilot/lib/tools.ts`
+  - `apps/web/src/features/copilot/lib/action-drafts.ts`
+- **To update help knowledge base articles:**
+  - `content/help/<module>/*.md`
+  - `apps/web/src/features/copilot/lib/help-search.ts`
+- **To edit the UI floating dock or full-screen chat:**
+  - `apps/web/src/features/copilot/components/CopilotFloatingDock.tsx`
+  - `apps/web/src/features/copilot/components/CopilotFullPageView.tsx`
+  - `apps/web/src/app/admin/copilot/page.tsx`
+

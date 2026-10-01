@@ -1,5 +1,42 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 9] - Final Polish, Bilingual Audit, Security & Privacy Review & Full Test Suite
+### Added & Verified
+- **Bilingual Strict Parity Audit (`pnpm i18n:check`):**
+  - Audited all 129 user-facing dictionary keys in English (`en.json`), Mizo (`lus.json`), and (`mizo.json`). 100% parity verified with zero missing keys.
+- **Privacy & Security Review (DPDP Act 2023 & Minor Data Protection):**
+  - Public verification routes (`/verify/marksheet/[token]`, `/verify/id/[token]`, `/verify/certificate/[token]`) expose minimal verification facts only, withholding minor student private PII (addresses, phone numbers, full dates of birth).
+  - Private Cloudflare R2 object storage access enforced with time-limited presigned URLs.
+  - Strict tenant isolation enforced with Postgres RLS across all Phase 2 tables.
+  - Platform revenue separate from school tuition fee accounts (`PLATFORM_RAZORPAY_*` vs `RAZORPAY_*`).
+- **Complete Monorepo Test Suite:**
+  - 77 automated tests across 31 test suites passing cleanly with zero failures.
+  - Next.js production build compiles 52 static and dynamic routes with zero TypeScript or bundling errors.
+- **Documentation Verification:**
+  - Verified and delivered all documentation: `docs/SERVICE_STORE.md`, `docs/IMPORT_GUIDE.md`, `docs/MODULE_GUIDE.md`, `docs/APP_PUBLISHING_RUNBOOK.md`, `docs/AI_COPILOT.md`, `docs/HELP_CONTENT_GUIDE.md`, `docs/FEATURES.md`, `docs/DATABASE.md`, `docs/ENV.md`, `docs/DECISIONS.md`.
+
+## [Phase 2 - Milestone 8] - AI Copilot (Mizo + English), 4 Modes, Safe Action Drafts & Quotas
+### Added
+- **Database Migrations:**
+  - `00017_ai_copilot.sql`: Created `ai_usage`, `ai_conversations`, `ai_messages`, and `help_articles` tables with full-text search function `search_help` and monthly message quota tracking.
+  - `00018_ai_copilot_seed.sql`: Seeded bilingual knowledge base help articles across all modules in English and Mizo.
+- **AI Copilot Core Engine (`apps/web/src/features/copilot/lib/`):**
+  - `LLMProvider` interface implemented with Anthropic Messages API (`ANTHROPIC_API_KEY`) and deterministic fallback `MockProvider`.
+  - 4 Operational Modes:
+    1. **Guide Mode (`guide`)**: Answers questions about school workflows, searches knowledge base articles, and provides clickable deep navigation links.
+    2. **Data Mode (`data`)**: Executes read-only data tools with session context (`student_stats`, `fee_summary`, `list_defaulters`, `exam_results_summary`, `attendance_summary`, `search_students`).
+    3. **Action Mode (`action`)**: Generates structured drafts for school notices, circulars, and bilingual translations. Enforces zero auto-apply invariant: all drafts require explicit human operator confirmation.
+    4. **General Mode (`general`)**: Polite, school-appropriate educational correspondence and speech drafting.
+  - Injected official Mizo terminology glossary (`packages/shared/src/i18n/glossary.lus.json`) into prompts.
+  - Governed monthly quota of 3,000 messages on Ultimate plan.
+- **User Interface Components:**
+  - `CopilotFloatingDock.tsx`: Floating assistant trigger and expandable chat drawer available across every admin page.
+  - `CopilotFullPageView.tsx`: Full-screen chat workspace at `/admin/copilot` with prompt ideas and quota indicators.
+  - Mode selector chips, language toggle (🇬🇧 EN / 🇲🇿 LUS), deep link quick cards, and interactive "Confirm & Apply" action draft cards.
+- **Evaluation Benchmark:**
+  - Created 30-case domain evaluation set in `ai-evals/copilot_evals.json`.
+  - Authored automated test suite `tests/ai_copilot.test.ts` (13/13 tests passing).
+
 ## [Phase 2 - Milestone 7] - Custom Module Builder (No-Code), 6 Templates & Installable Attendance / Certificates
 ### Added
 - **Database Migrations:**
