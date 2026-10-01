@@ -252,15 +252,15 @@ export function InstitutionalOnboardingFlow() {
   const domainPrice = domainType === 'custom_domain' ? domainServicePrice : 0;
 
   // Google Services: Pro tier = Free!
-  // Basic / Essential: Submit = ₹1000, Maps = ₹500. Both together (Bundle) = ₹1200!
+  // Basic / Essential: Submit = ₹500, Maps = ₹300. Both together (Bundle) = ₹700!
   let googleServicesPrice = 0;
   if (!isPro) {
     if (addonGoogleSubmit && addonGoogleMaps) {
-      googleServicesPrice = 1200; // Google Presence Bundle discount
+      googleServicesPrice = 700; // Google Presence Bundle discount
     } else if (addonGoogleSubmit) {
-      googleServicesPrice = 1000;
-    } else if (addonGoogleMaps) {
       googleServicesPrice = 500;
+    } else if (addonGoogleMaps) {
+      googleServicesPrice = 300;
     }
   }
 
@@ -861,7 +861,7 @@ export function InstitutionalOnboardingFlow() {
             {!isPro && (
               <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-between gap-3 text-xs">
                 <span className="text-emerald-950 font-medium">
-                  💡 <strong>Google Presence Bundle:</strong> Select both Google Submit (₹1,000) and Google Maps (₹500) to get the complete bundle for just <strong>₹1,200</strong> (Save ₹300).
+                  💡 <strong>Google Presence Bundle:</strong> Select both Google Submit (₹500) and Google Maps (₹300) to get the complete bundle for just <strong>₹700</strong> (Save ₹100).
                 </span>
               </div>
             )}
@@ -906,7 +906,7 @@ export function InstitutionalOnboardingFlow() {
 
                   <div className="text-right shrink-0">
                     <span className="font-black text-lg text-[#163A2B]">
-                      {isPro ? 'FREE' : '+₹1,000'}
+                      {isPro ? 'FREE' : '+₹500'}
                     </span>
                     <span className="text-[10px] text-slate-500 font-bold block">
                       {isPro ? 'Included in Pro' : 'One-time setup'}
@@ -948,7 +948,7 @@ export function InstitutionalOnboardingFlow() {
 
                   <div className="text-right shrink-0">
                     <span className="font-black text-lg text-[#163A2B]">
-                      {isPro ? 'FREE' : '+₹500'}
+                      {isPro ? 'FREE' : '+₹300'}
                     </span>
                     <span className="text-[10px] text-slate-500 font-bold block">
                       {isPro ? 'Included in Pro' : 'One-time setup'}
