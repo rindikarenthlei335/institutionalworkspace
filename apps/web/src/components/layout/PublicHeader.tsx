@@ -1,8 +1,8 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/Button';
 import {
   Menu,
@@ -17,10 +17,14 @@ import {
   CreditCard,
   GraduationCap,
   LayoutDashboard,
-  Sparkles,
   ShieldCheck,
   ChevronRight,
-  LogIn
+  LogIn,
+  KeyRound,
+  Lock,
+  Unlock,
+  Sparkles,
+  ArrowRight
 } from 'lucide-react';
 
 interface NavItem {
@@ -40,8 +44,14 @@ const NAV_ITEMS: NavItem[] = [
 ];
 
 export function PublicHeader() {
-  const [mobileDrawerOpen, setMobileDrawerOpen] = useState(false);
+  const [drawerOpen, setDrawerOpen] = useState(false);
+  const [secretAdminOpen, setSecretAdminOpen] = useState(false);
+  const [tapCount, setTapCount] = useState(0);
+  const [tapToast, setTapToast] = useState<string | null>(null);
+  const tapTimerRef = useRef<NodeJS.Timeout | null>(null);
+
   const pathname = usePathname();
+  const router = useRouter();
 
   const isLinkActive = (href: string) => {
     if (href === '/') {
@@ -50,81 +60,66 @@ export function PublicHeader() {
     return pathname.startsWith(href);
   };
 
+  // Secret 5 Quick Taps Handler on Logo
+  const handleLogoTap = (e: React.MouseEvent) => {
+    e.preventDefault();
+    const nextCount = tapCount + 1;
+    setTapCount(nextCount);
+
+    if (tapTimerRef.current) {
+      clearTimeout(tapTimerRef.current);
+    }
+
+    if (nextCount >= 5) {
+      setSecretAdminOpen(true);
+      setTapToast('🔓 Secret Admin Gateway Unlocked!');
+      setTapCount(0);
+      setTimeout(() => setTapToast(null), 3000);
+    } else {
+      if (nextCount >= 2) {
+        setTapToast(`🔒 Tap ${5 - nextCount} more times for secret admin access...`);
+      }
+      tapTimerRef.current = setTimeout(() => {
+        setTapCount(0);
+        setTapToast(null);
+      }, 2000);
+    }
+  };
+
   return (
     <>
-      {/* Top Demo / Role Switcher Ribbon */}
-      <div className="bg-[#0b1f17] text-white/90 px-3 sm:px-4 py-1.5 text-xs border-b border-white/10 flex items-center justify-between gap-2 z-50 overflow-x-auto scrollbar-none whitespace-nowrap">
-        <div className="flex items-center gap-2 shrink-0">
-          <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
-          <span className="font-semibold text-emerald-300">EduPortal Multi-Tenant SaaS:</span>
-          <span className="text-white/70 hidden sm:inline">Role Switcher:</span>
+      {/* Subtle Floating Secret Tap Toast Notification */}
+      {tapToast && (
+        <div className="fixed top-20 left-1/2 -translate-x-1/2 z-50 bg-slate-900/95 text-white text-xs px-4 py-2 rounded-full shadow-2xl border border-emerald-500/50 flex items-center gap-2 backdrop-blur-md animate-in fade-in slide-in-from-top-2">
+          <KeyRound className="w-3.5 h-3.5 text-emerald-400 animate-pulse" />
+          <span className="font-medium">{tapToast}</span>
         </div>
-        <div className="flex items-center gap-1.5 text-[11px] shrink-0">
-          <Link
-            href="/admin/dashboard"
-            className="px-2 py-0.5 rounded bg-emerald-700/60 hover:bg-emerald-600 active:scale-95 text-white font-medium border border-emerald-500/30 transition-all"
-          >
-            🏫 Admin Panel
-          </Link>
-          <Link
-            href="/admin/principal"
-            className="px-2 py-0.5 rounded bg-amber-700/60 hover:bg-amber-600 active:scale-95 text-white font-medium border border-amber-500/30 transition-all"
-          >
-            👔 Principal Cockpit
-          </Link>
-          <Link
-            href="/admin/copilot"
-            className="px-2 py-0.5 rounded bg-purple-700/60 hover:bg-purple-600 active:scale-95 text-white font-medium border border-purple-500/30 transition-all"
-          >
-            ✨ AI Copilot
-          </Link>
-          <Link
-            href="/plans"
-            className="px-2 py-0.5 rounded bg-blue-700/60 hover:bg-blue-600 active:scale-95 text-white font-medium border border-blue-500/30 transition-all"
-          >
-            ⚡ Tier Plans & Add-ons
-          </Link>
-          <Link
-            href="/platform/tenants"
-            className="px-2 py-0.5 rounded bg-indigo-700/60 hover:bg-indigo-600 active:scale-95 text-white font-medium border border-indigo-500/30 transition-all"
-          >
-            🌐 Super Admin
-          </Link>
-          <Link
-            href="/portal/dashboard"
-            className="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/20 transition-all"
-          >
-            🎓 Student Portal
-          </Link>
-          <Link
-            href="/login"
-            className="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 active:scale-95 text-white border border-white/20 transition-all"
-          >
-            🔑 Login
-          </Link>
-        </div>
-      </div>
+      )}
 
-      {/* Main Header */}
+      {/* Main Header (Clean Public View without role ribbons) */}
       <header className="sticky top-0 z-40 bg-[#163A2B] text-white border-b border-[#0F2A1F] shadow-md">
         <div className="max-w-7xl mx-auto px-3 sm:px-4 h-16 flex items-center justify-between gap-2 sm:gap-4">
           
-          {/* Mobile Left: Dashboard Drawer Button (vei lam) */}
-          <div className="flex items-center gap-2 md:hidden">
+          {/* Left: Dashboard Drawer Button (vei lam) */}
+          <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={() => setMobileDrawerOpen(true)}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-800/90 hover:bg-emerald-700 active:scale-95 text-emerald-100 border border-emerald-500/40 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400"
-              aria-label="Open Mobile Dashboard & Menu"
+              onClick={() => setDrawerOpen(true)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-emerald-800/90 hover:bg-emerald-700 active:scale-95 text-emerald-100 border border-emerald-500/40 shadow-sm transition-all focus:outline-none focus:ring-2 focus:ring-emerald-400 cursor-pointer"
+              aria-label="Open Institutional Dashboard"
             >
               <Menu className="w-4 h-4 text-emerald-300" />
               <span className="text-xs font-semibold tracking-wide">Dashboard</span>
             </button>
           </div>
 
-          {/* School Brand / Logo */}
-          <Link href="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-            <div className="w-8 h-8 rounded-[8px] border border-white/40 flex items-center justify-center bg-white/10 shrink-0">
+          {/* School Brand / Logo with Secret 5-Tap Gesture */}
+          <div
+            onClick={handleLogoTap}
+            className="flex items-center gap-2 hover:opacity-90 transition-opacity cursor-pointer select-none group"
+            title="Mount Carmel School (Quick tap 5x for Secret Admin)"
+          >
+            <div className="w-8 h-8 rounded-[8px] border border-white/40 flex items-center justify-center bg-white/10 shrink-0 group-active:scale-90 transition-transform">
               <span className="font-display font-bold text-sm">EP</span>
             </div>
             <div className="min-w-0">
@@ -135,7 +130,7 @@ export function PublicHeader() {
                 Aizawl, Mizoram
               </span>
             </div>
-          </Link>
+          </div>
 
           {/* Desktop Navigation Links (with Professional Stylish Click / Active States) */}
           <nav className="hidden md:flex items-center gap-1.5 lg:gap-2 text-xs font-medium">
@@ -148,25 +143,20 @@ export function PublicHeader() {
                   className={`relative px-3 py-1.5 rounded-full transition-all duration-200 flex items-center gap-1.5 active:scale-95 ${
                     active
                       ? 'bg-emerald-500/25 text-emerald-200 font-semibold border border-emerald-400/60 shadow-[0_0_12px_rgba(52,211,153,0.35)] ring-1 ring-emerald-400/30'
-                      : 'text-white/80 hover:text-white hover:bg-white/10 hover:border-white/20 border border-transparent active:bg-emerald-600/30 active:border-emerald-400/50'
+                      : 'text-white/80 hover:text-white hover:bg-white/10 border border-transparent active:border-emerald-500/40'
                   }`}
                 >
-                  {active && (
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 shadow-[0_0_6px_#34d399] animate-pulse shrink-0"></span>
-                  )}
                   <span>{item.label}</span>
+                  {active && (
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse"></span>
+                  )}
                 </Link>
               );
             })}
           </nav>
 
-          {/* Quick Action CTA Buttons */}
+          {/* Public Quick Action CTA Buttons */}
           <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            <Link href="/admin/dashboard" className="hidden lg:inline-flex">
-              <Button variant="secondary" size="sm" className="active:scale-95 transition-all text-xs">
-                Admin Panel
-              </Button>
-            </Link>
             <Link href="/pay-fee">
               <Button variant="secondary" size="sm" className="active:scale-95 transition-all text-xs px-2.5 sm:px-3">
                 Pay Fee
@@ -181,13 +171,113 @@ export function PublicHeader() {
         </div>
       </header>
 
-      {/* Mobile Drawer (Left / Vei Lam Side Navigation & Dashboard) */}
-      {mobileDrawerOpen && (
-        <div className="fixed inset-0 z-50 md:hidden flex">
+      {/* =================================================================================== */}
+      {/* SECRET ADMIN GATEWAY MODAL (Unlocked via 5 Quick Taps on Logo) */}
+      {/* =================================================================================== */}
+      {secretAdminOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md animate-in fade-in">
+          <div className="relative w-full max-w-md bg-slate-900 border border-emerald-500/40 rounded-2xl shadow-2xl p-6 text-white space-y-5 animate-in zoom-in-95">
+            {/* Header */}
+            <div className="flex items-start justify-between">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-emerald-500/20 border border-emerald-500/40 flex items-center justify-center text-emerald-400">
+                  <Unlock className="w-5 h-5" />
+                </div>
+                <div>
+                  <h3 className="font-display font-bold text-lg text-white">
+                    Secret Admin Gateway
+                  </h3>
+                  <span className="text-xs text-emerald-400/90 font-mono">
+                    Authorized Personnel Access
+                  </span>
+                </div>
+              </div>
+              <button
+                type="button"
+                onClick={() => setSecretAdminOpen(false)}
+                className="p-1 rounded-lg text-slate-400 hover:text-white hover:bg-slate-800 transition-colors cursor-pointer"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            <p className="text-xs text-slate-300 leading-relaxed">
+              You have unlocked the institutional admin access console via the secret logo gesture. Select your destination:
+            </p>
+
+            {/* Direct Admin Launch Cards */}
+            <div className="space-y-2 text-xs">
+              <Link
+                href="/admin/dashboard"
+                onClick={() => setSecretAdminOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl bg-emerald-800/50 hover:bg-emerald-700/60 border border-emerald-500/40 text-emerald-100 font-semibold active:scale-95 transition-all group cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <LayoutDashboard className="w-4 h-4 text-emerald-300" />
+                  <div>
+                    <span className="block font-bold">School Admin Panel</span>
+                    <span className="text-[10px] text-emerald-300/80 font-normal">Full CMS, fees, students & settings</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-emerald-400 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              <Link
+                href="/admin/principal"
+                onClick={() => setSecretAdminOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl bg-amber-950/50 hover:bg-amber-900/60 border border-amber-500/40 text-amber-200 font-semibold active:scale-95 transition-all group cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <span className="text-base">👔</span>
+                  <div>
+                    <span className="block font-bold">Principal Cockpit</span>
+                    <span className="text-[10px] text-amber-300/80 font-normal">10 live academic & fee KPIs</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-amber-400 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+
+              <Link
+                href="/platform/tenants"
+                onClick={() => setSecretAdminOpen(false)}
+                className="flex items-center justify-between p-3 rounded-xl bg-indigo-950/50 hover:bg-indigo-900/60 border border-indigo-500/40 text-indigo-200 font-semibold active:scale-95 transition-all group cursor-pointer"
+              >
+                <div className="flex items-center gap-2.5">
+                  <ShieldCheck className="w-4 h-4 text-indigo-300" />
+                  <div>
+                    <span className="block font-bold">Super Admin Engine</span>
+                    <span className="text-[10px] text-indigo-300/80 font-normal">Multi-tenant provisioning & billing</span>
+                  </div>
+                </div>
+                <ChevronRight className="w-4 h-4 text-indigo-400 group-hover:translate-x-0.5 transition-transform" />
+              </Link>
+            </div>
+
+            {/* Standard Login Fallback */}
+            <div className="pt-2 border-t border-slate-800 flex items-center justify-between">
+              <span className="text-[11px] text-slate-400">Need password login?</span>
+              <Link
+                href="/login"
+                onClick={() => setSecretAdminOpen(false)}
+                className="text-xs font-semibold text-emerald-400 hover:text-emerald-300 flex items-center gap-1"
+              >
+                <span>Go to Login Screen</span>
+                <ArrowRight className="w-3.5 h-3.5" />
+              </Link>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* DASHBOARD DRAWER (Left / Vei Lam Side Navigation & Portals) */}
+      {/* =================================================================================== */}
+      {drawerOpen && (
+        <div className="fixed inset-0 z-50 flex">
           {/* Backdrop Overlay */}
           <div
             className="fixed inset-0 bg-black/70 backdrop-blur-xs transition-opacity animate-in fade-in"
-            onClick={() => setMobileDrawerOpen(false)}
+            onClick={() => setDrawerOpen(false)}
           />
 
           {/* Drawer Body (Slides in from Left / Vei Lam) */}
@@ -203,14 +293,14 @@ export function PublicHeader() {
                     Mount Carmel School
                   </h3>
                   <span className="text-[10px] text-emerald-300 block">
-                    Dashboard & Mobile Menu
+                    Institutional Dashboard
                   </span>
                 </div>
               </div>
               <button
                 type="button"
-                onClick={() => setMobileDrawerOpen(false)}
-                className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors"
+                onClick={() => setDrawerOpen(false)}
+                className="p-1.5 rounded-lg text-white/70 hover:text-white hover:bg-white/10 transition-colors cursor-pointer"
                 aria-label="Close menu"
               >
                 <X className="w-5 h-5" />
@@ -220,27 +310,27 @@ export function PublicHeader() {
             {/* Drawer Scrollable Content */}
             <div className="flex-1 overflow-y-auto p-4 space-y-5 text-xs">
               
-              {/* Section 1: Institutional Roles & Dashboards */}
+              {/* Section 1: Institutional Roles & Portals */}
               <div>
                 <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-300/80 px-2 block mb-2">
-                  Institutional Dashboards
+                  Institutional Roles & Portals
                 </span>
                 <div className="space-y-1">
                   <Link
                     href="/admin/dashboard"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-emerald-800/50 hover:bg-emerald-700/60 border border-emerald-600/40 text-emerald-100 font-semibold active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-2.5">
                       <LayoutDashboard className="w-4 h-4 text-emerald-300" />
-                      <span>Admin Dashboard</span>
+                      <span>Admin Panel</span>
                     </span>
                     <ChevronRight className="w-3.5 h-3.5 text-emerald-400" />
                   </Link>
 
                   <Link
                     href="/admin/principal"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-amber-950/40 hover:bg-amber-900/50 border border-amber-600/40 text-amber-200 font-semibold active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-2.5">
@@ -253,36 +343,20 @@ export function PublicHeader() {
                   </Link>
 
                   <Link
-                    href="/admin/copilot"
-                    onClick={() => setMobileDrawerOpen(false)}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-purple-950/40 hover:bg-purple-900/50 border border-purple-600/40 text-purple-200 font-semibold active:scale-95 transition-all"
+                    href="/platform/tenants"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-indigo-950/30 hover:bg-indigo-900/40 border border-indigo-600/30 text-indigo-300 active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-2.5">
-                      <Sparkles className="w-4 h-4 text-purple-300" />
-                      <span>AI Copilot</span>
+                      <ShieldCheck className="w-3.5 h-3.5 text-indigo-300" />
+                      <span>Super Admin Engine</span>
                     </span>
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-purple-500/30 text-purple-300 font-bold">
-                      Mizo + EN
-                    </span>
-                  </Link>
-
-                  <Link
-                    href="/plans"
-                    onClick={() => setMobileDrawerOpen(false)}
-                    className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-blue-950/40 hover:bg-blue-900/50 border border-blue-600/40 text-blue-200 font-semibold active:scale-95 transition-all"
-                  >
-                    <span className="flex items-center gap-2.5">
-                      <span>⚡</span>
-                      <span>Tier Plans & Add-ons</span>
-                    </span>
-                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/30 text-blue-300 font-bold">
-                      Calculator
-                    </span>
+                    <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />
                   </Link>
 
                   <Link
                     href="/portal/dashboard"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-white/5 hover:bg-white/10 border border-white/10 text-white/90 active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-2.5">
@@ -293,20 +367,22 @@ export function PublicHeader() {
                   </Link>
 
                   <Link
-                    href="/platform/tenants"
-                    onClick={() => setMobileDrawerOpen(false)}
-                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-indigo-950/30 hover:bg-indigo-900/40 border border-indigo-600/30 text-indigo-300 active:scale-95 transition-all"
+                    href="/plans"
+                    onClick={() => setDrawerOpen(false)}
+                    className="flex items-center justify-between px-3 py-2.5 rounded-lg bg-blue-950/40 hover:bg-blue-900/50 border border-blue-600/40 text-blue-200 font-semibold active:scale-95 transition-all"
                   >
                     <span className="flex items-center gap-2.5">
-                      <ShieldCheck className="w-3.5 h-3.5" />
-                      <span>Super Admin Engine</span>
+                      <span>⚡</span>
+                      <span>Tier Plans & Add-ons</span>
                     </span>
-                    <ChevronRight className="w-3.5 h-3.5 text-indigo-400" />
+                    <span className="text-[9px] px-1.5 py-0.5 rounded bg-blue-500/30 text-blue-300 font-bold">
+                      Calculator
+                    </span>
                   </Link>
                 </div>
               </div>
 
-              {/* Section 2: School Public Pages (with Active Pill & Stylish Outline) */}
+              {/* Section 2: School Public Pages */}
               <div>
                 <span className="text-[10px] uppercase tracking-wider font-bold text-emerald-300/80 px-2 block mb-2">
                   School Pages
@@ -319,7 +395,7 @@ export function PublicHeader() {
                       <Link
                         key={item.href}
                         href={item.href}
-                        onClick={() => setMobileDrawerOpen(false)}
+                        onClick={() => setDrawerOpen(false)}
                         className={`flex items-center justify-between px-3 py-2.5 rounded-lg transition-all duration-200 active:scale-95 ${
                           active
                             ? 'bg-emerald-500/25 text-emerald-200 font-bold border border-emerald-400/60 shadow-[0_0_12px_rgba(52,211,153,0.3)] ring-1 ring-emerald-400/30'
@@ -347,7 +423,7 @@ export function PublicHeader() {
                 <div className="grid grid-cols-2 gap-2">
                   <Link
                     href="/pay-fee"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex flex-col items-center justify-center p-3 rounded-lg bg-emerald-900/60 border border-emerald-600/40 text-emerald-200 hover:bg-emerald-800 text-center active:scale-95 transition-all"
                   >
                     <CreditCard className="w-5 h-5 mb-1 text-emerald-300" />
@@ -357,7 +433,7 @@ export function PublicHeader() {
 
                   <Link
                     href="/admission"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex flex-col items-center justify-center p-3 rounded-lg bg-emerald-600/40 border border-emerald-400/50 text-white hover:bg-emerald-600/60 text-center active:scale-95 transition-all"
                   >
                     <GraduationCap className="w-5 h-5 mb-1 text-white" />
@@ -369,7 +445,7 @@ export function PublicHeader() {
                 <div className="mt-2">
                   <Link
                     href="/login"
-                    onClick={() => setMobileDrawerOpen(false)}
+                    onClick={() => setDrawerOpen(false)}
                     className="flex items-center justify-center gap-2 w-full py-2 px-3 rounded-lg bg-white/10 hover:bg-white/20 border border-white/20 text-white text-xs font-medium active:scale-95 transition-all"
                   >
                     <LogIn className="w-3.5 h-3.5" />

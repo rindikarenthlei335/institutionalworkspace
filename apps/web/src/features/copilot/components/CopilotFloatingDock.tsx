@@ -23,7 +23,7 @@ export function CopilotFloatingDock() {
       id: 'welcome',
       role: 'assistant',
       content:
-        'Hello! I am your EduPortal AI Copilot. How can I help you manage your school today? You can switch to Mizo (lus) anytime.',
+        'Chibai! I am your School AI Assistant (Pro & Pro+ Plan Feature). I can answer your questions about school admissions, fees, syllabus, facilities, and notices in Mizo (lus) and English!',
       createdAt: new Date().toISOString()
     }
   ]);
@@ -107,24 +107,24 @@ export function CopilotFloatingDock() {
 
   return (
     <div className="fixed bottom-6 right-6 z-50">
-      {/* Floating Toggle Button */}
+      {/* Floating Toggle Button (Bottom Right Corner) */}
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 bg-[#163A2B] hover:bg-[#1f4e3b] text-white px-4 py-3 rounded-full shadow-2xl border border-emerald-400/30 transition-transform hover:scale-105 active:scale-95"
-          title="Open EduPortal AI Copilot"
+          className="flex items-center gap-2 bg-[#163A2B] hover:bg-[#1f4e3b] text-white px-4 py-2.5 rounded-full shadow-2xl border border-emerald-400/40 transition-transform hover:scale-105 active:scale-95 cursor-pointer"
+          title="Open School AI Copilot (Pro & Pro+ Feature)"
         >
-          <span className="text-xl">✨</span>
+          <span className="text-lg">✨</span>
           <span className="font-display font-semibold text-xs tracking-wide">AI Copilot</span>
-          <span className="text-[9px] px-1.5 py-0.5 rounded bg-emerald-500/40 text-emerald-200 font-bold uppercase">
-            Ultimate
+          <span className="text-[9px] px-1.5 py-0.5 rounded-full bg-emerald-500/30 text-emerald-200 font-bold uppercase">
+            Pro & Pro+
           </span>
         </button>
       )}
 
       {/* Floating Drawer */}
       {isOpen && (
-        <div className="w-96 h-[540px] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5">
+        <div className="w-96 max-w-[calc(100vw-2rem)] h-[540px] max-h-[85vh] bg-white rounded-2xl shadow-2xl border border-gray-200 flex flex-col overflow-hidden animate-in fade-in slide-in-from-bottom-5">
           {/* Header */}
           <div className="bg-[#163A2B] p-3 text-white flex items-center justify-between">
             <div className="flex items-center gap-2">
@@ -133,7 +133,7 @@ export function CopilotFloatingDock() {
                 <div className="flex items-center gap-1.5">
                   <h3 className="font-display font-bold text-xs">AI Copilot</h3>
                   <span className="text-[8px] bg-emerald-500/40 text-emerald-200 px-1 py-0.2 rounded font-mono font-bold">
-                    ULTIMATE
+                    PRO & PRO+
                   </span>
                 </div>
                 <p className="text-[10px] text-white/70">Mizo + English School Assistant</p>

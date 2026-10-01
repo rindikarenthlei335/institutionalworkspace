@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { CopilotFloatingDock } from '@/features/copilot/components/CopilotFloatingDock';
 import {
   Menu,
   X,
@@ -60,7 +59,6 @@ export function AdminNavLayout({ children }: AdminNavLayoutProps) {
     { href: '/admin/principal', label: 'Principal Dashboard', icon: Briefcase, badge: 'PRO', highlight: true },
     { href: '/admin/builder', label: 'Custom Builder', icon: Layers, badge: 'ULTIMATE' },
     { href: '/admin/modules', label: 'Module Manager', icon: Layers, badge: 'ULTIMATE' },
-    { href: '/admin/copilot', label: 'AI Copilot', icon: Sparkles, badge: 'ULTIMATE', copilot: true },
   ];
 
   const renderNavContent = () => (
@@ -136,21 +134,17 @@ export function AdminNavLayout({ children }: AdminNavLayoutProps) {
                     ? 'bg-emerald-500/25 text-emerald-200 font-bold border border-emerald-400/50 shadow-[0_0_10px_rgba(52,211,153,0.25)] ring-1 ring-emerald-400/20'
                     : item.highlight
                     ? 'bg-amber-950/40 border border-amber-600/30 text-amber-300 hover:bg-amber-900/50'
-                    : item.copilot
-                    ? 'bg-purple-950/40 border border-purple-600/30 text-purple-200 hover:bg-purple-900/50'
                     : 'text-white/80 hover:text-white hover:bg-white/10 border border-transparent'
                 }`}
               >
                 <span className="flex items-center gap-2.5">
-                  <Icon className={`w-4 h-4 ${item.highlight ? 'text-amber-400' : item.copilot ? 'text-purple-300' : 'text-white/60'}`} />
+                  <Icon className={`w-4 h-4 ${item.highlight ? 'text-amber-400' : 'text-white/60'}`} />
                   <span>{item.label}</span>
                 </span>
                 {item.badge && (
                   <span className={`text-[9px] px-1.5 py-0.5 rounded font-bold ${
                     item.badge === 'PRO' && item.highlight
                       ? 'bg-amber-500/30 text-amber-300'
-                      : item.badge === 'ULTIMATE' && item.copilot
-                      ? 'bg-purple-500/30 text-purple-300'
                       : 'bg-emerald-500/30 text-emerald-300'
                   }`}>
                     {item.badge}
@@ -233,9 +227,6 @@ export function AdminNavLayout({ children }: AdminNavLayoutProps) {
           {children}
         </main>
       </div>
-
-      {/* Persistent AI Copilot Floating Dock */}
-      <CopilotFloatingDock />
     </div>
   );
 }

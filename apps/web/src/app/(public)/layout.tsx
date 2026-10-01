@@ -2,6 +2,7 @@ import React from 'react';
 import Link from 'next/link';
 import { PublicHeader } from '@/components/layout/PublicHeader';
 import { TrackerScript } from '@/features/analytics/components/TrackerScript';
+import { CopilotFloatingDock } from '@/features/copilot/components/CopilotFloatingDock';
 
 export default function PublicWebsiteLayout({
   children
@@ -52,6 +53,9 @@ export default function PublicWebsiteLayout({
           </div>
         </div>
       </footer>
+
+      {/* Public Side AI Copilot (Pro & Pro+ Feature, Floating Bottom Right Corner) */}
+      <CopilotFloatingDock />
     </div>
   );
 }
