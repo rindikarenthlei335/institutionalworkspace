@@ -80,23 +80,28 @@ export function HomeTemplateView() {
           <div className="flex items-center gap-2">
             <Layout className="w-4 h-4 text-emerald-400 shrink-0" />
             <span className="font-bold text-white">Live Website Template Switcher:</span>
-            <span className="text-[11px] text-slate-400 hidden sm:inline">
-              (Choose any of the 4 Essential Tier designs below)
+            <span className="text-[11px] text-slate-400 hidden lg:inline">
+              (Choose any of the Basic, Essential, or Pro ₹8,000 designs)
             </span>
           </div>
 
           <div className="flex flex-wrap items-center gap-1.5 w-full md:w-auto">
             {[
-              { id: 'template-1-trident', label: '1. Trident Classic', badge: 'Basic' },
-              { id: 'template-2-brightfuture', label: '2. Bright Future Navy', badge: 'Essential' },
-              { id: 'template-3-unipix', label: '3. Unipix Crimson', badge: 'Essential' },
-              { id: 'template-4-nuova', label: '4. Nuova Modern', badge: 'Essential' },
+              { id: 'template-1-trident', label: '1. Trident', badge: 'Basic' },
+              { id: 'template-2-brightfuture', label: '2. Bright Future', badge: 'Essential' },
+              { id: 'template-3-unipix', label: '3. Unipix', badge: 'Essential' },
+              { id: 'template-4-nuova', label: '4. Nuova', badge: 'Essential' },
+              { id: 'template-5-eudaimonia', label: '5. Eudaimonia', badge: 'Pro ₹8k' },
+              { id: 'template-6-eduka', label: '6. Eduka', badge: 'Pro ₹8k' },
+              { id: 'template-7-edugate', label: '7. Edugate', badge: 'Pro ₹8k' },
+              { id: 'template-8-qeducato', label: '8. Qeducato', badge: 'Pro ₹8k' },
+              { id: 'template-9-universitybridge', label: '9. UnivBridge', badge: 'Pro ₹8k' },
             ].map((tmpl) => (
               <button
                 key={tmpl.id}
                 type="button"
                 onClick={() => handleTemplateSwitch(tmpl.id)}
-                className={`px-2.5 py-1 rounded-lg text-xs font-semibold flex items-center gap-1.5 transition-all cursor-pointer ${
+                className={`px-2 py-1 rounded-lg text-xs font-semibold flex items-center gap-1 transition-all cursor-pointer ${
                   activeTemplateId === tmpl.id
                     ? 'bg-emerald-600 text-white shadow-sm ring-1 ring-emerald-400'
                     : 'bg-slate-800 text-slate-300 hover:bg-slate-700 hover:text-white'
@@ -104,7 +109,11 @@ export function HomeTemplateView() {
               >
                 <span>{tmpl.label}</span>
                 <span className={`text-[9px] px-1 py-0.2 rounded font-bold ${
-                  tmpl.badge === 'Basic' ? 'bg-black/30 text-emerald-300' : 'bg-black/30 text-amber-300'
+                  tmpl.badge === 'Basic'
+                    ? 'bg-black/30 text-emerald-300'
+                    : tmpl.badge === 'Essential'
+                    ? 'bg-black/30 text-amber-300'
+                    : 'bg-black/30 text-blue-300'
                 }`}>
                   {tmpl.badge}
                 </span>
@@ -571,6 +580,500 @@ export function HomeTemplateView() {
             </div>
           </section>
 
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* TEMPLATE 5: EUDAIMONIA PRESTIGIOUS COLLEGIATE (Deep Wine Maroon & Romanesque Campus) */}
+      {/* =================================================================================== */}
+      {activeTemplateId === 'template-5-eudaimonia' && (
+        <div className="space-y-12 animate-in fade-in duration-300">
+          
+          {/* Romanesque Arch Hero */}
+          <section
+            className="relative bg-[#5C1324] text-white py-20 px-4 text-center overflow-hidden rounded-2xl max-w-7xl mx-auto shadow-xl"
+            style={{
+              backgroundImage: `linear-gradient(to bottom, rgba(74, 14, 28, 0.88), rgba(92, 19, 36, 0.94)), url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920&auto=format&fit=crop')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
+            <div className="relative max-w-4xl mx-auto space-y-5 z-10">
+              <span className="text-xs uppercase tracking-widest text-amber-300 font-bold block">
+                Meet With Our University
+              </span>
+              <h1 className="font-serif font-bold text-4xl sm:text-5xl lg:text-6xl leading-tight">
+                Most reputed educational <span className="underline decoration-amber-400">institution</span> in Booston
+              </h1>
+              <p className="text-sm sm:text-base text-white/85 max-w-2xl mx-auto leading-relaxed">
+                Empowering students with world-class faculty, historic collegiate architecture, and profound research foundations.
+              </p>
+              <div className="flex justify-center gap-3 pt-2">
+                <Link href="/admission">
+                  <Button size="lg" className="bg-[#7A1C29] hover:bg-[#8D2130] text-white font-bold border border-amber-400/40">
+                    APPLY NOW →
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Founder Message & Circular Seal */}
+          <section className="max-w-7xl mx-auto px-4 grid md:grid-cols-12 gap-8 items-center">
+            <div className="md:col-span-5 grid grid-cols-2 gap-3">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=600&auto=format&fit=crop" alt="Campus mentor" className="rounded-2xl object-cover h-48 w-full shadow-md" />
+              <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop" alt="Students studying" className="rounded-2xl object-cover h-48 w-full shadow-md mt-6" />
+            </div>
+            <div className="md:col-span-7 space-y-4">
+              <div className="flex items-center gap-3">
+                <div className="w-12 h-12 rounded-full border-2 border-[#5C1324] flex items-center justify-center font-bold text-[10px] text-[#5C1324] text-center leading-none">
+                  SINCE<br />1990
+                </div>
+                <div>
+                  <span className="text-xs uppercase tracking-wider text-slate-500 font-semibold block">Founder's Note</span>
+                  <h2 className="font-serif font-bold text-2xl sm:text-3xl text-slate-900 dark:text-white">
+                    Message from the main <span className="text-[#5C1324] dark:text-rose-400 underline">founder</span>
+                  </h2>
+                </div>
+              </div>
+              <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-300 leading-relaxed">
+                We have focused on generating new knowledge and promoting critical thinking amongst our students, graduating more than 7,000 young men and women during this time.
+              </p>
+              <div className="p-3.5 bg-slate-50 dark:bg-slate-800/60 rounded-xl border-l-4 border-[#5C1324] text-xs text-slate-700 dark:text-slate-200 italic">
+                "Since its inception in 2001, Eduvet University has become one of the most reputed educational institutions in NYC."
+              </div>
+              <div className="flex items-center justify-between pt-2">
+                <div>
+                  <span className="font-bold text-sm text-slate-900 dark:text-white block">Alexis D. Dowson</span>
+                  <span className="text-xs text-slate-500">Founder & Chancellor</span>
+                </div>
+                <span className="font-serif italic text-lg text-slate-400">Alexis D. Dowson</span>
+              </div>
+            </div>
+          </section>
+
+          {/* Deep Maroon 3-Pillars Ribbon */}
+          <section className="bg-[#5C1324] text-white py-12 px-4 rounded-2xl max-w-7xl mx-auto space-y-8">
+            <div className="text-center max-w-xl mx-auto space-y-1">
+              <span className="text-xs uppercase tracking-widest text-amber-300 font-bold">Why Choose Us</span>
+              <h3 className="font-serif font-bold text-2xl sm:text-3xl text-white">
+                One of the largest, most diverse <span className="underline decoration-amber-400">universities</span> in the nyc
+              </h3>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'Education Affordability', desc: 'We have focused on generating new knowledge & accessible merit scholarships.', icon: '🎓' },
+                { title: 'Core level academics solutions', desc: 'We have focused on generating deep rigor in fundamental humanities & STEM.', icon: '🧠' },
+                { title: 'Inspiring Student Life', desc: 'We have focused on extracurricular leadership, debate societies, and athletic honors.', icon: '📖' },
+              ].map((c, i) => (
+                <div key={i} className="p-6 rounded-xl bg-white/10 backdrop-blur-md border border-white/15 space-y-3 hover:bg-white/15 transition-all">
+                  <span className="text-3xl block">{c.icon}</span>
+                  <h4 className="font-serif font-bold text-lg text-white">{c.title}</h4>
+                  <p className="text-xs text-white/80 leading-relaxed">{c.desc}</p>
+                  <span className="text-xs font-semibold text-amber-300 flex items-center gap-1 cursor-pointer">
+                    READ MORE ↗
+                  </span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Announcements & News Feeds */}
+          <section className="max-w-7xl mx-auto px-4 space-y-6">
+            <h3 className="font-serif font-bold text-2xl text-slate-900 dark:text-white">
+              Announcements & <span className="underline text-[#5C1324] dark:text-rose-400">news</span> feeds
+            </h3>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="rounded-2xl overflow-hidden shadow-lg border border-slate-200">
+                <img src="https://images.unsplash.com/photo-1523240795612-9a054b0db644?q=80&w=800&auto=format&fit=crop" alt="Campus debate" className="w-full h-48 object-cover" />
+                <div className="p-4 bg-white dark:bg-slate-900 space-y-2">
+                  <span className="text-xs text-slate-400 font-mono">Jan 01, 2026 to Jan 10, 2026</span>
+                  <h4 className="font-bold text-base text-slate-900 dark:text-white">Annual Inter-Collegiate Research Symposium & Paper Defense</h4>
+                  <p className="text-xs text-slate-500">Faculty delegates and graduating scholars present discoveries in bio-medicine.</p>
+                </div>
+              </div>
+              <div className="space-y-3">
+                {[
+                  { date: '01 Jan', title: 'Duis aute irure dolor in reprehenderit in voluptate', sub: 'Published by academic council' },
+                  { date: '08 Jan', title: 'Excepteur sint occaecat cupidatat non proident sunt', sub: 'Dean of admissions announcement' },
+                  { date: '15 Jan', title: 'New artificial intelligence laboratory inaugurates in campus', sub: 'Department of computer sciences' }
+                ].map((item, idx) => (
+                  <div key={idx} className="p-3.5 rounded-xl border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 flex items-center gap-4 hover:shadow-sm">
+                    <div className="px-3 py-2 rounded-lg bg-[#5C1324] text-white text-center font-bold text-xs shrink-0">
+                      {item.date}
+                    </div>
+                    <div>
+                      <h5 className="font-bold text-xs sm:text-sm text-slate-900 dark:text-white">{item.title}</h5>
+                      <span className="text-[11px] text-slate-400">{item.sub}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* TEMPLATE 6: EDUKA MODERN BRIGHT ACADEMY (Vibrant Teal & Amber Orange) */}
+      {/* =================================================================================== */}
+      {activeTemplateId === 'template-6-eduka' && (
+        <div className="space-y-12 animate-in fade-in duration-300">
+          
+          {/* Eduka Vibrant Hero */}
+          <section className="relative bg-gradient-to-r from-teal-900 via-teal-800 to-emerald-900 text-white py-20 px-4 rounded-2xl max-w-7xl mx-auto shadow-xl overflow-hidden">
+            <div className="relative max-w-4xl mx-auto space-y-6 text-center z-10">
+              <span className="text-xs uppercase font-extrabold tracking-wider px-3.5 py-1.5 rounded-full bg-amber-400 text-slate-950 inline-block shadow-sm">
+                WELCOME TO EDUKA!
+              </span>
+              <h1 className="font-display font-black text-4xl sm:text-6xl text-white leading-tight">
+                Start Your Beautiful And <span className="text-amber-400">Bright Future</span>
+              </h1>
+              <p className="text-sm sm:text-base text-teal-100 max-w-2xl mx-auto leading-relaxed">
+                There are many variations of modern learning pathways available. Where students acquire real skills and thrive.
+              </p>
+              <div className="flex justify-center gap-3 pt-2">
+                <Link href="/admission">
+                  <Button size="lg" className="bg-amber-500 hover:bg-amber-600 text-slate-950 font-black">
+                    ABOUT MORE →
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button size="lg" variant="secondary" className="bg-white/20 hover:bg-white/30 text-white border-white/30 font-bold">
+                    LEARN MORE →
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* 4 Floating Numbered Cards (01, 02, 03, 04) */}
+          <section className="max-w-7xl mx-auto px-4 -mt-8">
+            <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
+              {[
+                { num: '01', title: 'Scholarship Facility', desc: 'Available for high merit candidates.' },
+                { num: '02', title: 'Skilled Lecturers', desc: 'Global educator exposure in all fields.' },
+                { num: '03', title: 'Book Library Facility', desc: 'Over 25,000 digital & physical volumes.' },
+                { num: '04', title: 'Affordable Price', desc: 'Accessible fees with zero hidden cost.' }
+              ].map((card, i) => (
+                <Card key={i} className="p-5 bg-white dark:bg-slate-900 shadow-xl border-t-4 border-t-teal-600 space-y-2">
+                  <span className="text-xs font-mono font-bold px-2 py-0.5 rounded bg-teal-50 dark:bg-teal-950/60 text-teal-700 dark:text-teal-400 inline-block">
+                    {card.num}
+                  </span>
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">{card.title}</h4>
+                  <p className="text-xs text-slate-500">{card.desc}</p>
+                </Card>
+              ))}
+            </div>
+          </section>
+
+          {/* Teal Stats Banner with Medals */}
+          <section className="bg-teal-700 text-white py-10 px-4 rounded-2xl max-w-7xl mx-auto shadow-lg">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+              {[
+                { val: '500', sub: 'Total Courses' },
+                { val: '1900', sub: 'Our Students' },
+                { val: '750', sub: 'Skilled Lecturers' },
+                { val: '30', sub: 'Win Awards' }
+              ].map((st, i) => (
+                <div key={i} className="space-y-1">
+                  <span className="text-3xl sm:text-4xl font-extrabold text-amber-300 block font-mono">
+                    {st.val}
+                  </span>
+                  <span className="text-xs text-teal-100 font-semibold">{st.sub}</span>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Let's Check Our Courses */}
+          <section className="max-w-7xl mx-auto px-4 space-y-6">
+            <div className="text-center space-y-1">
+              <span className="text-xs uppercase font-bold text-amber-600 tracking-wider">Our Courses</span>
+              <h2 className="font-display font-bold text-3xl text-slate-900 dark:text-white">
+                Let's Check <span className="text-amber-500">Our Courses</span>
+              </h2>
+            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'Interactive Drama & Public Speech', tag: 'Drama', lessons: '10 Lessons', rating: '4.8' },
+                { title: 'Digital Arts & Modern UI Design', tag: 'Design', lessons: '15 Lessons', rating: '4.9' },
+                { title: 'Fundamental Bio-Sciences & Labs', tag: 'Science', lessons: '12 Lessons', rating: '4.7' }
+              ].map((crs, i) => (
+                <Card key={i} className="overflow-hidden border hover:border-amber-500 transition-all">
+                  <div className="h-40 bg-slate-800 relative">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?q=80&w=600&auto=format&fit=crop" alt={crs.title} className="w-full h-full object-cover" />
+                    <span className="absolute top-3 left-3 text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500 text-slate-950">
+                      {crs.tag}
+                    </span>
+                  </div>
+                  <div className="p-4 space-y-3">
+                    <div className="flex items-center justify-between text-xs text-slate-500">
+                      <span>{crs.lessons}</span>
+                      <span className="text-amber-500 font-bold">★ {crs.rating}</span>
+                    </div>
+                    <h3 className="font-bold text-base text-slate-900 dark:text-white">{crs.title}</h3>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* TEMPLATE 7: EDUGATE ONLINE & SKILLS INSTITUTE (Electric Blue & Sunflower Yellow) */}
+      {/* =================================================================================== */}
+      {activeTemplateId === 'template-7-edugate' && (
+        <div className="space-y-12 animate-in fade-in duration-300">
+          
+          {/* Blue Classroom Hero */}
+          <section className="bg-sky-700 text-white py-16 px-4 rounded-2xl max-w-7xl mx-auto shadow-xl relative overflow-hidden">
+            <div className="max-w-4xl mx-auto space-y-5 text-center relative z-10">
+              <h1 className="font-display font-black text-4xl sm:text-6xl text-white leading-tight uppercase tracking-tight">
+                Educate <span className="text-amber-300">Yourself</span>
+              </h1>
+              <p className="text-base sm:text-lg text-sky-100 max-w-xl mx-auto leading-relaxed">
+                Unlock your potential with the best online courses and certified mentor tracks.
+              </p>
+              <div className="pt-2">
+                <Link href="/admission">
+                  <button className="px-6 py-3 rounded-lg bg-yellow-400 hover:bg-yellow-500 text-slate-950 font-black text-sm uppercase tracking-wider shadow-lg">
+                    ENROLL NOW
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Courses with Progress Bars */}
+          <section className="max-w-7xl mx-auto px-4 space-y-6">
+            <h2 className="font-display font-bold text-2xl text-slate-900 dark:text-white uppercase tracking-wider">
+              Our Courses
+            </h2>
+            <div className="grid md:grid-cols-3 gap-6">
+              {[
+                { title: 'Digital Marketing', desc: 'Promote products and sources online', progress: 45 },
+                { title: 'Coding for Beginners', desc: 'Learn the logic of programming', progress: 70 },
+                { title: 'Environmental Studies', desc: 'Explore the principles of strategy', progress: 30 }
+              ].map((crs, i) => (
+                <div key={i} className="p-5 rounded-2xl bg-sky-500 text-white space-y-4 shadow-md">
+                  <h3 className="font-bold text-lg text-white">{crs.title}</h3>
+                  <p className="text-xs text-sky-100">{crs.desc}</p>
+                  <div className="space-y-1.5 pt-2">
+                    <div className="w-full h-2 bg-sky-700 rounded-full overflow-hidden">
+                      <div className="h-full bg-amber-300 rounded-full" style={{ width: `${crs.progress}%` }}></div>
+                    </div>
+                    <span className="text-[11px] font-mono text-sky-100 block text-right">{crs.progress}% fit</span>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </section>
+
+          {/* Student Stories & Blog */}
+          <section className="max-w-7xl mx-auto px-4 grid md:grid-cols-12 gap-8 items-start">
+            <div className="md:col-span-5 space-y-4">
+              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white uppercase">
+                Student Stories
+              </h3>
+              <Card className="p-5 space-y-3 bg-sky-50 dark:bg-sky-950/40 border-sky-200">
+                <p className="text-xs text-slate-700 dark:text-slate-200 italic leading-relaxed">
+                  "The courses provided valuable knowledge that helped me grow in my career and land practical tech opportunities."
+                </p>
+                <div className="flex items-center gap-3 pt-2">
+                  <div className="w-9 h-9 rounded-full bg-sky-600 text-white flex items-center justify-center font-bold text-xs">
+                    LB
+                  </div>
+                  <div>
+                    <h5 className="font-bold text-xs text-slate-900 dark:text-white">Lisa Bocker</h5>
+                    <span className="text-[10px] text-slate-500">Alumni Graduate</span>
+                  </div>
+                </div>
+              </Card>
+            </div>
+            <div className="md:col-span-7 space-y-4">
+              <h3 className="font-display font-bold text-xl text-slate-900 dark:text-white uppercase">
+                Education Blog
+              </h3>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <Card className="p-4 space-y-2">
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">The Benefits of Lifelong Learning</h4>
+                  <p className="text-xs text-slate-500">Continuous education expands cognitive agility and career readiness.</p>
+                </Card>
+                <Card className="p-4 space-y-2">
+                  <h4 className="font-bold text-sm text-slate-900 dark:text-white">Tips for Effective Online Study</h4>
+                  <p className="text-xs text-slate-500">Master scheduling, focused pomodoro sprints, and active note-taking.</p>
+                </Card>
+              </div>
+            </div>
+          </section>
+
+          {/* Yellow Community Call to Action */}
+          <section className="max-w-7xl mx-auto px-4">
+            <div className="p-6 rounded-2xl bg-yellow-400 text-slate-950 text-center space-y-2 shadow-lg">
+              <h3 className="font-black text-xl sm:text-2xl uppercase">
+                Join Our Community — Enrich Your Learning Today!
+              </h3>
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* TEMPLATE 8: QEDUCATO PROFESSIONAL ACADEMIC FACULTY (Midnight Navy & Coral Sunset) */}
+      {/* =================================================================================== */}
+      {activeTemplateId === 'template-8-qeducato' && (
+        <div className="space-y-12 animate-in fade-in duration-300">
+          
+          {/* Header Architectural Sketch Banner */}
+          <section className="bg-[#0F243A] text-white py-16 px-4 rounded-2xl max-w-7xl mx-auto text-center space-y-4 shadow-xl">
+            <span className="text-xs uppercase tracking-widest text-[#FF6B52] font-bold">
+              Academic Faculty Programs
+            </span>
+            <h1 className="font-display font-bold text-4xl sm:text-5xl text-white">
+              Our Courses
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-300 max-w-xl mx-auto">
+              Home · Our Courses
+            </p>
+          </section>
+
+          {/* 6-Card Academic Grid */}
+          <section className="max-w-7xl mx-auto px-4 space-y-6">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {[
+                { title: 'Biochemistry', badge: 'Biochemistry', desc: 'Seamlessly visualize quality intellectual capital without superior collaboration.' },
+                { title: 'Major in Economics', badge: 'Economics', desc: 'Quantitative monetary models, econometrics, and policy analytics.' },
+                { title: 'Business Media', badge: 'Media', desc: 'Corporate communication, digital PR strategies, and multimedia journalism.' },
+                { title: 'Public Administration', badge: 'Public', desc: 'Governance, civic policies, ethics, and public sector leadership.' },
+                { title: 'Biotechnology', badge: 'Sciences', desc: 'Genetic engineering, molecular cellular biology, and industrial biotech.' },
+                { title: 'Corporate Finance', badge: 'Finance', desc: 'Capital investments, portfolio theory, and international securities.' }
+              ].map((crs, i) => (
+                <Card key={i} className="overflow-hidden border border-slate-200 dark:border-slate-800 hover:shadow-lg transition-all space-y-3 p-5">
+                  <div className="flex items-center justify-between">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-[#FF6B52] text-white">
+                      {crs.badge}
+                    </span>
+                    <span className="text-xs text-slate-400 font-mono">Majors</span>
+                  </div>
+                  <h3 className="font-bold text-lg text-slate-900 dark:text-white">{crs.title}</h3>
+                  <p className="text-xs text-slate-500 leading-relaxed">{crs.desc}</p>
+                  <div className="pt-2 border-t border-slate-100 dark:border-slate-800 flex justify-between items-center text-xs font-semibold text-[#FF6B52]">
+                    <span>Read More →</span>
+                    <span>📖</span>
+                  </div>
+                </Card>
+              ))}
+            </div>
+          </section>
+        </div>
+      )}
+
+      {/* =================================================================================== */}
+      {/* TEMPLATE 9: UNIVERSITYBRIDGE HERITAGE COLLEGIATE (Royal Blue & Campus Bronze) */}
+      {/* =================================================================================== */}
+      {activeTemplateId === 'template-9-universitybridge' && (
+        <div className="space-y-12 animate-in fade-in duration-300">
+          
+          {/* Royal Blue Top Bar & Crest */}
+          <div className="bg-[#0B47A8] text-white py-3 px-6 rounded-t-2xl max-w-7xl mx-auto flex justify-between items-center text-xs">
+            <div className="flex items-center gap-2">
+              <span className="font-serif italic font-bold">UniversityBridge</span>
+              <span className="text-[10px] text-blue-200">· Two centuries of teaching excellence</span>
+            </div>
+            <div className="flex items-center gap-4 text-[11px]">
+              <span>University</span>
+              <span>Life on Campus</span>
+              <span>The Staff</span>
+              <span>Contact</span>
+            </div>
+          </div>
+
+          {/* Historic Facade Hero */}
+          <section
+            className="relative bg-[#072F75] text-white py-24 px-4 text-center overflow-hidden rounded-b-2xl max-w-7xl mx-auto shadow-2xl"
+            style={{
+              backgroundImage: `linear-gradient(to bottom, rgba(11, 71, 168, 0.85), rgba(7, 47, 117, 0.92)), url('https://images.unsplash.com/photo-1541829070764-84a7d30dd3f3?q=80&w=1920&auto=format&fit=crop')`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }}
+          >
+            <div className="relative max-w-4xl mx-auto space-y-6 z-10">
+              <h1 className="font-serif font-black text-4xl sm:text-6xl text-white leading-tight">
+                Teach. Learn. Grow.
+              </h1>
+              <p className="text-base sm:text-lg text-blue-100 max-w-2xl mx-auto leading-relaxed">
+                Celebrating two centuries of academic excellence and timeless tradition.
+              </p>
+              <div className="flex justify-center gap-3 pt-2">
+                <Link href="/admission">
+                  <Button size="lg" className="bg-[#0B47A8] hover:bg-blue-800 text-white font-bold border border-white/30">
+                    Explore
+                  </Button>
+                </Link>
+                <Link href="/about">
+                  <Button size="lg" className="bg-[#8C6D46] hover:bg-[#775B39] text-white font-bold">
+                    Contact
+                  </Button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Educating Generations & Diversity */}
+          <section className="max-w-7xl mx-auto px-4 space-y-6">
+            <div className="grid md:grid-cols-4 gap-4">
+              {[
+                { title: 'Educating Generations', sub: 'Pioneering scientific research for over 200 years.' },
+                { title: 'Educating Generations', sub: 'Inspiring intellectual curiosity and debate.' },
+                { title: 'Educating Generations', sub: 'Building character and community fellowship.' }
+              ].map((col, i) => (
+                <Card key={i} className="p-5 space-y-3">
+                  <h4 className="font-serif font-bold text-base text-[#0B47A8]">{col.title}</h4>
+                  <p className="text-xs text-slate-500">{col.sub}</p>
+                  <span className="text-xs font-semibold text-[#8C6D46] block cursor-pointer">Read more →</span>
+                </Card>
+              ))}
+
+              {/* 4th Royal Blue Card: Diversity */}
+              <div className="p-5 rounded-xl bg-[#0B47A8] text-white space-y-3 flex flex-col justify-between shadow-md">
+                <div>
+                  <span className="text-xs uppercase font-bold text-blue-200">Campus Life</span>
+                  <h4 className="font-serif font-bold text-xl text-white">Diversity on campus</h4>
+                </div>
+                <Link href="/admission">
+                  <button className="w-full py-2 rounded bg-white text-[#0B47A8] font-bold text-xs">
+                    Sign up now
+                  </button>
+                </Link>
+              </div>
+            </div>
+          </section>
+
+          {/* Join our Alumni Programs & Newsletter */}
+          <section className="max-w-7xl mx-auto px-4">
+            <div className="p-8 rounded-2xl bg-slate-50 dark:bg-slate-900 border border-slate-200 dark:border-slate-800 flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="space-y-2">
+                <h3 className="font-serif font-bold text-2xl text-slate-900 dark:text-white">
+                  Join our alumni programs
+                </h3>
+                <p className="text-xs text-slate-500 max-w-md">
+                  Connecting over 45,000 graduates across the globe with mentorship and networking fellowships.
+                </p>
+              </div>
+              <div className="flex items-center gap-3 w-full md:w-auto">
+                <input
+                  type="email"
+                  placeholder="Enter your email"
+                  className="px-4 py-2 rounded-lg border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-800 text-xs text-slate-900 dark:text-white flex-1 md:w-64"
+                />
+                <button className="px-5 py-2 rounded-lg bg-[#8C6D46] hover:bg-[#775B39] text-white font-bold text-xs shrink-0">
+                  Subscribe
+                </button>
+              </div>
+            </div>
+          </section>
         </div>
       )}
 
