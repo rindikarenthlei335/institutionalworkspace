@@ -1,3 +1,4 @@
+export function generateStaticParams() { return [{ token: 'sample' }]; }
 import React from 'react';
 import Link from 'next/link';
 
