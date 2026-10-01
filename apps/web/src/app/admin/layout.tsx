@@ -65,6 +65,10 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
               <span>Principal Dashboard</span>
               <span className="text-[9px] px-1.5 py-0.5 rounded bg-yellow-400/20">PRO</span>
             </Link>
+            <Link href="/admin/modules" className="flex items-center justify-between px-3 py-2 rounded-[6px] hover:bg-white/10 text-white font-medium transition-colors">
+              <span>Modules & Extensions</span>
+              <span className="text-[9px] px-1.5 py-0.5 rounded bg-indigo-500/30 text-indigo-300 font-bold">ULTIMATE</span>
+            </Link>
           </div>
         </nav>
 

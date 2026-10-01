@@ -74,3 +74,5 @@ export interface UserProfile {
   avatarUrl?: string;
   isActive: boolean;
 }
+
+export * from './modules';

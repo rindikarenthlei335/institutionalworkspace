@@ -9,7 +9,8 @@
     "typecheck": "pnpm --recursive run typecheck",
     "lint": "pnpm --recursive run lint",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
-    "i18n:check": "node scripts/i18n_check.js"
+    "i18n:check": "node scripts/i18n_check.js",
+    "gen:module": "node scripts/gen-module.js"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1143.0",

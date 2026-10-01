@@ -1,5 +1,34 @@
 # Project Changelog
 
+## [Phase 2 - Milestone 6] - Module Manager, ModuleManifest Standard & Guided Install Wizard
+### Added
+- **ModuleManifest Standard (`packages/shared/src/types/modules.ts`):**
+  - Standardized declarative specification for institutional extensions with bilingual title/description, category, minimum plan tier (`basic`, `essential`, `pro`, `ultimate`), dependency declarations, permissions, dynamic routes, sidebar nav injections, settings schema, 6-step guided setup steps, and `isCore` protection.
+- **Central Module Registry (`apps/web/src/features/modules/registry.ts`):**
+  - Retrofitted all Phase 1 and Phase 2 modules into manifests:
+    - Core modules: `settings`, `data_hub` (protected against disable).
+    - Pro modules: `staff`, `exams`, `id_cards`, `cms`, `students`, `fees`.
+    - First-class installable Ultimate modules: `attendance`, `certificates`.
+- **Database Migrations:**
+  - `00013_module_manager.sql`: Created `tenant_modules` table with lifecycle status (`available`, `installed_enabled`, `installed_disabled`, `archived`), settings JSONB, and tenant RLS.
+  - `00014_module_manager_seed.sql`: Seeded Mount Carmel tenant modules with core and pro modules enabled.
+- **Developer CLI Scaffolding Tool (`scripts/gen-module.js`):**
+  - `pnpm gen:module <module_id>` scaffolds feature folder, starter master view component, Next.js admin page route, manifest declaration, and bilingual markdown help articles in `content/help/<module_id>/`.
+  - Authored comprehensive developer guide in `docs/MODULE_GUIDE.md`.
+- **Module Manager Admin Console (`/admin/modules` & `ModuleManagerView.tsx`):**
+  - Catalog view filtered by category (Academics, Administration, Finance, Website & CMS).
+  - Search bar and module cards with status indicators (Active, Disabled, Not Installed).
+  - 6-step Guided Setup Wizard:
+    1. Overview (benefits, who uses it, setup time).
+    2. Prerequisites Check (plan tier and module dependency verification).
+    3. Configuration (dynamic form rendered from `settingsSchema`).
+    4. Roles & Permissions (delegation to staff, teachers, accountants).
+    5. Optional Data Import (sample Excel template download and drag-drop).
+    6. Review & Confirm (activation and sidebar injection).
+  - Integrated `Modules & Extensions` into Admin Sidebar with `ULTIMATE` badge.
+- **Automated Verification:**
+  - `tests/module_manager.test.ts`: 7 unit tests verifying manifest schema compliance, core module disable protection, prerequisite dependency resolution, and plan gating. Total 55 tests pass across monorepo.
+
 ## [Phase 2 - Milestone 5] - App Publishing Pipeline, Store Package Export & Operator Runbook
 ### Added
 - **Database Migrations:**
