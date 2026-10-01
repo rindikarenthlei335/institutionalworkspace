@@ -54,6 +54,7 @@ INSERT INTO store_asset_specs (
     'png',
     2048,
     true,
+    true,
     'Square 1024x1024 PNG without transparency or alpha channel.'
   ),
   (

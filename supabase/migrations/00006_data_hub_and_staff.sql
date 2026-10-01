@@ -81,16 +81,19 @@ alter table public.import_batches enable row level security;
 alter table public.import_errors enable row level security;
 
 -- 5. Tenant RLS Policies
+drop policy if exists "Tenant staff profiles isolation" on public.staff_profiles;
 create policy "Tenant staff profiles isolation"
   on public.staff_profiles for all using (
     tenant_id = (select private.current_tenant_id()) or (select private.is_platform_owner())
   );
 
+drop policy if exists "Tenant import batches isolation" on public.import_batches;
 create policy "Tenant import batches isolation"
   on public.import_batches for all using (
     tenant_id = (select private.current_tenant_id()) or (select private.is_platform_owner())
   );
 
+drop policy if exists "Tenant import errors isolation" on public.import_errors;
 create policy "Tenant import errors isolation"
   on public.import_errors for all using (
     tenant_id = (select private.current_tenant_id()) or (select private.is_platform_owner())
@@ -108,7 +111,7 @@ begin
       qualification,
       photo_url,
       bio,
-      is_active
+      is_published
     ) values (
       new.tenant_id,
       new.full_name,
@@ -120,9 +123,9 @@ begin
     )
     on conflict do nothing;
   else
-    -- If toggled off or inactive, deactivate faculty record
+    -- If toggled off or inactive, unpublish faculty record
     update public.faculty
-    set is_active = false
+    set is_published = false
     where tenant_id = new.tenant_id and name = new.full_name;
   end if;
   return new;

@@ -33,6 +33,7 @@ create table if not exists public.about_content (
   vision text,
   objectives jsonb default '[]'::jsonb,
   history text,
+  is_published boolean not null default true,
   created_at timestamptz not null default now(),
   updated_at timestamptz not null default now()
 );
@@ -94,6 +95,7 @@ create table if not exists public.gallery_images (
   image_url text not null,
   caption text,
   display_order integer not null default 0,
+  is_published boolean not null default true,
   created_at timestamptz not null default now()
 );
 
