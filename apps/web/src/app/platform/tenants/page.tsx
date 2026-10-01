@@ -69,7 +69,8 @@ export default function PlatformTenantsPage() {
       <PlatformMetricsOverview />
 
       <div className="bg-slate-950 border border-slate-800 rounded-lg overflow-hidden">
-        <table className="w-full text-left text-xs">
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
           <thead>
             <tr className="border-b border-slate-800 text-slate-400">
               <th className="p-4">School Name</th>
@@ -121,6 +122,7 @@ export default function PlatformTenantsPage() {
             ))}
           </tbody>
         </table>
+        </div>
       </div>
 
       <TenantOnboardingWizard

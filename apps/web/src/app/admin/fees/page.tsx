@@ -51,38 +51,40 @@ export default function AdminFeesPage() {
 
       {tab === 'receipts' && (
         <Card className="p-0 overflow-hidden">
-          <table className="w-full text-left text-xs">
-            <thead>
-              <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
-                <th className="p-3">Receipt No</th>
-                <th className="p-3">Student Name</th>
-                <th className="p-3">Amount</th>
-                <th className="p-3">Payment Mode</th>
-                <th className="p-3">Date</th>
-                <th className="p-3 text-right">PDF Receipt</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--border-subtle)]">
-              {receipts.map((r, i) => (
-                <tr key={i} className="hover:bg-[var(--bg-elevated)]/50">
-                  <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{r.receiptNo}</td>
-                  <td className="p-3 font-semibold text-[var(--text-primary)]">{r.studentName}</td>
-                  <td className="p-3 font-mono font-bold text-[var(--text-primary)]">₹ {r.amount.toLocaleString('en-IN')}.00</td>
-                  <td className="p-3">
-                    <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] font-semibold">
-                      {r.mode}
-                    </span>
-                  </td>
-                  <td className="p-3 tabular-nums">{r.date}</td>
-                  <td className="p-3 text-right">
-                    <button className="text-xs font-semibold text-[var(--brand-primary)] hover:underline cursor-pointer flex items-center gap-1 justify-end ml-auto">
-                      <Receipt className="w-3.5 h-3.5" /> PDF
-                    </button>
-                  </td>
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left text-xs">
+              <thead>
+                <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
+                  <th className="p-3">Receipt No</th>
+                  <th className="p-3">Student Name</th>
+                  <th className="p-3">Amount</th>
+                  <th className="p-3">Payment Mode</th>
+                  <th className="p-3">Date</th>
+                  <th className="p-3 text-right">PDF Receipt</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[var(--border-subtle)]">
+                {receipts.map((r, i) => (
+                  <tr key={i} className="hover:bg-[var(--bg-elevated)]/50">
+                    <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{r.receiptNo}</td>
+                    <td className="p-3 font-semibold text-[var(--text-primary)]">{r.studentName}</td>
+                    <td className="p-3 font-mono font-bold text-[var(--text-primary)]">₹ {r.amount.toLocaleString('en-IN')}.00</td>
+                    <td className="p-3">
+                      <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] font-semibold">
+                        {r.mode}
+                      </span>
+                    </td>
+                    <td className="p-3 tabular-nums">{r.date}</td>
+                    <td className="p-3 text-right">
+                      <button className="text-xs font-semibold text-[var(--brand-primary)] hover:underline cursor-pointer flex items-center gap-1 justify-end ml-auto">
+                        <Receipt className="w-3.5 h-3.5" /> PDF
+                      </button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Card>
       )}
 

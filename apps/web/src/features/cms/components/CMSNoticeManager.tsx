@@ -88,45 +88,47 @@ export function CMSNoticeManager() {
       </div>
 
       <Card className="p-0 overflow-hidden">
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
-              <th className="p-3">Title</th>
-              <th className="p-3">Category</th>
-              <th className="p-3">Pinned</th>
-              <th className="p-3">Status</th>
-              <th className="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--border-subtle)]">
-            {notices.map((n) => (
-              <tr key={n.id} className="hover:bg-[var(--bg-elevated)]/50">
-                <td className="p-3 font-semibold text-[var(--text-primary)]">{n.title}</td>
-                <td className="p-3">
-                  <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] font-semibold">
-                    {n.category}
-                  </span>
-                </td>
-                <td className="p-3">
-                  {n.isPinned && <Pin className="w-3.5 h-3.5 text-[var(--status-warning)] inline" />}
-                </td>
-                <td className="p-3">
-                  <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--status-success)]/15 text-[var(--status-success)] font-semibold">
-                    Published
-                  </span>
-                </td>
-                <td className="p-3 text-right space-x-2">
-                  <button onClick={() => handleEdit(n)} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-                    <Pencil className="w-3.5 h-3.5 inline" />
-                  </button>
-                  <button onClick={() => handleDelete(n.id)} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
-                    <Trash2 className="w-3.5 h-3.5 inline" />
-                  </button>
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
+                <th className="p-3">Title</th>
+                <th className="p-3">Category</th>
+                <th className="p-3">Pinned</th>
+                <th className="p-3">Status</th>
+                <th className="p-3 text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-subtle)]">
+              {notices.map((n) => (
+                <tr key={n.id} className="hover:bg-[var(--bg-elevated)]/50">
+                  <td className="p-3 font-semibold text-[var(--text-primary)]">{n.title}</td>
+                  <td className="p-3">
+                    <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--brand-primary-soft)] text-[var(--brand-primary)] font-semibold">
+                      {n.category}
+                    </span>
+                  </td>
+                  <td className="p-3">
+                    {n.isPinned && <Pin className="w-3.5 h-3.5 text-[var(--status-warning)] inline" />}
+                  </td>
+                  <td className="p-3">
+                    <span className="px-2 py-0.5 rounded text-[10px] bg-[var(--status-success)]/15 text-[var(--status-success)] font-semibold">
+                      Published
+                    </span>
+                  </td>
+                  <td className="p-3 text-right space-x-2">
+                    <button onClick={() => handleEdit(n)} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
+                      <Pencil className="w-3.5 h-3.5 inline" />
+                    </button>
+                    <button onClick={() => handleDelete(n.id)} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
+                      <Trash2 className="w-3.5 h-3.5 inline" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
       {/* Add/Edit Modal */}

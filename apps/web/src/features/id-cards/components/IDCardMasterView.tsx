@@ -627,48 +627,50 @@ export function IDCardMasterView() {
             </p>
           </div>
 
-          <table className="w-full text-left text-xs border border-[var(--border-default)]">
-            <thead className="bg-[var(--bg-base)] text-[var(--text-secondary)]">
-              <tr>
-                <th className="py-2.5 px-3">Card Number</th>
-                <th className="py-2.5 px-3">Cardholder</th>
-                <th className="py-2.5 px-3">Role / Class</th>
-                <th className="py-2.5 px-3">Issue Date</th>
-                <th className="py-2.5 px-3 text-center">Reprint Count</th>
-                <th className="py-2.5 px-3">Last Re-issued</th>
-                <th className="py-2.5 px-3 text-right">Actions</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--border-default)]">
-              {cards.map(card => (
-                <tr key={card.id} className="hover:bg-[var(--bg-base)]">
-                  <td className="py-2.5 px-3 font-mono font-bold text-slate-800">{card.cardNumber}</td>
-                  <td className="py-2.5 px-3 font-semibold text-slate-900">{card.personName}</td>
-                  <td className="py-2.5 px-3 text-slate-700">{card.roleOrClass}</td>
-                  <td className="py-2.5 px-3 font-mono text-slate-600">{card.issueDate}</td>
-                  <td className="py-2.5 px-3 text-center font-mono">
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
-                      card.reprintCount > 0 ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'
-                    }`}>
-                      {card.reprintCount} {card.reprintCount === 1 ? 'Reprint' : 'Reprints'}
-                    </span>
-                  </td>
-                  <td className="py-2.5 px-3 text-slate-500 font-mono text-[11px]">
-                    {card.lastPrintedAt || 'Original Issue'}
-                  </td>
-                  <td className="py-2.5 px-3 text-right">
-                    <Button
-                      variant="secondary"
-                      size="sm"
-                      onClick={() => setReprintTarget(card)}
-                    >
-                      + Log Reprint
-                    </Button>
-                  </td>
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left text-xs border border-[var(--border-default)]">
+              <thead className="bg-[var(--bg-base)] text-[var(--text-secondary)]">
+                <tr>
+                  <th className="py-2.5 px-3">Card Number</th>
+                  <th className="py-2.5 px-3">Cardholder</th>
+                  <th className="py-2.5 px-3">Role / Class</th>
+                  <th className="py-2.5 px-3">Issue Date</th>
+                  <th className="py-2.5 px-3 text-center">Reprint Count</th>
+                  <th className="py-2.5 px-3">Last Re-issued</th>
+                  <th className="py-2.5 px-3 text-right">Actions</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[var(--border-default)]">
+                {cards.map(card => (
+                  <tr key={card.id} className="hover:bg-[var(--bg-base)]">
+                    <td className="py-2.5 px-3 font-mono font-bold text-slate-800">{card.cardNumber}</td>
+                    <td className="py-2.5 px-3 font-semibold text-slate-900">{card.personName}</td>
+                    <td className="py-2.5 px-3 text-slate-700">{card.roleOrClass}</td>
+                    <td className="py-2.5 px-3 font-mono text-slate-600">{card.issueDate}</td>
+                    <td className="py-2.5 px-3 text-center font-mono">
+                      <span className={`px-2 py-0.5 rounded-full text-[10px] font-bold ${
+                        card.reprintCount > 0 ? 'bg-amber-100 text-amber-800' : 'bg-slate-100 text-slate-600'
+                      }`}>
+                        {card.reprintCount} {card.reprintCount === 1 ? 'Reprint' : 'Reprints'}
+                      </span>
+                    </td>
+                    <td className="py-2.5 px-3 text-slate-500 font-mono text-[11px]">
+                      {card.lastPrintedAt || 'Original Issue'}
+                    </td>
+                    <td className="py-2.5 px-3 text-right">
+                      <Button
+                        variant="secondary"
+                        size="sm"
+                        onClick={() => setReprintTarget(card)}
+                      >
+                        + Log Reprint
+                      </Button>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Card>
       )}
 

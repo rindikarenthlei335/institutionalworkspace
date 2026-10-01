@@ -384,7 +384,7 @@ export function ExcelImportWizard({
           </div>
 
           {/* Mapping Table */}
-          <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden text-xs">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden text-xs overflow-x-auto w-full">
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50 dark:bg-slate-950/60 text-slate-500 border-b border-slate-200 dark:border-slate-800">
@@ -537,7 +537,7 @@ export function ExcelImportWizard({
           </div>
 
           {/* Rows Diff & Preview List */}
-          <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden text-xs max-h-80 overflow-y-auto">
+          <div className="border border-slate-200 dark:border-slate-800 rounded-xl overflow-hidden text-xs max-h-80 overflow-y-auto overflow-x-auto w-full">
             <table className="w-full text-left">
               <thead>
                 <tr className="bg-slate-50 dark:bg-slate-950/60 text-slate-500 border-b border-slate-200 dark:border-slate-800">

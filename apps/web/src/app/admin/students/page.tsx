@@ -87,47 +87,49 @@ export default function AdminStudentsPage() {
       </div>
 
       <Card className="p-0 overflow-hidden">
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
-              <th className="p-3">Admission No</th>
-              <th className="p-3">Student Name</th>
-              <th className="p-3">Class & Section</th>
-              <th className="p-3">Residence Type</th>
-              <th className="p-3">Guardian Phone</th>
-              <th className="p-3">Status</th>
-              <th className="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--border-subtle)]">
-            {students.map((s) => (
-              <tr key={s.id} className="hover:bg-[var(--bg-elevated)]/50">
-                <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{s.admissionNo}</td>
-                <td className="p-3 font-semibold text-[var(--text-primary)]">{s.fullName}</td>
-                <td className="p-3">{s.className} - {s.sectionName || 'A'}</td>
-                <td className="p-3">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${s.residenceType === 'hosteller' ? 'bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)]'}`}>
-                    {s.residenceType === 'hosteller' ? 'Hosteller' : 'Day Scholar'}
-                  </span>
-                </td>
-                <td className="p-3 font-mono">{s.guardianPhone}</td>
-                <td className="p-3">
-                  <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[var(--status-success)]/15 text-[var(--status-success)]">
-                    Active
-                  </span>
-                </td>
-                <td className="p-3 text-right space-x-2">
-                  <button onClick={() => { setEditingStudent(s); setShowFormModal(true); }} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-                    <Pencil className="w-3.5 h-3.5 inline" />
-                  </button>
-                  <button onClick={() => handleDelete(s.id)} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
-                    <Trash2 className="w-3.5 h-3.5 inline" />
-                  </button>
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
+                <th className="p-3">Admission No</th>
+                <th className="p-3">Student Name</th>
+                <th className="p-3">Class & Section</th>
+                <th className="p-3">Residence Type</th>
+                <th className="p-3">Guardian Phone</th>
+                <th className="p-3">Status</th>
+                <th className="p-3 text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-subtle)]">
+              {students.map((s) => (
+                <tr key={s.id} className="hover:bg-[var(--bg-elevated)]/50">
+                  <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{s.admissionNo}</td>
+                  <td className="p-3 font-semibold text-[var(--text-primary)]">{s.fullName}</td>
+                  <td className="p-3">{s.className} - {s.sectionName || 'A'}</td>
+                  <td className="p-3">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${s.residenceType === 'hosteller' ? 'bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)]'}`}>
+                      {s.residenceType === 'hosteller' ? 'Hosteller' : 'Day Scholar'}
+                    </span>
+                  </td>
+                  <td className="p-3 font-mono">{s.guardianPhone}</td>
+                  <td className="p-3">
+                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-[var(--status-success)]/15 text-[var(--status-success)]">
+                      Active
+                    </span>
+                  </td>
+                  <td className="p-3 text-right space-x-2">
+                    <button onClick={() => { setEditingStudent(s); setShowFormModal(true); }} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
+                      <Pencil className="w-3.5 h-3.5 inline" />
+                    </button>
+                    <button onClick={() => handleDelete(s.id)} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
+                      <Trash2 className="w-3.5 h-3.5 inline" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
       <StudentFormModal

@@ -342,7 +342,7 @@ export function StaffDirectoryView({ onOpenImportForStaff }: StaffDirectoryViewP
           </select>
         </div>
 
-        <div className="relative min-w-[240px]">
+        <div className="relative w-full sm:w-auto sm:min-w-[240px]">
           <Search className="w-3.5 h-3.5 text-slate-400 absolute left-3 top-2.5" />
           <input
             type="text"

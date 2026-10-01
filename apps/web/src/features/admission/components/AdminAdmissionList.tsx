@@ -36,49 +36,51 @@ export function AdminAdmissionList() {
   return (
     <div className="space-y-4">
       <Card className="p-0 overflow-hidden">
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
-              <th className="p-3">Application No</th>
-              <th className="p-3">Student Name</th>
-              <th className="p-3">Applying Class</th>
-              <th className="p-3">Residence Type</th>
-              <th className="p-3">Guardian Phone</th>
-              <th className="p-3">Status</th>
-              <th className="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--border-subtle)]">
-            {applications.map((app) => (
-              <tr key={app.id} className="hover:bg-[var(--bg-elevated)]/50">
-                <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{app.applicationNo}</td>
-                <td className="p-3 font-semibold text-[var(--text-primary)]">{app.studentName}</td>
-                <td className="p-3">{app.className}</td>
-                <td className="p-3">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${app.residenceType === 'hosteller' ? 'bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)]'}`}>
-                    {app.residenceType === 'hosteller' ? 'Hosteller' : 'Day Scholar'}
-                  </span>
-                </td>
-                <td className="p-3 font-mono">{app.guardianPhone}</td>
-                <td className="p-3">
-                  <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${app.status === 'enrolled' ? 'bg-[var(--status-success)]/15 text-[var(--status-success)]' : 'bg-[var(--status-warning)]/15 text-[var(--status-warning)]'}`}>
-                    {app.status.toUpperCase()}
-                  </span>
-                </td>
-                <td className="p-3 text-right space-x-2">
-                  {app.status !== 'enrolled' && (
-                    <button
-                      onClick={() => setConvertingApp(app)}
-                      className="text-xs font-semibold text-[var(--brand-primary)] hover:underline cursor-pointer"
-                    >
-                      Approve & Enrol →
-                    </button>
-                  )}
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
+                <th className="p-3">Application No</th>
+                <th className="p-3">Student Name</th>
+                <th className="p-3">Applying Class</th>
+                <th className="p-3">Residence Type</th>
+                <th className="p-3">Guardian Phone</th>
+                <th className="p-3">Status</th>
+                <th className="p-3 text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-subtle)]">
+              {applications.map((app) => (
+                <tr key={app.id} className="hover:bg-[var(--bg-elevated)]/50">
+                  <td className="p-3 font-mono font-semibold text-[var(--brand-primary)]">{app.applicationNo}</td>
+                  <td className="p-3 font-semibold text-[var(--text-primary)]">{app.studentName}</td>
+                  <td className="p-3">{app.className}</td>
+                  <td className="p-3">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${app.residenceType === 'hosteller' ? 'bg-[var(--brand-primary-soft)] text-[var(--brand-primary)]' : 'bg-[var(--bg-elevated)] text-[var(--text-secondary)]'}`}>
+                      {app.residenceType === 'hosteller' ? 'Hosteller' : 'Day Scholar'}
+                    </span>
+                  </td>
+                  <td className="p-3 font-mono">{app.guardianPhone}</td>
+                  <td className="p-3">
+                    <span className={`px-2 py-0.5 rounded text-[10px] font-semibold ${app.status === 'enrolled' ? 'bg-[var(--status-success)]/15 text-[var(--status-success)]' : 'bg-[var(--status-warning)]/15 text-[var(--status-warning)]'}`}>
+                      {app.status.toUpperCase()}
+                    </span>
+                  </td>
+                  <td className="p-3 text-right space-x-2">
+                    {app.status !== 'enrolled' && (
+                      <button
+                        onClick={() => setConvertingApp(app)}
+                        className="text-xs font-semibold text-[var(--brand-primary)] hover:underline cursor-pointer"
+                      >
+                        Approve & Enrol →
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
       <ConvertToStudentModal

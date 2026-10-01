@@ -21,42 +21,44 @@ export function SaaSBillingTracker() {
   return (
     <div className="space-y-4">
       <Card className="p-0 overflow-hidden bg-slate-950 border-slate-800 text-white">
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-slate-800 bg-slate-900 text-slate-400">
-              <th className="p-4">Tenant / School</th>
-              <th className="p-4">Amount</th>
-              <th className="p-4">Due Date</th>
-              <th className="p-4">Status</th>
-              <th className="p-4">Payment Ref</th>
-              <th className="p-4 text-right">Action</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-slate-800">
-            {invoices.map((inv) => (
-              <tr key={inv.id} className="hover:bg-slate-900/50">
-                <td className="p-4 font-semibold text-white">{inv.tenantName}</td>
-                <td className="p-4 font-mono font-bold text-emerald-400">₹ {inv.amount.toLocaleString()}</td>
-                <td className="p-4 text-slate-400 tabular-nums">{inv.dueDate}</td>
-                <td className="p-4">
-                  {inv.status === 'paid' ? (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400">Paid</span>
-                  ) : (
-                    <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300">Unpaid</span>
-                  )}
-                </td>
-                <td className="p-4 font-mono text-[11px] text-slate-400">{inv.paymentReference || '—'}</td>
-                <td className="p-4 text-right">
-                  {inv.status !== 'paid' && (
-                    <button onClick={() => handleMarkPaid(inv.id)} className="text-xs font-semibold text-emerald-400 hover:underline">
-                      Mark as Paid
-                    </button>
-                  )}
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-slate-800 bg-slate-900 text-slate-400">
+                <th className="p-4">Tenant / School</th>
+                <th className="p-4">Amount</th>
+                <th className="p-4">Due Date</th>
+                <th className="p-4">Status</th>
+                <th className="p-4">Payment Ref</th>
+                <th className="p-4 text-right">Action</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-slate-800">
+              {invoices.map((inv) => (
+                <tr key={inv.id} className="hover:bg-slate-900/50">
+                  <td className="p-4 font-semibold text-white">{inv.tenantName}</td>
+                  <td className="p-4 font-mono font-bold text-emerald-400">₹ {inv.amount.toLocaleString()}</td>
+                  <td className="p-4 text-slate-400 tabular-nums">{inv.dueDate}</td>
+                  <td className="p-4">
+                    {inv.status === 'paid' ? (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-emerald-500/20 text-emerald-400">Paid</span>
+                    ) : (
+                      <span className="px-2 py-0.5 rounded text-[10px] font-semibold bg-amber-500/20 text-amber-300">Unpaid</span>
+                    )}
+                  </td>
+                  <td className="p-4 font-mono text-[11px] text-slate-400">{inv.paymentReference || '—'}</td>
+                  <td className="p-4 text-right">
+                    {inv.status !== 'paid' && (
+                      <button onClick={() => handleMarkPaid(inv.id)} className="text-xs font-semibold text-emerald-400 hover:underline">
+                        Mark as Paid
+                      </button>
+                    )}
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
     </div>
   );

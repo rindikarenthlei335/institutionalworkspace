@@ -848,35 +848,37 @@ export function ExamsMasterView() {
             </p>
           </div>
 
-          <table className="w-full text-left text-xs border border-[var(--border-default)]">
-            <thead className="bg-[var(--bg-base)] text-[var(--text-secondary)]">
-              <tr>
-                <th className="py-2.5 px-3">Date & Time</th>
-                <th className="py-2.5 px-3">Student</th>
-                <th className="py-2.5 px-3">Subject</th>
-                <th className="py-2.5 px-3 text-center">Original</th>
-                <th className="py-2.5 px-3 text-center">Moderated</th>
-                <th className="py-2.5 px-3">Audit Reason</th>
-                <th className="py-2.5 px-3">Adjusted By</th>
-              </tr>
-            </thead>
-            <tbody className="divide-y divide-[var(--border-default)]">
-              {moderationAuditLog.map(log => (
-                <tr key={log.id} className="hover:bg-[var(--bg-base)]">
-                  <td className="py-2.5 px-3 font-mono text-slate-600">{log.adjustedAt}</td>
-                  <td className="py-2.5 px-3">
-                    <span className="font-semibold text-slate-900 block">{log.studentName}</span>
-                    <span className="text-[10px] font-mono text-slate-500">{log.admissionNo}</span>
-                  </td>
-                  <td className="py-2.5 px-3 font-medium text-slate-800">{log.subjectName}</td>
-                  <td className="py-2.5 px-3 text-center font-mono text-rose-700 line-through">{log.rawMarks}</td>
-                  <td className="py-2.5 px-3 text-center font-mono font-bold text-emerald-700">{log.moderatedMarks}</td>
-                  <td className="py-2.5 px-3 text-slate-700">{log.reason}</td>
-                  <td className="py-2.5 px-3 text-slate-600">{log.adjustedBy}</td>
+          <div className="overflow-x-auto w-full">
+            <table className="w-full text-left text-xs border border-[var(--border-default)]">
+              <thead className="bg-[var(--bg-base)] text-[var(--text-secondary)]">
+                <tr>
+                  <th className="py-2.5 px-3">Date & Time</th>
+                  <th className="py-2.5 px-3">Student</th>
+                  <th className="py-2.5 px-3">Subject</th>
+                  <th className="py-2.5 px-3 text-center">Original</th>
+                  <th className="py-2.5 px-3 text-center">Moderated</th>
+                  <th className="py-2.5 px-3">Audit Reason</th>
+                  <th className="py-2.5 px-3">Adjusted By</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+              <tbody className="divide-y divide-[var(--border-default)]">
+                {moderationAuditLog.map(log => (
+                  <tr key={log.id} className="hover:bg-[var(--bg-base)]">
+                    <td className="py-2.5 px-3 font-mono text-slate-600">{log.adjustedAt}</td>
+                    <td className="py-2.5 px-3">
+                      <span className="font-semibold text-slate-900 block">{log.studentName}</span>
+                      <span className="text-[10px] font-mono text-slate-500">{log.admissionNo}</span>
+                    </td>
+                    <td className="py-2.5 px-3 font-medium text-slate-800">{log.subjectName}</td>
+                    <td className="py-2.5 px-3 text-center font-mono text-rose-700 line-through">{log.rawMarks}</td>
+                    <td className="py-2.5 px-3 text-center font-mono font-bold text-emerald-700">{log.moderatedMarks}</td>
+                    <td className="py-2.5 px-3 text-slate-700">{log.reason}</td>
+                    <td className="py-2.5 px-3 text-slate-600">{log.adjustedBy}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
         </Card>
       )}
 

@@ -46,35 +46,37 @@ export function CMSFacultyManager() {
       </div>
 
       <Card className="p-0 overflow-hidden">
-        <table className="w-full text-left text-xs">
-          <thead>
-            <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
-              <th className="p-3">Name</th>
-              <th className="p-3">Designation</th>
-              <th className="p-3">Qualification</th>
-              <th className="p-3">Experience</th>
-              <th className="p-3 text-right">Actions</th>
-            </tr>
-          </thead>
-          <tbody className="divide-y divide-[var(--border-subtle)]">
-            {faculty.map((f) => (
-              <tr key={f.id} className="hover:bg-[var(--bg-elevated)]/50">
-                <td className="p-3 font-semibold text-[var(--text-primary)]">{f.name}</td>
-                <td className="p-3 font-semibold text-[var(--brand-primary)]">{f.designation}</td>
-                <td className="p-3 text-[var(--text-secondary)]">{f.qualification}</td>
-                <td className="p-3 text-[var(--text-secondary)]">{f.experience}</td>
-                <td className="p-3 text-right space-x-2">
-                  <button onClick={() => { setEditing(f); setForm({ name: f.name, designation: f.designation, qualification: f.qualification || '', experience: f.experience || '' }); setShowModal(true); }} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
-                    <Pencil className="w-3.5 h-3.5 inline" />
-                  </button>
-                  <button onClick={() => setFaculty(faculty.filter(item => item.id !== f.id))} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
-                    <Trash2 className="w-3.5 h-3.5 inline" />
-                  </button>
-                </td>
+        <div className="overflow-x-auto w-full">
+          <table className="w-full text-left text-xs">
+            <thead>
+              <tr className="border-b border-[var(--border-default)] bg-[var(--bg-elevated)] text-[var(--text-secondary)]">
+                <th className="p-3">Name</th>
+                <th className="p-3">Designation</th>
+                <th className="p-3">Qualification</th>
+                <th className="p-3">Experience</th>
+                <th className="p-3 text-right">Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody className="divide-y divide-[var(--border-subtle)]">
+              {faculty.map((f) => (
+                <tr key={f.id} className="hover:bg-[var(--bg-elevated)]/50">
+                  <td className="p-3 font-semibold text-[var(--text-primary)]">{f.name}</td>
+                  <td className="p-3 font-semibold text-[var(--brand-primary)]">{f.designation}</td>
+                  <td className="p-3 text-[var(--text-secondary)]">{f.qualification}</td>
+                  <td className="p-3 text-[var(--text-secondary)]">{f.experience}</td>
+                  <td className="p-3 text-right space-x-2">
+                    <button onClick={() => { setEditing(f); setForm({ name: f.name, designation: f.designation, qualification: f.qualification || '', experience: f.experience || '' }); setShowModal(true); }} className="text-[var(--text-secondary)] hover:text-[var(--brand-primary)]">
+                      <Pencil className="w-3.5 h-3.5 inline" />
+                    </button>
+                    <button onClick={() => setFaculty(faculty.filter(item => item.id !== f.id))} className="text-[var(--text-secondary)] hover:text-[var(--status-error)]">
+                      <Trash2 className="w-3.5 h-3.5 inline" />
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
       </Card>
 
       {showModal && (
