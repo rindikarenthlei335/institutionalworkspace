@@ -41,7 +41,7 @@ export interface OnboardingOrder {
   schoolName: string;
   planTier: PlanTier;
   billingCycle: 'monthly' | 'yearly';
-  domainType: 'subdomain' | 'custom_domain';
+  domainType: 'subdomain' | 'own_domain' | 'custom_domain';
   subdomain: string;
   customDomainName: string;
   customDomainExt: string;
@@ -65,7 +65,6 @@ export interface OnboardingOrder {
 }
 
 // 3 Core Active Plans (Basic 1499, Essential 3999, Pro 8000)
-// 9999 plan omitted per user request
 const ACTIVE_TIERS: PlanTier[] = ['basic', 'essential', 'pro'];
 
 const PLANS_CONFIG: Record<
@@ -83,52 +82,53 @@ const PLANS_CONFIG: Record<
     name: 'BASIC',
     monthlyPrice: 1499,
     yearlyPrice: 14990,
-    tagline: 'Core digital services & public website for standard institutions',
+    tagline: 'Simple school website with 6 core modules & admin data/image upload',
     modules: [
-      'Home Page Module (Custom Hero & Campus Facade)',
-      'About Us Module (School History, Mission & Leadership)',
-      'Faculty & Staff Directory Module (Teacher Profiles & Subjects)',
-      'Campus Facilities Module (Labs, Library & Bus Transport)',
-      'Student Activities & Sports Module (Clubs & Annual Day)',
-      'Digital Notice Board Module (Circulars, Exams & Routine)',
-      'School Admin Panel (Data management, notices & image upload)',
-      'Mobile Responsive PWA Website (Ultra-fast & zero overflow)',
-      'Brand Theme Color Customizer (Change in any plan)',
-      '1 Classic Website Template (Trident Public School)'
+      'School Logo Upload & Identity Branding',
+      'Theme Customizer (Changeable anytime in admin)',
+      'Admin Panel (Data & Image upload)',
+      'Module 6 (Home, Activities, Faculty, Facilities, About, Notice)',
+      'Home Screen: Achievements & Auto-sliding photo gallery',
+      'Faculty Directory: Interactive biodata & teacher gallery',
+      'Digital Notice Board: Circulars, exam routine & urgent alerts',
+      'Free Institutional Subdomain (*.eduportal.in)',
+      'Free Own Domain Connect (CNAME & SSL)',
+      'UI Level: Basic Clean Website'
     ]
   },
   essential: {
     name: 'ESSENTIAL',
     monthlyPrice: 3999,
     yearlyPrice: 39990,
-    tagline: 'Online admissions, fee desk & 4 website template designs',
+    tagline: 'Website + Mobile App with Online Admissions & Fee payment desk',
     badge: 'Popular for High Schools',
     modules: [
-      'All 6 Basic Modules (Home, About, Faculty, Facilities, Activities, Notices)',
-      'School Admin Panel (Full CMS & Photo Manager)',
-      'Online Student Admission Desk & Application Form',
-      'Online Fee Desk & Instant UPI Payment Receipts',
-      '4 Website Template Styles (Trident, Bright Future, Unipix, Nuova)',
-      'Student Marksheet & Result Lookup Desk',
-      'Mobile Responsive PWA Website & Subdomain',
-      'Direct WhatsApp Parent Connect Desk'
+      'Website + Mobile App (Shared EduPortal App & PWA)',
+      'All Basic Modules (Logo, Theme, Module 6, Admin Panel)',
+      'Admin Login & Role-based authentication',
+      'Student Management (Class, section, roll no, parent info)',
+      'Fee Payment Desk (Day Scholar / Hosteller fee structure)',
+      'Online Admission Desk & Instant Fee Receipts',
+      'Super Admin + Data Entry Operator Logins',
+      'UI Level: Level 1 (Modern High School Design)'
     ]
   },
   pro: {
     name: 'PRO',
     monthlyPrice: 8000,
     yearlyPrice: 79990,
-    tagline: 'Complete enterprise suite with exams, ID cards & public AI Copilot',
+    tagline: 'Website + App + Full Institutional Analytics & Principal Cockpit',
     badge: 'Executive Suite',
     modules: [
-      'All Essential Modules + Complete Academic ERP',
-      '10 Enterprise Website Templates (Includes Eudaimonia, Eduka, Edugate, Qeducato, UnivBridge, Apex)',
-      'Student ID Card Generator & Bulk PDF Export',
-      'Exams & Grade Sheet Master Processing Desk',
-      'Teachers & Staff Database Management',
-      'Public AI Copilot (English + Mizo Admissions & Fee Assistant)',
-      'School Analytics & Visitor Insights Desk',
-      'Principal Executive Cockpit with 10 Live KPIs'
+      'Website + Mobile App + Full Institutional Analytics',
+      'All Essential Modules + Complete Academic Management',
+      'Principal Executive Dashboard (Student stats, Fee collection: thla/kum/due)',
+      'Live Website Visitor Analytics Desk',
+      'Google Search Console & Sitemap Submit — FREE (Included)',
+      'Google Maps Location Pin & Claim — FREE (Included)',
+      'Domain Register Service — Discounted at ₹3,000 (instead of ₹5,000)',
+      'Accountant, Teacher & Student Management Desks',
+      'UI Level: Level 2 (Collegiate / Executive Design)'
     ]
   },
   pro_plus: {
@@ -145,7 +145,6 @@ const DOMAIN_OPTIONS = [
   {
     ext: '.edu.in',
     name: 'Official Indian Educational Domain',
-    price: 1800,
     badge: 'Recognized Institutions Only',
     rules: 'Requires registration certificate of educational trust/society & board affiliation.',
     requiresDocs: true
@@ -153,7 +152,6 @@ const DOMAIN_OPTIONS = [
   {
     ext: '.ac.in',
     name: 'Academic College / University Domain',
-    price: 1800,
     badge: 'Colleges & Universities',
     rules: 'Requires government/university affiliation and registration proof.',
     requiresDocs: true
@@ -161,15 +159,13 @@ const DOMAIN_OPTIONS = [
   {
     ext: '.com',
     name: 'Global Commercial Domain',
-    price: 1200,
     badge: 'Instant Setup',
-    rules: 'No documents needed. Instant worldwide activation within 15 minutes.',
+    rules: 'No documents needed. Worldwide recognized activation.',
     requiresDocs: false
   },
   {
     ext: '.in',
     name: 'National Indian Domain',
-    price: 850,
     badge: 'National Registry',
     rules: 'No documents needed. Ideal for schools and academies across India.',
     requiresDocs: false
@@ -177,9 +173,8 @@ const DOMAIN_OPTIONS = [
   {
     ext: '.org.in',
     name: 'Non-Profit Educational Society Domain',
-    price: 1100,
     badge: 'Trusts & Societies',
-    rules: 'No mandatory documents. Suitable for educational non-profits and NGOs.',
+    rules: 'Suitable for educational trusts, societies, and NGOs.',
     requiresDocs: false
   }
 ];
@@ -195,9 +190,10 @@ export function InstitutionalOnboardingFlow() {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('monthly');
   const [schoolName, setSchoolName] = useState<string>('Mount Carmel School');
   
-  // Domain Setup
-  const [domainType, setDomainType] = useState<'subdomain' | 'custom_domain'>('subdomain');
+  // Domain Setup: 'subdomain' (Free) | 'own_domain' (Free) | 'custom_domain' (Register Service: ₹5000 / Pro: ₹3000)
+  const [domainType, setDomainType] = useState<'subdomain' | 'own_domain' | 'custom_domain'>('subdomain');
   const [subdomain, setSubdomain] = useState<string>('mountcarmel');
+  const [ownDomainName, setOwnDomainName] = useState<string>('www.mountcarmelaizawl.com');
   const [customDomainName, setCustomDomainName] = useState<string>('mountcarmelaizawl');
   const [customDomainExt, setCustomDomainExt] = useState<string>('.edu.in');
   const [uploadDocsLater, setUploadDocsLater] = useState<boolean>(true);
@@ -246,16 +242,34 @@ export function InstitutionalOnboardingFlow() {
     }
   }, []);
 
-  // Calculation of Totals
+  // Calculation of Totals according to Idea Summary
+  const isPro = selectedPlan === 'pro';
   const planInfo = PLANS_CONFIG[selectedPlan];
   const planPrice = billingCycle === 'monthly' ? planInfo.monthlyPrice : planInfo.yearlyPrice;
-  const domainPrice = domainType === 'custom_domain' ? (DOMAIN_OPTIONS.find(d => d.ext === customDomainExt)?.price || 0) : 0;
-  const googleSubmitPrice = addonGoogleSubmit ? 999 : 0;
-  const googleMapsPrice = addonGoogleMaps ? 499 : 0;
-  const playStorePrice = addonPlayStore ? 5000 : 0;
-  const totalPayable = planPrice + domainPrice + googleSubmitPrice + googleMapsPrice + playStorePrice;
+  
+  // Domain Price: Subdomain = ₹0, Own Domain Connect = ₹0, Register Service = ₹5000 (Pro: ₹3000)
+  const domainServicePrice = isPro ? 3000 : 5000;
+  const domainPrice = domainType === 'custom_domain' ? domainServicePrice : 0;
 
-  // Handle Domain Selection
+  // Google Services: Pro tier = Free!
+  // Basic / Essential: Submit = ₹1000, Maps = ₹500. Both together (Bundle) = ₹1200!
+  let googleServicesPrice = 0;
+  if (!isPro) {
+    if (addonGoogleSubmit && addonGoogleMaps) {
+      googleServicesPrice = 1200; // Google Presence Bundle discount
+    } else if (addonGoogleSubmit) {
+      googleServicesPrice = 1000;
+    } else if (addonGoogleMaps) {
+      googleServicesPrice = 500;
+    }
+  }
+
+  // Play Store White-Label Android App: ₹8000 setup fee
+  const playStorePrice = addonPlayStore ? 8000 : 0;
+
+  const totalPayable = planPrice + domainPrice + googleServicesPrice + playStorePrice;
+
+  // Selected Domain Option (for .edu.in docs requirement)
   const selectedDomainOption = DOMAIN_OPTIONS.find(d => d.ext === customDomainExt);
 
   // Filter templates unlocked for this tier
@@ -296,13 +310,13 @@ export function InstitutionalOnboardingFlow() {
       billingCycle,
       domainType,
       subdomain: subdomain.toLowerCase().replace(/[^a-z0-9-]/g, ''),
-      customDomainName: `${customDomainName}${customDomainExt}`,
+      customDomainName: domainType === 'own_domain' ? ownDomainName : `${customDomainName}${customDomainExt}`,
       customDomainExt,
       educationalDocsUploaded: Object.keys(uploadedDocs).length > 0,
       uploadDocsLater,
       uploadedDocNames: Object.values(uploadedDocs),
-      addonGoogleSubmit,
-      addonGoogleMaps,
+      addonGoogleSubmit: isPro ? true : addonGoogleSubmit,
+      addonGoogleMaps: isPro ? true : addonGoogleMaps,
       googleMapsLink,
       uploadMapsLater,
       addonPlayStore,
@@ -444,7 +458,7 @@ export function InstitutionalOnboardingFlow() {
               </div>
             </div>
 
-            {/* 3 Tier Cards (Basic, Essential, Pro) - 9999 plan removed, clean 3-col grid */}
+            {/* 3 Tier Cards (Basic, Essential, Pro) - Clean 3-col grid matching Idea Summary */}
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-6xl mx-auto items-stretch">
               {ACTIVE_TIERS.map((tierKey) => {
                 const tier = PLANS_CONFIG[tierKey];
@@ -530,7 +544,7 @@ export function InstitutionalOnboardingFlow() {
         )}
 
         {/* =================================================================================== */}
-        {/* STEP 2: DOMAIN SETUP (Custom Subdomain vs Domain Register Service) */}
+        {/* STEP 2: DOMAIN SETUP (Subdomain vs Own Domain vs Domain Register Service) */}
         {/* =================================================================================== */}
         {currentStep === 2 && (
           <div className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
@@ -542,7 +556,7 @@ export function InstitutionalOnboardingFlow() {
                 School Name & Domain Configuration
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 font-normal">
-                Choose between a free instant institutional subdomain or register a custom official domain (.edu.in, .com, .in).
+                Choose between a free institutional subdomain, connect your existing domain, or have us register an official domain for your school.
               </p>
             </div>
 
@@ -558,60 +572,94 @@ export function InstitutionalOnboardingFlow() {
                 className="bg-white border-2 border-slate-200 text-slate-900 font-semibold text-sm rounded-xl px-4 py-3 focus:border-[#163A2B] focus:ring-2 focus:ring-[#163A2B]/10"
               />
               <span className="text-[11px] text-slate-500 block">
-                This official name will be configured on your website header, report cards, ID cards, and receipts.
+                This official name will be configured on your website header, report cards, ID cards, and fee receipts.
               </span>
             </Card>
 
-            {/* Domain Type Tabs */}
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            {/* 3 Domain Options matching Idea Summary */}
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+              
+              {/* Option A: Subdomain (Free) */}
               <div
                 onClick={() => setDomainType('subdomain')}
-                className={`p-6 rounded-3xl border-2 cursor-pointer transition-all bg-white ${
+                className={`p-6 rounded-3xl border-2 cursor-pointer transition-all bg-white flex flex-col justify-between ${
                   domainType === 'subdomain'
                     ? 'border-[#163A2B] ring-4 ring-emerald-600/10 shadow-lg'
                     : 'border-slate-200 hover:border-slate-300 shadow-sm'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-extrabold text-[#163A2B] uppercase tracking-wider">Option A</span>
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-[#163A2B]">
-                    Included Free (₹0)
-                  </span>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-extrabold text-[#163A2B] uppercase tracking-wider">Option A</span>
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-emerald-100 text-[#163A2B]">
+                      Free (₹0)
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-base text-slate-900 mt-2">Institutional Subdomain</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-normal leading-relaxed">
+                    Default instant address for all schools. Zero setup time, free wildcard SSL included.
+                  </p>
                 </div>
-                <h4 className="font-extrabold text-base text-slate-900 mt-2">Instant Institutional Subdomain</h4>
-                <p className="text-xs text-slate-600 mt-1 font-normal">
-                  Active instantly with zero setup time. Perfect for launching right away.
-                </p>
-                <div className="mt-4 text-xs font-mono font-bold text-[#163A2B] bg-slate-50 p-3 rounded-xl border border-slate-200">
-                  https://{subdomain || 'schoolname'}.eduportal.in
+                <div className="mt-4 text-xs font-mono font-bold text-[#163A2B] bg-slate-50 p-2.5 rounded-xl border border-slate-200 break-all">
+                  https://{subdomain || 'school'}.eduportal.in
                 </div>
               </div>
 
+              {/* Option B: Own Domain Connect (Free) */}
+              <div
+                onClick={() => setDomainType('own_domain')}
+                className={`p-6 rounded-3xl border-2 cursor-pointer transition-all bg-white flex flex-col justify-between ${
+                  domainType === 'own_domain'
+                    ? 'border-[#163A2B] ring-4 ring-emerald-600/10 shadow-lg'
+                    : 'border-slate-200 hover:border-slate-300 shadow-sm'
+                }`}
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-extrabold text-indigo-700 uppercase tracking-wider">Option B</span>
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-indigo-100 text-indigo-800">
+                      Free (₹0)
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-base text-slate-900 mt-2">Connect Own Domain</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-normal leading-relaxed">
+                    School already owns domain. Connect via CNAME pointing with free automated Cloudflare SSL.
+                  </p>
+                </div>
+                <div className="mt-4 text-xs font-mono font-bold text-indigo-800 bg-slate-50 p-2.5 rounded-xl border border-slate-200 break-all">
+                  {ownDomainName || 'www.yourschool.com'}
+                </div>
+              </div>
+
+              {/* Option C: Domain Register Service */}
               <div
                 onClick={() => setDomainType('custom_domain')}
-                className={`p-6 rounded-3xl border-2 cursor-pointer transition-all bg-white ${
+                className={`p-6 rounded-3xl border-2 cursor-pointer transition-all bg-white flex flex-col justify-between ${
                   domainType === 'custom_domain'
                     ? 'border-[#163A2B] ring-4 ring-emerald-600/10 shadow-lg'
                     : 'border-slate-200 hover:border-slate-300 shadow-sm'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="text-xs font-extrabold text-amber-800 uppercase tracking-wider">Option B</span>
-                  <span className="text-xs font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-900">
-                    Official Domain Service
-                  </span>
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-extrabold text-amber-800 uppercase tracking-wider">Option C</span>
+                    <span className="text-[11px] font-bold px-2.5 py-1 rounded-full bg-amber-100 text-amber-900">
+                      {isPro ? '₹3,000 (Pro)' : '₹5,000'}
+                    </span>
+                  </div>
+                  <h4 className="font-extrabold text-base text-slate-900 mt-2">Domain Register Service</h4>
+                  <p className="text-xs text-slate-600 mt-1 font-normal leading-relaxed">
+                    We buy & manage domain (.edu.in, .com, .in) under school name with DNS setup & 1st year registration.
+                  </p>
                 </div>
-                <h4 className="font-extrabold text-base text-slate-900 mt-2">Register Custom Domain</h4>
-                <p className="text-xs text-slate-600 mt-1 font-normal">
-                  Buy official institutional domain (.edu.in, .ac.in, .com, .in) with DNS provisioning.
-                </p>
-                <div className="mt-4 text-xs font-mono font-bold text-amber-800 bg-slate-50 p-3 rounded-xl border border-slate-200">
-                  https://www.{customDomainName || 'schoolname'}{customDomainExt}
+                <div className="mt-4 text-xs font-mono font-bold text-amber-800 bg-slate-50 p-2.5 rounded-xl border border-slate-200 break-all">
+                  www.{customDomainName || 'school'}{customDomainExt}
                 </div>
               </div>
+
             </div>
 
-            {/* Details for Option A: Subdomain */}
+            {/* Subdomain Input Configuration */}
             {domainType === 'subdomain' && (
               <Card className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm space-y-3">
                 <label className="block text-xs font-bold text-slate-900">Choose Your Subdomain Slug</label>
@@ -626,18 +674,43 @@ export function InstitutionalOnboardingFlow() {
                   <span className="text-xs text-slate-500 shrink-0 font-mono font-bold">.eduportal.in</span>
                 </div>
                 <span className="text-[11px] text-emerald-800 font-semibold block">
-                  ✓ Instant SSL Certificate, CDN routing & DDoS protection included free.
+                  ✓ Wildcard DNS & Automated Cloudflare SSL Certificate active immediately.
                 </span>
               </Card>
             )}
 
-            {/* Details for Option B: Domain Registration Service */}
+            {/* Own Domain Connect Input */}
+            {domainType === 'own_domain' && (
+              <Card className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm space-y-3">
+                <label className="block text-xs font-bold text-slate-900">Enter Your Existing Domain</label>
+                <Input
+                  value={ownDomainName}
+                  onChange={(e) => setOwnDomainName(e.target.value.toLowerCase())}
+                  placeholder="www.mountcarmelschool.com"
+                  className="bg-white border-2 border-slate-200 text-indigo-900 font-mono font-bold text-sm rounded-xl px-4 py-3 focus:border-indigo-600"
+                />
+                <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs text-slate-700 space-y-1">
+                  <span className="font-bold text-slate-900 block">DNS Pointing Instructions:</span>
+                  <p className="text-[11px] leading-relaxed">
+                    Set a <strong>CNAME</strong> record for <code>www</code> pointing to <code>sites.eduportal.in</code> in your domain registrar (GoDaddy, Namecheap, etc.).
+                  </p>
+                </div>
+              </Card>
+            )}
+
+            {/* Domain Registration Service Setup */}
             {domainType === 'custom_domain' && (
               <div className="space-y-6">
                 <Card className="p-6 bg-white border border-slate-200 rounded-3xl shadow-sm space-y-4">
-                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
-                    Select Domain Extension & Pricing
-                  </label>
+                  <div className="flex items-center justify-between border-b border-slate-100 pb-3">
+                    <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
+                      Select Domain Extension (.edu.in, .com, .in)
+                    </label>
+                    <span className="text-xs font-bold text-[#163A2B]">
+                      {isPro ? 'Pro Special: ₹3,000 all-inclusive' : 'All-inclusive Setup: ₹5,000'}
+                    </span>
+                  </div>
+
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
                     {DOMAIN_OPTIONS.map((d) => (
                       <div
@@ -651,7 +724,9 @@ export function InstitutionalOnboardingFlow() {
                       >
                         <div className="flex items-center justify-between">
                           <span className="font-extrabold text-base text-slate-900">{d.ext}</span>
-                          <span className="font-black text-sm text-[#163A2B]">₹{d.price}/yr</span>
+                          <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-slate-100 text-slate-700">
+                            {d.badge}
+                          </span>
                         </div>
                         <span className="text-xs font-semibold text-slate-800 block mt-1">{d.name}</span>
                         <p className="text-[11px] text-slate-500 mt-1 leading-relaxed">{d.rules}</p>
@@ -674,7 +749,7 @@ export function InstitutionalOnboardingFlow() {
                   </div>
                 </Card>
 
-                {/* 5 Required Documents for Educational Domains (.edu.in / .ac.in) */}
+                {/* 5 Required Documents for Official Educational Domain (.edu.in / .ac.in) */}
                 {selectedDomainOption?.requiresDocs && (
                   <Card className="p-6 bg-amber-50/50 border-2 border-amber-200 rounded-3xl shadow-sm space-y-4">
                     <div className="flex items-start gap-3">
@@ -683,10 +758,10 @@ export function InstitutionalOnboardingFlow() {
                       </div>
                       <div>
                         <h4 className="font-bold text-sm text-slate-900">
-                          5 Required Documents for Official Educational Domain ({customDomainExt})
+                          5 Required Verification Documents for ({customDomainExt})
                         </h4>
                         <p className="text-xs text-slate-600 mt-0.5">
-                          ERNET India regulations require verification of institutional accreditation and authorization.
+                          ERNET India regulations mandate registered society/trust and institutional affiliation verification.
                         </p>
                       </div>
                     </div>
@@ -701,7 +776,7 @@ export function InstitutionalOnboardingFlow() {
                         className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                       />
                       <label htmlFor="uploadLater" className="text-xs text-amber-950 cursor-pointer font-bold">
-                        Upload documents later after payment confirmation (Recommended - Pay first, submit documents within 7 days)
+                        Upload documents later after payment confirmation (Pay first, submit documents within 7 days)
                       </label>
                     </div>
 
@@ -766,7 +841,7 @@ export function InstitutionalOnboardingFlow() {
         )}
 
         {/* =================================================================================== */}
-        {/* STEP 3: ADD-ON SERVICES (Checkboxes with Prices) */}
+        {/* STEP 3: ADD-ON SERVICES (Pricing aligned with Idea Summary) */}
         {/* =================================================================================== */}
         {currentStep === 3 && (
           <div className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
@@ -778,17 +853,33 @@ export function InstitutionalOnboardingFlow() {
                 Select Add-on Institutional Services
               </h2>
               <p className="text-xs sm:text-sm text-slate-600 font-normal">
-                Tick the additional digital outreach services you want to bundle with your institutional workspace.
+                Bundle SEO, Google Search Console, live GPS map location pin, or a dedicated white-label mobile app.
               </p>
             </div>
+
+            {/* Bundle Note for Basic & Essential */}
+            {!isPro && (
+              <div className="p-3.5 bg-emerald-50 rounded-2xl border border-emerald-200 flex items-center justify-between gap-3 text-xs">
+                <span className="text-emerald-950 font-medium">
+                  💡 <strong>Google Presence Bundle:</strong> Select both Google Submit (₹1,000) and Google Maps (₹500) to get the complete bundle for just <strong>₹1,200</strong> (Save ₹300).
+                </span>
+              </div>
+            )}
+
+            {isPro && (
+              <div className="p-3.5 bg-emerald-100/70 rounded-2xl border border-emerald-300 flex items-center gap-2 text-xs text-emerald-950 font-bold">
+                <Sparkles className="w-4 h-4 text-[#163A2B]" />
+                <span>Executive Pro Advantage: Google Search Console Submit and Google Maps Pin are 100% FREE & Included!</span>
+              </div>
+            )}
 
             <div className="space-y-4">
               
               {/* Addon 1: Google Search Console Submit */}
               <div
-                onClick={() => setAddonGoogleSubmit(!addonGoogleSubmit)}
+                onClick={() => !isPro && setAddonGoogleSubmit(!addonGoogleSubmit)}
                 className={`p-6 rounded-3xl border-2 transition-all cursor-pointer bg-white ${
-                  addonGoogleSubmit
+                  isPro || addonGoogleSubmit
                     ? 'border-[#163A2B] ring-4 ring-emerald-600/10 shadow-lg bg-emerald-50/20'
                     : 'border-slate-200 hover:border-slate-300 shadow-sm'
                 }`}
@@ -796,7 +887,7 @@ export function InstitutionalOnboardingFlow() {
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3.5">
                     <div className="mt-1">
-                      {addonGoogleSubmit ? (
+                      {isPro || addonGoogleSubmit ? (
                         <CheckSquare className="w-6 h-6 text-[#163A2B]" />
                       ) : (
                         <Square className="w-6 h-6 text-slate-400" />
@@ -805,17 +896,21 @@ export function InstitutionalOnboardingFlow() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Search className="w-5 h-5 text-[#163A2B]" />
-                        <h4 className="font-extrabold text-base text-slate-900">Google Search Console & SEO Submission</h4>
+                        <h4 className="font-extrabold text-base text-slate-900">Google Search Console & Sitemap Submission</h4>
                       </div>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed font-normal">
-                        Full XML sitemap generation, Google Search indexing submission, and Bing/IndexNow pinging so parents find your school instantly on Google.
+                        Domain ownership verification, XML sitemap indexing submission, and homepage indexing request so parents discover your school on Google Search.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-black text-lg text-[#163A2B]">+₹999</span>
-                    <span className="text-[10px] text-slate-500 font-bold block">One-time setup</span>
+                    <span className="font-black text-lg text-[#163A2B]">
+                      {isPro ? 'FREE' : '+₹1,000'}
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-bold block">
+                      {isPro ? 'Included in Pro' : 'One-time setup'}
+                    </span>
                   </div>
                 </div>
               </div>
@@ -823,18 +918,18 @@ export function InstitutionalOnboardingFlow() {
               {/* Addon 2: Google Maps Location Verification */}
               <div
                 className={`p-6 rounded-3xl border-2 transition-all bg-white ${
-                  addonGoogleMaps
+                  isPro || addonGoogleMaps
                     ? 'border-[#163A2B] ring-4 ring-emerald-600/10 shadow-lg bg-emerald-50/20'
                     : 'border-slate-200 hover:border-slate-300 shadow-sm'
                 }`}
               >
                 <div
                   className="flex items-start justify-between gap-4 cursor-pointer"
-                  onClick={() => setAddonGoogleMaps(!addonGoogleMaps)}
+                  onClick={() => !isPro && setAddonGoogleMaps(!addonGoogleMaps)}
                 >
                   <div className="flex items-start gap-3.5">
                     <div className="mt-1">
-                      {addonGoogleMaps ? (
+                      {isPro || addonGoogleMaps ? (
                         <CheckSquare className="w-6 h-6 text-[#163A2B]" />
                       ) : (
                         <Square className="w-6 h-6 text-slate-400" />
@@ -843,21 +938,25 @@ export function InstitutionalOnboardingFlow() {
                     <div>
                       <div className="flex items-center gap-2">
                         <MapPin className="w-5 h-5 text-amber-700" />
-                        <h4 className="font-extrabold text-base text-slate-900">Google Maps Institutional Location Pin</h4>
+                        <h4 className="font-extrabold text-base text-slate-900">Google Maps Location Pin & Claim</h4>
                       </div>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed font-normal">
-                        Embedding live Google Maps GPS location on your school website so visiting parents and bus drivers navigate easily.
+                        Institutional location registration, GPS coordinates pin, campus contact details, photo uploads, and live map embed on school website.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-black text-lg text-[#163A2B]">+₹499</span>
-                    <span className="text-[10px] text-slate-500 font-bold block">One-time setup</span>
+                    <span className="font-black text-lg text-[#163A2B]">
+                      {isPro ? 'FREE' : '+₹500'}
+                    </span>
+                    <span className="text-[10px] text-slate-500 font-bold block">
+                      {isPro ? 'Included in Pro' : 'One-time setup'}
+                    </span>
                   </div>
                 </div>
 
-                {addonGoogleMaps && (
+                {(isPro || addonGoogleMaps) && (
                   <div className="mt-4 pt-4 border-t border-slate-100 space-y-3">
                     <div className="flex items-center gap-2">
                       <input
@@ -907,17 +1006,17 @@ export function InstitutionalOnboardingFlow() {
                     <div>
                       <div className="flex items-center gap-2">
                         <Smartphone className="w-5 h-5 text-purple-700" />
-                        <h4 className="font-extrabold text-base text-slate-900">Google Play Store Android App Publishing</h4>
+                        <h4 className="font-extrabold text-base text-slate-900">White-Label Custom Android App on Google Play Store</h4>
                       </div>
                       <p className="text-xs text-slate-600 mt-1 leading-relaxed font-normal">
-                        Dedicated branded Android APK compiled, signed, and uploaded to Google Play Store under institutional developer account.
+                        Dedicated standalone APK branded under your school name and logo on Google Play Store. (Shared EduPortal app & PWA is already included free in Essential and Pro).
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-black text-lg text-purple-700">+₹5,000</span>
-                    <span className="text-[10px] text-slate-500 font-bold block">Publishing fee</span>
+                    <span className="font-black text-lg text-purple-700">+₹8,000</span>
+                    <span className="text-[10px] text-slate-500 font-bold block">One-time setup</span>
                   </div>
                 </div>
 
@@ -926,10 +1025,10 @@ export function InstitutionalOnboardingFlow() {
                     <div className="p-4 rounded-2xl bg-purple-50 border border-purple-200 space-y-1.5 text-xs">
                       <span className="font-extrabold text-purple-950 flex items-center gap-2">
                         <Clock className="w-4 h-4 text-purple-700" />
-                        <span>Crucial Timeline Note: 30 – 50 Days Required</span>
+                        <span>Timeline & Regulatory Requirements: 30 – 50 Days</span>
                       </span>
                       <p className="text-[11px] text-purple-900 leading-relaxed font-normal">
-                        Google Play Console mandates a strict 14-day closed testing period with 12 opted-in testers and D-U-N-S business organization verification before an institutional app is approved for public store download.
+                        Google Play Console mandates organization D-U-N-S verification and a strict 14-day closed testing period with 12 opted-in testers before public approval.
                       </p>
                     </div>
                   </div>
@@ -1093,7 +1192,7 @@ export function InstitutionalOnboardingFlow() {
         )}
 
         {/* =================================================================================== */}
-        {/* STEP 5: SUMMARY & PAYMENT SUBMISSION (QR Code, UTR & Screenshot) */}
+        {/* STEP 5: SUMMARY & PAYMENT SUBMISSION (Dynamic Itemized Invoice) */}
         {/* =================================================================================== */}
         {currentStep === 5 && (
           <form onSubmit={handleSubmitOrder} className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
@@ -1130,10 +1229,14 @@ export function InstitutionalOnboardingFlow() {
                     <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
                       <div>
                         <span className="font-medium text-slate-700">
-                          {domainType === 'subdomain' ? 'Institutional Subdomain' : `Domain: ${customDomainName}${customDomainExt}`}
+                          {domainType === 'subdomain'
+                            ? 'Institutional Subdomain (*.eduportal.in)'
+                            : domainType === 'own_domain'
+                            ? `Own Domain Connect (${ownDomainName})`
+                            : `Domain Registration (${customDomainName}${customDomainExt})`}
                         </span>
                         <span className="text-[10px] text-slate-500 block">
-                          {domainType === 'subdomain' ? 'Included Free' : '1 Year Registration & DNS'}
+                          {domainType === 'custom_domain' ? (isPro ? 'Pro Special Discount Rate' : '1 Year Registration & DNS Setup') : 'Included Free (₹0)'}
                         </span>
                       </div>
                       <span className="font-bold text-slate-900 text-sm">
@@ -1141,24 +1244,35 @@ export function InstitutionalOnboardingFlow() {
                       </span>
                     </div>
 
-                    {addonGoogleSubmit && (
+                    {(isPro || addonGoogleSubmit || addonGoogleMaps) && (
                       <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                        <span className="text-slate-700 font-medium">Google Search Console Submission</span>
-                        <span className="font-bold text-[#163A2B] text-sm">+₹999</span>
-                      </div>
-                    )}
-
-                    {addonGoogleMaps && (
-                      <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                        <span className="text-slate-700 font-medium">Google Maps GPS Location Pin</span>
-                        <span className="font-bold text-[#163A2B] text-sm">+₹499</span>
+                        <div>
+                          <span className="text-slate-700 font-medium">
+                            {isPro
+                              ? 'Google Submit & Maps Pin'
+                              : addonGoogleSubmit && addonGoogleMaps
+                              ? 'Google Presence Bundle (Submit + Maps)'
+                              : addonGoogleSubmit
+                              ? 'Google Search Console Submit'
+                              : 'Google Maps Location Pin'}
+                          </span>
+                          <span className="text-[10px] text-emerald-700 block">
+                            {isPro ? 'Included Free in Pro Plan' : addonGoogleSubmit && addonGoogleMaps ? 'Bundle Discount Applied' : 'Outreach Setup'}
+                          </span>
+                        </div>
+                        <span className="font-bold text-[#163A2B] text-sm">
+                          {isPro ? '₹0 (Free)' : `+₹${googleServicesPrice.toLocaleString('en-IN')}`}
+                        </span>
                       </div>
                     )}
 
                     {addonPlayStore && (
                       <div className="flex justify-between items-center py-1.5 border-b border-slate-100">
-                        <span className="text-slate-700 font-medium">Google Play Store App Publishing</span>
-                        <span className="font-bold text-purple-700 text-sm">+₹5,000</span>
+                        <div>
+                          <span className="text-slate-700 font-medium">White-Label Play Store Android App</span>
+                          <span className="text-[10px] text-purple-700 block">Dedicated APK Publishing</span>
+                        </div>
+                        <span className="font-bold text-purple-700 text-sm">+₹8,000</span>
                       </div>
                     )}
                   </div>
