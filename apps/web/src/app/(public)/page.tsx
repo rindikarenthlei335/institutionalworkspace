@@ -83,6 +83,108 @@ export default function PublicHomePage() {
           ))}
         </div>
       </section>
+
+      {/* SaaS Portals & Feature Hub Section */}
+      <section className="max-w-7xl mx-auto px-4 pt-4 border-t border-[var(--border-default)]">
+        <div className="text-center max-w-3xl mx-auto mb-10 space-y-2">
+          <span className="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-300 uppercase tracking-wider">
+            ⚡ Platform Portals & Features
+          </span>
+          <h2 className="font-display font-bold text-3xl text-[var(--text-primary)]">
+            Explore All Management Portals & Modules
+          </h2>
+          <p className="text-xs text-[var(--text-secondary)]">
+            Click into any institutional portal below to test the full live SaaS platform.
+          </p>
+        </div>
+
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {[
+            {
+              title: 'School Admin Panel',
+              badge: 'ADMIN',
+              color: 'bg-emerald-50 border-emerald-200 text-emerald-800',
+              href: '/admin/dashboard',
+              desc: 'Full administrative control for students, staff, classes, website content, and fees.'
+            },
+            {
+              title: 'Principal Cockpit (10 KPIs)',
+              badge: 'LEADERSHIP',
+              color: 'bg-amber-50 border-amber-200 text-amber-800',
+              href: '/admin/principal',
+              desc: 'Executive dashboard with 10 real-time KPIs, revenue velocity, fee health, and staff attendance.'
+            },
+            {
+              title: 'AI Copilot Studio',
+              badge: 'AI ULTIMATE',
+              color: 'bg-purple-50 border-purple-200 text-purple-800',
+              href: '/admin/copilot',
+              desc: 'Bilingual AI assistant with 4 specialized modes, safe draft confirmation, and 3,000 quota.'
+            },
+            {
+              title: 'SaaS Tier Plans & Pricing',
+              badge: 'SAAS TIERS',
+              color: 'bg-blue-50 border-blue-200 text-blue-800',
+              href: '/platform/plans',
+              desc: 'Starter, Growth, Ultimate, and Enterprise tiers with live feature gating & module comparison.'
+            },
+            {
+              title: 'Super Admin & Multi-Tenancy',
+              badge: 'PLATFORM',
+              color: 'bg-indigo-50 border-indigo-200 text-indigo-800',
+              href: '/platform/tenants',
+              desc: 'Super administrator platform to manage schools, domains, subscriptions, and billing.'
+            },
+            {
+              title: 'Data Hub & Bulk Import',
+              badge: 'DATA HUB',
+              color: 'bg-teal-50 border-teal-200 text-teal-800',
+              href: '/admin/data-hub',
+              desc: 'High-speed CSV/Excel importer for students, staff, grades, and attendance with live validation.'
+            },
+            {
+              title: 'Exams & Marksheets Generator',
+              badge: 'ACADEMICS',
+              color: 'bg-rose-50 border-rose-200 text-rose-800',
+              href: '/admin/exams',
+              desc: 'Exam scheduling, subject-wise marks entry, and official verifiable digital marksheet generator.'
+            },
+            {
+              title: 'PVC ID Card Generator',
+              badge: 'STUDIO',
+              color: 'bg-cyan-50 border-cyan-200 text-cyan-800',
+              href: '/admin/id-cards',
+              desc: 'High-resolution PVC ID card studio with photo uploads, QR codes, and batch printing.'
+            },
+            {
+              title: 'Student & Parent Portal',
+              badge: 'PORTAL',
+              color: 'bg-slate-50 border-slate-200 text-slate-800',
+              href: '/portal/dashboard',
+              desc: 'Dedicated student portal for live report cards, digital ID card, fee receipts, and school notices.'
+            }
+          ].map((portal, i) => (
+            <Link key={i} href={portal.href} className="group block">
+              <Card className="h-full hover:shadow-lg hover:border-emerald-500 transition-all border border-slate-200">
+                <div className="flex items-center justify-between mb-3">
+                  <span className={`text-[10px] font-black uppercase tracking-wider px-2 py-0.5 rounded border ${portal.color}`}>
+                    {portal.badge}
+                  </span>
+                  <span className="text-xs text-slate-400 group-hover:text-emerald-600 transition-colors">
+                    Open Portal →
+                  </span>
+                </div>
+                <h3 className="font-display font-bold text-base text-[var(--text-primary)] group-hover:text-emerald-700 transition-colors mb-1.5">
+                  {portal.title}
+                </h3>
+                <p className="text-xs text-[var(--text-secondary)] leading-relaxed">
+                  {portal.desc}
+                </p>
+              </Card>
+            </Link>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
