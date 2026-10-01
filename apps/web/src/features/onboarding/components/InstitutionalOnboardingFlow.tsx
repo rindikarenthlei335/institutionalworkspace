@@ -352,20 +352,20 @@ export function InstitutionalOnboardingFlow() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white pb-24">
+    <div className="min-h-screen bg-[#F8FAF9] text-slate-900 pb-24">
       
-      {/* Onboarding Header Banner */}
-      <div className="bg-gradient-to-r from-emerald-950 via-slate-900 to-[#0F2A1F] border-b border-emerald-900/40 py-8 px-4">
+      {/* Onboarding Header Banner (Forest Green #163A2B) */}
+      <div className="bg-[#163A2B] text-white border-b border-[#0F2A1F] py-8 px-4 shadow-sm">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
-          <div className="space-y-1 text-center md:text-left">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs font-semibold">
-              <Sparkles className="w-3.5 h-3.5" />
+          <div className="space-y-1.5 text-center md:text-left">
+            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 border border-white/20 text-emerald-200 text-xs font-semibold">
+              <Sparkles className="w-3.5 h-3.5 text-emerald-300" />
               <span>EduPortal Multi-Tenant SaaS · Automated Institutional Provisioning</span>
             </div>
-            <h1 className="font-display font-black text-2xl sm:text-3xl text-white">
+            <h1 className="font-display font-black text-2xl sm:text-3xl text-white tracking-tight">
               Setup & Launch Your School Digital Workspace
             </h1>
-            <p className="text-xs sm:text-sm text-slate-400">
+            <p className="text-xs sm:text-sm text-emerald-100/80">
               Select your plan tier, configure domain, choose modules & theme, and submit for instant activation.
             </p>
           </div>
@@ -377,8 +377,8 @@ export function InstitutionalOnboardingFlow() {
               </Button>
             </Link>
             <Link href="/platform/tenants">
-              <Button variant="secondary" size="sm" className="bg-indigo-950/60 hover:bg-indigo-900/80 text-indigo-200 border-indigo-700/50 text-xs flex items-center gap-1.5">
-                <ShieldCheck className="w-3.5 h-3.5 text-indigo-400" />
+              <Button variant="secondary" size="sm" className="bg-emerald-950/80 hover:bg-emerald-900 text-emerald-200 border border-emerald-700/50 text-xs flex items-center gap-1.5">
+                <ShieldCheck className="w-3.5 h-3.5 text-emerald-300" />
                 <span>Super Admin Desk</span>
               </Button>
             </Link>
@@ -386,8 +386,8 @@ export function InstitutionalOnboardingFlow() {
         </div>
       </div>
 
-      {/* Interactive Step Navigator */}
-      <div className="bg-slate-900/90 border-b border-slate-800 sticky top-0 z-30 backdrop-blur-md px-4 py-3">
+      {/* Interactive Step Navigator (Crisp White Bar with Forest Green Accents) */}
+      <div className="bg-white border-b border-slate-200 sticky top-0 z-30 shadow-xs px-4 py-3">
         <div className="max-w-6xl mx-auto flex items-center justify-between overflow-x-auto scrollbar-none gap-2 text-xs">
           {[
             { num: 1, label: '1. Plan & Modules' },
@@ -403,14 +403,14 @@ export function InstitutionalOnboardingFlow() {
               onClick={() => s.num <= currentStep && setCurrentStep(s.num)}
               className={`px-3 py-1.5 rounded-full font-semibold shrink-0 transition-all flex items-center gap-1.5 cursor-pointer ${
                 currentStep === s.num
-                  ? 'bg-emerald-500 text-slate-950 shadow-md font-bold'
+                  ? 'bg-[#163A2B] text-white shadow-sm font-bold'
                   : currentStep > s.num
-                  ? 'bg-emerald-950/60 text-emerald-300 border border-emerald-700/50'
-                  : 'bg-slate-800 text-slate-400 opacity-60 cursor-not-allowed'
+                  ? 'bg-emerald-50 text-[#163A2B] border border-emerald-200 font-semibold hover:bg-emerald-100/60'
+                  : 'bg-slate-100 text-slate-400 opacity-70 cursor-not-allowed'
               }`}
             >
               <span>{s.label}</span>
-              {currentStep > s.num && <Check className="w-3.5 h-3.5 text-emerald-400" />}
+              {currentStep > s.num && <Check className="w-3.5 h-3.5 text-[#163A2B]" />}
             </button>
           ))}
         </div>
@@ -424,21 +424,23 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 1 && (
           <div className="space-y-8 animate-in fade-in">
             <div className="text-center max-w-2xl mx-auto space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">Step 1 of 5</span>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#163A2B] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-block">
+                Step 1 of 5
+              </span>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900">
                 Choose Institutional Plan Tier
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600">
                 All institutional core modules are pre-enabled and pre-ticked. Select the tier that matches your school size.
               </p>
 
               {/* Billing Cycle Toggle */}
-              <div className="inline-flex items-center p-1 rounded-xl bg-slate-900 border border-slate-800 mt-3">
+              <div className="inline-flex items-center p-1 rounded-xl bg-slate-100 border border-slate-200 mt-3">
                 <button
                   type="button"
                   onClick={() => setBillingCycle('monthly')}
                   className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
-                    billingCycle === 'monthly' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'
+                    billingCycle === 'monthly' ? 'bg-[#163A2B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   Monthly Billing
@@ -447,7 +449,7 @@ export function InstitutionalOnboardingFlow() {
                   type="button"
                   onClick={() => setBillingCycle('yearly')}
                   className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all flex items-center gap-1 cursor-pointer ${
-                    billingCycle === 'yearly' ? 'bg-emerald-600 text-white shadow-sm' : 'text-slate-400 hover:text-white'
+                    billingCycle === 'yearly' ? 'bg-[#163A2B] text-white shadow-sm' : 'text-slate-600 hover:text-slate-900'
                   }`}
                 >
                   <span>Yearly (Save 17%)</span>
@@ -469,56 +471,58 @@ export function InstitutionalOnboardingFlow() {
                     onClick={() => setSelectedPlan(tierKey)}
                     className={`rounded-2xl border p-5 flex flex-col justify-between transition-all duration-200 cursor-pointer relative ${
                       isSelected
-                        ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/40 shadow-xl shadow-emerald-950/50'
-                        : 'bg-slate-900/60 border-slate-800 hover:border-slate-700 hover:bg-slate-900/90'
+                        ? 'bg-emerald-50/40 border-[#163A2B] ring-2 ring-[#163A2B] shadow-lg'
+                        : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
                     }`}
                   >
                     {tier.badge && (
-                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-emerald-500 text-slate-950 shadow-md">
+                      <span className="absolute -top-3 left-1/2 -translate-x-1/2 text-[10px] font-black uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-[#163A2B] text-white shadow-sm">
                         {tier.badge}
                       </span>
                     )}
 
                     <div className="space-y-4">
-                      <div className="border-b border-slate-800 pb-4">
-                        <span className="text-xs font-mono font-bold text-emerald-400 tracking-wider">
+                      <div className="border-b border-slate-100 pb-4">
+                        <span className="text-xs font-mono font-bold text-[#163A2B] tracking-wider uppercase">
                           {tier.name}
                         </span>
                         <div className="mt-1 flex items-baseline gap-1">
-                          <span className="text-3xl font-display font-black text-white">
+                          <span className="text-3xl font-display font-black text-slate-900">
                             ₹{price.toLocaleString('en-IN')}
                           </span>
-                          <span className="text-xs text-slate-400">
+                          <span className="text-xs text-slate-500">
                             /{billingCycle === 'monthly' ? 'mo' : 'yr'}
                           </span>
                         </div>
-                        <p className="text-[11px] text-slate-400 mt-1 leading-relaxed">
+                        <p className="text-[11px] text-slate-600 mt-1 leading-relaxed">
                           {tier.tagline}
                         </p>
                       </div>
 
                       {/* Pre-ticked Modules List */}
                       <div className="space-y-2">
-                        <span className="text-[10px] uppercase font-bold text-slate-400 tracking-wider block">
+                        <span className="text-[10px] uppercase font-bold text-slate-500 tracking-wider block">
                           Included & Pre-Enabled Modules:
                         </span>
                         <ul className="space-y-2 text-xs">
                           {tier.modules.map((mod, i) => (
                             <li key={i} className="flex items-start gap-2">
-                              <CheckSquare className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
-                              <span className="text-slate-300 leading-snug">{mod}</span>
+                              <CheckSquare className="w-4 h-4 text-[#163A2B] shrink-0 mt-0.5" />
+                              <span className="text-slate-700 leading-snug">{mod}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     </div>
 
-                    <div className="pt-5 mt-4 border-t border-slate-800">
+                    <div className="pt-5 mt-4 border-t border-slate-100">
                       <Button
                         type="button"
                         variant={isSelected ? 'primary' : 'secondary'}
                         className={`w-full text-xs font-bold py-2 ${
-                          isSelected ? 'bg-emerald-500 hover:bg-emerald-600 text-slate-950' : 'bg-slate-800 text-white hover:bg-slate-700'
+                          isSelected
+                            ? 'bg-[#163A2B] hover:bg-[#0F2A1F] text-white'
+                            : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
                         }`}
                       >
                         {isSelected ? '✓ Selected This Plan' : 'Select Plan'}
@@ -530,13 +534,13 @@ export function InstitutionalOnboardingFlow() {
             </div>
 
             {/* Bottom Next Step Bar */}
-            <div className="p-4 rounded-2xl bg-slate-900 border border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+            <div className="p-4 rounded-2xl bg-white border border-slate-200 shadow-sm flex flex-col sm:flex-row items-center justify-between gap-4">
               <div>
-                <span className="text-xs text-slate-400">Selected Tier:</span>
-                <span className="text-sm font-bold text-white uppercase ml-2">
+                <span className="text-xs text-slate-500">Selected Tier:</span>
+                <span className="text-sm font-bold text-[#163A2B] uppercase ml-2">
                   {PLANS_CONFIG[selectedPlan].name} (₹{planPrice.toLocaleString('en-IN')}/{billingCycle === 'monthly' ? 'mo' : 'yr'})
                 </span>
-                <p className="text-[11px] text-emerald-400 mt-0.5">
+                <p className="text-[11px] text-emerald-700 font-medium mt-0.5">
                   ✓ All {PLANS_CONFIG[selectedPlan].modules.length} modules pre-ticked and ready for provisioning.
                 </p>
               </div>
@@ -545,7 +549,7 @@ export function InstitutionalOnboardingFlow() {
                 type="button"
                 variant="primary"
                 onClick={() => setCurrentStep(2)}
-                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer"
+                className="bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Select This Plan & Continue to Domain Setup</span>
                 <ArrowRight className="w-4 h-4" />
@@ -560,27 +564,29 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 2 && (
           <div className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
             <div className="text-center space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">Step 2 of 5</span>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#163A2B] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-block">
+                Step 2 of 5
+              </span>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900">
                 School Name & Domain Configuration
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Choose between a free instant institutional subdomain or register a custom official domain (.edu.in, .com, .in).
               </p>
             </div>
 
             {/* School Name Input */}
-            <Card className="p-5 bg-slate-900 border-slate-800 space-y-3">
-              <label className="block text-xs font-bold text-white uppercase tracking-wider">
+            <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-3">
+              <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
                 Full Official School Name
               </label>
               <Input
                 value={schoolName}
                 onChange={(e) => setSchoolName(e.target.value)}
                 placeholder="e.g. Mount Carmel Higher Secondary School"
-                className="bg-slate-950 border-slate-700 text-white font-semibold text-sm"
+                className="bg-slate-50 border-slate-300 text-slate-900 font-semibold text-sm focus:bg-white focus:border-[#163A2B]"
               />
-              <span className="text-[11px] text-slate-400 block">
+              <span className="text-[11px] text-slate-500 block">
                 This official name will be configured on your website header, report cards, ID cards, and receipts.
               </span>
             </Card>
@@ -591,21 +597,21 @@ export function InstitutionalOnboardingFlow() {
                 onClick={() => setDomainType('subdomain')}
                 className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                   domainType === 'subdomain'
-                    ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/30'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-emerald-50/40 border-[#163A2B] ring-2 ring-[#163A2B]/40 shadow-sm'
+                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider">Option A</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-300">
+                  <span className="text-xs font-bold text-[#163A2B] uppercase tracking-wider">Option A</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-100 text-[#163A2B]">
                     Included Free (₹0)
                   </span>
                 </div>
-                <h4 className="font-bold text-base text-white mt-1">Instant Institutional Subdomain</h4>
-                <p className="text-xs text-slate-400 mt-1">
+                <h4 className="font-bold text-base text-slate-900 mt-1">Instant Institutional Subdomain</h4>
+                <p className="text-xs text-slate-600 mt-1">
                   Active instantly with zero setup time. Perfect for launching right away.
                 </p>
-                <div className="mt-3 text-xs font-mono text-emerald-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                <div className="mt-3 text-xs font-mono text-[#163A2B] font-bold bg-white p-2.5 rounded-lg border border-slate-200">
                   https://{subdomain || 'schoolname'}.eduportal.in
                 </div>
               </div>
@@ -614,21 +620,21 @@ export function InstitutionalOnboardingFlow() {
                 onClick={() => setDomainType('custom_domain')}
                 className={`p-5 rounded-2xl border cursor-pointer transition-all ${
                   domainType === 'custom_domain'
-                    ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/30'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-emerald-50/40 border-[#163A2B] ring-2 ring-[#163A2B]/40 shadow-sm'
+                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
                 }`}
               >
                 <div className="flex items-center justify-between">
-                  <span className="text-xs font-bold text-amber-400 uppercase tracking-wider">Option B</span>
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-500/20 text-amber-300">
+                  <span className="text-xs font-bold text-amber-700 uppercase tracking-wider">Option B</span>
+                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-amber-100 text-amber-800">
                     Official Domain Service
                   </span>
                 </div>
-                <h4 className="font-bold text-base text-white mt-1">Register Custom Domain</h4>
-                <p className="text-xs text-slate-400 mt-1">
+                <h4 className="font-bold text-base text-slate-900 mt-1">Register Custom Domain</h4>
+                <p className="text-xs text-slate-600 mt-1">
                   Buy official institutional domain (.edu.in, .ac.in, .com, .in) with DNS provisioning.
                 </p>
-                <div className="mt-3 text-xs font-mono text-amber-300 bg-slate-950 p-2.5 rounded-lg border border-slate-800">
+                <div className="mt-3 text-xs font-mono text-amber-700 font-bold bg-white p-2.5 rounded-lg border border-slate-200">
                   https://www.{customDomainName || 'schoolname'}{customDomainExt}
                 </div>
               </div>
@@ -636,19 +642,19 @@ export function InstitutionalOnboardingFlow() {
 
             {/* Details for Option A: Subdomain */}
             {domainType === 'subdomain' && (
-              <Card className="p-5 bg-slate-900 border-slate-800 space-y-3">
-                <label className="block text-xs font-bold text-white">Choose Your Subdomain Slug</label>
+              <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-3">
+                <label className="block text-xs font-bold text-slate-900">Choose Your Subdomain Slug</label>
                 <div className="flex items-center gap-2">
-                  <span className="text-xs text-slate-400">https://</span>
+                  <span className="text-xs text-slate-500 font-mono">https://</span>
                   <Input
                     value={subdomain}
                     onChange={(e) => setSubdomain(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
                     placeholder="mountcarmel"
-                    className="bg-slate-950 border-slate-700 text-emerald-400 font-mono font-bold text-sm"
+                    className="bg-slate-50 border-slate-300 text-[#163A2B] font-mono font-bold text-sm focus:bg-white focus:border-[#163A2B]"
                   />
-                  <span className="text-xs text-slate-400 shrink-0">.eduportal.in</span>
+                  <span className="text-xs text-slate-500 shrink-0 font-mono">.eduportal.in</span>
                 </div>
-                <span className="text-[11px] text-emerald-400 font-semibold block">
+                <span className="text-[11px] text-emerald-700 font-semibold block">
                   ✓ Instant SSL Certificate, CDN routing & DDoS protection included free.
                 </span>
               </Card>
@@ -657,8 +663,8 @@ export function InstitutionalOnboardingFlow() {
             {/* Details for Option B: Domain Registration Service */}
             {domainType === 'custom_domain' && (
               <div className="space-y-6">
-                <Card className="p-5 bg-slate-900 border-slate-800 space-y-4">
-                  <label className="block text-xs font-bold text-white uppercase tracking-wider">
+                <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-4">
+                  <label className="block text-xs font-bold text-slate-900 uppercase tracking-wider">
                     Select Domain Extension & Pricing
                   </label>
                   <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -668,62 +674,62 @@ export function InstitutionalOnboardingFlow() {
                         onClick={() => setCustomDomainExt(d.ext)}
                         className={`p-3.5 rounded-xl border cursor-pointer transition-all ${
                           customDomainExt === d.ext
-                            ? 'bg-slate-950 border-emerald-500 ring-1 ring-emerald-500'
-                            : 'bg-slate-950/60 border-slate-800 hover:border-slate-700'
+                            ? 'bg-emerald-50/50 border-[#163A2B] ring-1 ring-[#163A2B]'
+                            : 'bg-slate-50 border-slate-200 hover:border-slate-300'
                         }`}
                       >
                         <div className="flex items-center justify-between">
-                          <span className="font-mono font-bold text-base text-white">{d.ext}</span>
-                          <span className="font-bold text-xs text-emerald-400">₹{d.price}/yr</span>
+                          <span className="font-mono font-bold text-base text-slate-900">{d.ext}</span>
+                          <span className="font-bold text-xs text-[#163A2B]">₹{d.price}/yr</span>
                         </div>
-                        <span className="text-[11px] font-semibold text-slate-300 block mt-1">{d.name}</span>
-                        <p className="text-[10px] text-slate-400 mt-1 leading-relaxed">{d.rules}</p>
+                        <span className="text-[11px] font-semibold text-slate-700 block mt-1">{d.name}</span>
+                        <p className="text-[10px] text-slate-500 mt-1 leading-relaxed">{d.rules}</p>
                       </div>
                     ))}
                   </div>
 
-                  <div className="pt-3 border-t border-slate-800 space-y-2">
-                    <label className="block text-xs font-bold text-white">Desired Domain Name</label>
+                  <div className="pt-3 border-t border-slate-100 space-y-2">
+                    <label className="block text-xs font-bold text-slate-900">Desired Domain Name</label>
                     <div className="flex items-center gap-2">
-                      <span className="text-xs text-slate-400 font-mono">www.</span>
+                      <span className="text-xs text-slate-500 font-mono">www.</span>
                       <Input
                         value={customDomainName}
                         onChange={(e) => setCustomDomainName(e.target.value.toLowerCase().replace(/[^a-z0-9-]/g, ''))}
                         placeholder="mountcarmelaizawl"
-                        className="bg-slate-950 border-slate-700 text-white font-mono text-sm"
+                        className="bg-slate-50 border-slate-300 text-slate-900 font-mono text-sm focus:bg-white focus:border-[#163A2B]"
                       />
-                      <span className="text-xs font-mono font-bold text-amber-300 shrink-0">{customDomainExt}</span>
+                      <span className="text-xs font-mono font-bold text-amber-700 shrink-0">{customDomainExt}</span>
                     </div>
                   </div>
                 </Card>
 
                 {/* 5 Required Documents for Educational Domains (.edu.in / .ac.in) */}
                 {selectedDomainOption?.requiresDocs && (
-                  <Card className="p-5 bg-slate-900 border-amber-600/40 space-y-4">
+                  <Card className="p-5 bg-amber-50/50 border-amber-200 shadow-sm space-y-4">
                     <div className="flex items-start gap-3">
-                      <div className="p-2 rounded-lg bg-amber-500/20 text-amber-400 shrink-0">
+                      <div className="p-2 rounded-lg bg-amber-100 text-amber-700 shrink-0">
                         <FileText className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="font-bold text-sm text-white">
+                        <h4 className="font-bold text-sm text-slate-900">
                           5 Required Documents for Official Educational Domain ({customDomainExt})
                         </h4>
-                        <p className="text-xs text-slate-400 mt-0.5">
+                        <p className="text-xs text-slate-600 mt-0.5">
                           ERNET India regulations require verification of institutional accreditation and authorization.
                         </p>
                       </div>
                     </div>
 
                     {/* Upload Later Checkbox */}
-                    <div className="p-3 bg-amber-950/30 rounded-xl border border-amber-500/30 flex items-center gap-3">
+                    <div className="p-3 bg-amber-100/70 rounded-xl border border-amber-300 flex items-center gap-3">
                       <input
                         type="checkbox"
                         id="uploadLater"
                         checked={uploadDocsLater}
                         onChange={(e) => setUploadDocsLater(e.target.checked)}
-                        className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                        className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                       />
-                      <label htmlFor="uploadLater" className="text-xs text-amber-200 cursor-pointer font-medium">
+                      <label htmlFor="uploadLater" className="text-xs text-amber-900 cursor-pointer font-medium">
                         Upload documents later after payment confirmation (Recommended - Pay first, submit documents within 7 days)
                       </label>
                     </div>
@@ -737,11 +743,11 @@ export function InstitutionalOnboardingFlow() {
                           { key: 'doc4', title: '4. Authority Authorization Letter on School Letterhead with Stamp' },
                           { key: 'doc5', title: '5. Campus Address Proof (Electricity Bill / Land Allotment Deed)' }
                         ].map((doc) => (
-                          <div key={doc.key} className="p-3 bg-slate-950 rounded-xl border border-slate-800 flex items-center justify-between gap-3 text-xs">
-                            <span className="font-medium text-slate-300">{doc.title}</span>
+                          <div key={doc.key} className="p-3 bg-white rounded-xl border border-slate-200 flex items-center justify-between gap-3 text-xs">
+                            <span className="font-medium text-slate-800">{doc.title}</span>
                             <div className="shrink-0 flex items-center gap-2">
                               {uploadedDocs[doc.key] ? (
-                                <span className="text-[11px] text-emerald-400 font-semibold flex items-center gap-1">
+                                <span className="text-[11px] text-[#163A2B] font-semibold flex items-center gap-1">
                                   <Check className="w-3.5 h-3.5" />
                                   <span>{uploadedDocs[doc.key]}</span>
                                 </span>
@@ -749,9 +755,9 @@ export function InstitutionalOnboardingFlow() {
                                 <button
                                   type="button"
                                   onClick={() => handleDocUpload(doc.key, 'uploaded-doc.pdf')}
-                                  className="px-2.5 py-1 rounded bg-slate-800 hover:bg-slate-700 text-white font-semibold text-[11px] flex items-center gap-1 cursor-pointer"
+                                  className="px-2.5 py-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 font-semibold text-[11px] flex items-center gap-1 cursor-pointer border border-slate-200"
                                 >
-                                  <Upload className="w-3 h-3 text-slate-400" />
+                                  <Upload className="w-3 h-3 text-slate-500" />
                                   <span>Upload PDF</span>
                                 </button>
                               )}
@@ -766,12 +772,12 @@ export function InstitutionalOnboardingFlow() {
             )}
 
             {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+            <div className="flex items-center justify-between pt-4 border-t border-slate-200">
               <Button
                 type="button"
                 variant="secondary"
                 onClick={() => setCurrentStep(1)}
-                className="bg-slate-800 text-white hover:bg-slate-700 text-xs flex items-center gap-1.5"
+                className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs flex items-center gap-1.5 shadow-xs"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Plans</span>
@@ -781,7 +787,7 @@ export function InstitutionalOnboardingFlow() {
                 type="button"
                 variant="primary"
                 onClick={() => setCurrentStep(3)}
-                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer"
+                className="bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Continue to Add-on Services</span>
                 <ArrowRight className="w-4 h-4" />
@@ -796,11 +802,13 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 3 && (
           <div className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
             <div className="text-center space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">Step 3 of 5</span>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#163A2B] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-block">
+                Step 3 of 5
+              </span>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900">
                 Select Add-on Institutional Services
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Tick the additional digital outreach services you want to bundle with your institutional workspace.
               </p>
             </div>
@@ -812,33 +820,33 @@ export function InstitutionalOnboardingFlow() {
                 onClick={() => setAddonGoogleSubmit(!addonGoogleSubmit)}
                 className={`p-5 rounded-2xl border transition-all cursor-pointer ${
                   addonGoogleSubmit
-                    ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/30'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-emerald-50/40 border-[#163A2B] ring-2 ring-[#163A2B]/40 shadow-sm'
+                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
                 }`}
               >
                 <div className="flex items-start justify-between gap-4">
                   <div className="flex items-start gap-3">
                     <div className="mt-1">
                       {addonGoogleSubmit ? (
-                        <CheckSquare className="w-5 h-5 text-emerald-400" />
+                        <CheckSquare className="w-5 h-5 text-[#163A2B]" />
                       ) : (
-                        <Square className="w-5 h-5 text-slate-500" />
+                        <Square className="w-5 h-5 text-slate-400" />
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <Search className="w-4 h-4 text-emerald-400" />
-                        <h4 className="font-bold text-base text-white">Google Search Console & SEO Submission</h4>
+                        <Search className="w-4 h-4 text-[#163A2B]" />
+                        <h4 className="font-bold text-base text-slate-900">Google Search Console & SEO Submission</h4>
                       </div>
-                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         Full XML sitemap generation, Google Search indexing submission, and Bing/IndexNow pinging so parents find your school instantly on Google.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-mono font-bold text-base text-emerald-400">+₹999</span>
-                    <span className="text-[10px] text-slate-400 block">One-time setup</span>
+                    <span className="font-mono font-bold text-base text-[#163A2B]">+₹999</span>
+                    <span className="text-[10px] text-slate-500 block">One-time setup</span>
                   </div>
                 </div>
               </Card>
@@ -847,8 +855,8 @@ export function InstitutionalOnboardingFlow() {
               <Card
                 className={`p-5 rounded-2xl border transition-all ${
                   addonGoogleMaps
-                    ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/30'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-emerald-50/40 border-[#163A2B] ring-2 ring-[#163A2B]/40 shadow-sm'
+                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
                 }`}
               >
                 <div
@@ -858,39 +866,39 @@ export function InstitutionalOnboardingFlow() {
                   <div className="flex items-start gap-3">
                     <div className="mt-1">
                       {addonGoogleMaps ? (
-                        <CheckSquare className="w-5 h-5 text-emerald-400" />
+                        <CheckSquare className="w-5 h-5 text-[#163A2B]" />
                       ) : (
-                        <Square className="w-5 h-5 text-slate-500" />
+                        <Square className="w-5 h-5 text-slate-400" />
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <MapPin className="w-4 h-4 text-amber-400" />
-                        <h4 className="font-bold text-base text-white">Google Maps Institutional Location Pin</h4>
+                        <MapPin className="w-4 h-4 text-amber-600" />
+                        <h4 className="font-bold text-base text-slate-900">Google Maps Institutional Location Pin</h4>
                       </div>
-                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         Embedding live Google Maps GPS location on your school website so visiting parents and bus drivers navigate easily.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-mono font-bold text-base text-emerald-400">+₹499</span>
-                    <span className="text-[10px] text-slate-400 block">One-time setup</span>
+                    <span className="font-mono font-bold text-base text-[#163A2B]">+₹499</span>
+                    <span className="text-[10px] text-slate-500 block">One-time setup</span>
                   </div>
                 </div>
 
                 {addonGoogleMaps && (
-                  <div className="mt-4 pt-3 border-t border-slate-800 space-y-3">
+                  <div className="mt-4 pt-3 border-t border-slate-100 space-y-3">
                     <div className="flex items-center gap-2">
                       <input
                         type="checkbox"
                         id="mapsLater"
                         checked={uploadMapsLater}
                         onChange={(e) => setUploadMapsLater(e.target.checked)}
-                        className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500"
+                        className="w-4 h-4 rounded text-emerald-600 focus:ring-emerald-500 cursor-pointer"
                       />
-                      <label htmlFor="mapsLater" className="text-xs text-slate-300 cursor-pointer">
+                      <label htmlFor="mapsLater" className="text-xs text-slate-700 cursor-pointer font-medium">
                         Provide Google Maps link later after payment confirmation
                       </label>
                     </div>
@@ -900,7 +908,7 @@ export function InstitutionalOnboardingFlow() {
                         value={googleMapsLink}
                         onChange={(e) => setGoogleMapsLink(e.target.value)}
                         placeholder="Paste Google Maps URL: https://maps.app.goo.gl/..."
-                        className="bg-slate-950 border-slate-700 text-xs text-white"
+                        className="bg-slate-50 border-slate-300 text-xs text-slate-900 focus:bg-white focus:border-[#163A2B]"
                       />
                     )}
                   </div>
@@ -911,8 +919,8 @@ export function InstitutionalOnboardingFlow() {
               <Card
                 className={`p-5 rounded-2xl border transition-all ${
                   addonPlayStore
-                    ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/30'
-                    : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                    ? 'bg-purple-50/40 border-purple-600 ring-2 ring-purple-600/30 shadow-sm'
+                    : 'bg-white border-slate-200 hover:border-slate-300 shadow-xs'
                 }`}
               >
                 <div
@@ -922,36 +930,36 @@ export function InstitutionalOnboardingFlow() {
                   <div className="flex items-start gap-3">
                     <div className="mt-1">
                       {addonPlayStore ? (
-                        <CheckSquare className="w-5 h-5 text-emerald-400" />
+                        <CheckSquare className="w-5 h-5 text-purple-700" />
                       ) : (
-                        <Square className="w-5 h-5 text-slate-500" />
+                        <Square className="w-5 h-5 text-slate-400" />
                       )}
                     </div>
                     <div>
                       <div className="flex items-center gap-2">
-                        <Smartphone className="w-4 h-4 text-purple-400" />
-                        <h4 className="font-bold text-base text-white">Google Play Store Android App Publishing</h4>
+                        <Smartphone className="w-4 h-4 text-purple-700" />
+                        <h4 className="font-bold text-base text-slate-900">Google Play Store Android App Publishing</h4>
                       </div>
-                      <p className="text-xs text-slate-400 mt-1 leading-relaxed">
+                      <p className="text-xs text-slate-600 mt-1 leading-relaxed">
                         Dedicated branded Android APK compiled, signed, and uploaded to Google Play Store under institutional developer account.
                       </p>
                     </div>
                   </div>
 
                   <div className="text-right shrink-0">
-                    <span className="font-mono font-bold text-base text-purple-400">+₹5,000</span>
-                    <span className="text-[10px] text-slate-400 block">Publishing fee</span>
+                    <span className="font-mono font-bold text-base text-purple-700">+₹5,000</span>
+                    <span className="text-[10px] text-slate-500 block">Publishing fee</span>
                   </div>
                 </div>
 
                 {addonPlayStore && (
-                  <div className="mt-4 pt-3 border-t border-slate-800">
-                    <div className="p-3 rounded-xl bg-purple-950/40 border border-purple-600/40 space-y-1 text-xs">
-                      <span className="font-bold text-purple-300 flex items-center gap-1.5">
-                        <Clock className="w-4 h-4 text-purple-400" />
+                  <div className="mt-4 pt-3 border-t border-purple-100">
+                    <div className="p-3 rounded-xl bg-purple-50 border border-purple-200 space-y-1 text-xs">
+                      <span className="font-bold text-purple-900 flex items-center gap-1.5">
+                        <Clock className="w-4 h-4 text-purple-700" />
                         <span>Crucial Timeline Note: 30 – 50 Days Required</span>
                       </span>
-                      <p className="text-[11px] text-purple-200/80 leading-relaxed">
+                      <p className="text-[11px] text-purple-800 leading-relaxed">
                         Google Play Console mandates a strict 14-day closed testing period with 12 opted-in testers and D-U-N-S business organization verification before an institutional app is approved for public store download.
                       </p>
                     </div>
@@ -962,12 +970,12 @@ export function InstitutionalOnboardingFlow() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+            <div className="flex items-center justify-between pt-4 border-t border-slate-200">
               <Button
                 type="button"
                 variant="secondary"
                 onClick={() => setCurrentStep(2)}
-                className="bg-slate-800 text-white hover:bg-slate-700 text-xs flex items-center gap-1.5"
+                className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs flex items-center gap-1.5 shadow-xs"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Domain</span>
@@ -977,7 +985,7 @@ export function InstitutionalOnboardingFlow() {
                 type="button"
                 variant="primary"
                 onClick={() => setCurrentStep(4)}
-                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer"
+                className="bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Continue to Theme & Template</span>
                 <ArrowRight className="w-4 h-4" />
@@ -992,22 +1000,24 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 4 && (
           <div className="space-y-8 animate-in fade-in">
             <div className="text-center space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">Step 4 of 5</span>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#163A2B] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-block">
+                Step 4 of 5
+              </span>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900">
                 Brand Color Palette & Website Design Template
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Pick your school color scheme (unlimited on all plans) and choose from the templates unlocked in your {PLANS_CONFIG[selectedPlan].name} plan.
               </p>
             </div>
 
             {/* Color Palette Selector */}
-            <Card className="p-5 bg-slate-900 border-slate-800 space-y-3 max-w-4xl mx-auto">
-              <div className="flex items-center justify-between border-b border-slate-800 pb-2">
-                <span className="text-xs font-bold text-white uppercase tracking-wider">
+            <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-3 max-w-4xl mx-auto">
+              <div className="flex items-center justify-between border-b border-slate-100 pb-2">
+                <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
                   Brand Color Palette
                 </span>
-                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold">
+                <span className="text-[10px] px-2 py-0.5 rounded-full bg-emerald-100 text-[#163A2B] font-bold">
                   Changeable anytime in admin panel
                 </span>
               </div>
@@ -1021,13 +1031,13 @@ export function InstitutionalOnboardingFlow() {
                       onClick={() => setSelectedThemeId(p.id)}
                       className={`p-2.5 rounded-xl border text-left flex items-center gap-2 transition-all cursor-pointer ${
                         isThemeActive
-                          ? 'border-emerald-500 bg-emerald-500/15 shadow-sm ring-1 ring-emerald-500'
-                          : 'border-slate-800 bg-slate-950 hover:border-slate-700'
+                          ? 'border-[#163A2B] bg-emerald-50 text-[#163A2B] shadow-xs ring-1 ring-[#163A2B]'
+                          : 'border-slate-200 bg-slate-50 hover:border-slate-300 text-slate-700'
                       }`}
                     >
-                      <span className="w-4 h-4 rounded-full shrink-0 border border-black/30" style={{ backgroundColor: p.primaryHex }} />
-                      <span className="text-xs font-semibold text-white truncate">{p.name.split(' ')[0]}</span>
-                      {isThemeActive && <Check className="w-3.5 h-3.5 text-emerald-400 ml-auto" />}
+                      <span className="w-4 h-4 rounded-full shrink-0 border border-black/20" style={{ backgroundColor: p.primaryHex }} />
+                      <span className="text-xs font-semibold truncate">{p.name.split(' ')[0]}</span>
+                      {isThemeActive && <Check className="w-3.5 h-3.5 text-[#163A2B] ml-auto" />}
                     </button>
                   );
                 })}
@@ -1037,10 +1047,10 @@ export function InstitutionalOnboardingFlow() {
             {/* Template Selection Grid */}
             <div className="space-y-4">
               <div className="flex items-center justify-between max-w-4xl mx-auto">
-                <span className="text-xs font-bold text-white uppercase tracking-wider">
+                <span className="text-xs font-bold text-slate-900 uppercase tracking-wider">
                   Available Templates for {PLANS_CONFIG[selectedPlan].name} ({unlockedTemplates.length} Available)
                 </span>
-                <span className="text-xs text-slate-400">Click a template card to select:</span>
+                <span className="text-xs text-slate-500">Click a template card to select:</span>
               </div>
 
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
@@ -1052,25 +1062,25 @@ export function InstitutionalOnboardingFlow() {
                       onClick={() => setSelectedTemplateId(tmpl.id)}
                       className={`rounded-2xl border overflow-hidden cursor-pointer transition-all duration-200 flex flex-col justify-between ${
                         isSelected
-                          ? 'bg-slate-900 border-emerald-500 ring-2 ring-emerald-500/40 shadow-xl'
-                          : 'bg-slate-900/60 border-slate-800 hover:border-slate-700'
+                          ? 'bg-white border-[#163A2B] ring-2 ring-[#163A2B] shadow-md'
+                          : 'bg-white border-slate-200 hover:border-slate-300 hover:shadow-md'
                       }`}
                     >
                       <div>
-                        <div className="relative aspect-[16/10] bg-slate-950 overflow-hidden">
+                        <div className="relative aspect-[16/10] bg-slate-100 overflow-hidden">
                           <img src={tmpl.previewImage} alt={tmpl.name} className="w-full h-full object-cover object-top" />
-                          <span className="absolute top-2 left-2 text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-black/80 text-white">
+                          <span className="absolute top-2 left-2 text-[10px] font-mono font-bold px-2 py-0.5 rounded bg-black/70 text-white">
                             {tmpl.code}
                           </span>
                           {isSelected && (
-                            <span className="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded bg-emerald-500 text-slate-950 shadow-sm flex items-center gap-1">
+                            <span className="absolute top-2 right-2 text-[10px] font-bold px-2 py-0.5 rounded bg-[#163A2B] text-white shadow-sm flex items-center gap-1">
                               <Check className="w-3 h-3" /> Selected
                             </span>
                           )}
                         </div>
                         <div className="p-4 space-y-1">
-                          <h4 className="font-bold text-sm text-white">{tmpl.name}</h4>
-                          <span className="text-[10px] text-slate-400 block">{tmpl.category}</span>
+                          <h4 className="font-bold text-sm text-slate-900">{tmpl.name}</h4>
+                          <span className="text-[10px] text-slate-500 block">{tmpl.category}</span>
                         </div>
                       </div>
 
@@ -1080,7 +1090,9 @@ export function InstitutionalOnboardingFlow() {
                           variant={isSelected ? 'primary' : 'secondary'}
                           size="sm"
                           className={`w-full text-xs font-semibold ${
-                            isSelected ? 'bg-emerald-500 text-slate-950 font-bold' : 'bg-slate-800 text-white hover:bg-slate-700'
+                            isSelected
+                              ? 'bg-[#163A2B] text-white font-bold'
+                              : 'bg-slate-100 text-slate-700 hover:bg-slate-200 border border-slate-200'
                           }`}
                         >
                           {isSelected ? '✓ Selected Design' : 'Use This Template'}
@@ -1093,12 +1105,12 @@ export function InstitutionalOnboardingFlow() {
             </div>
 
             {/* Navigation Buttons */}
-            <div className="flex items-center justify-between pt-4 border-t border-slate-800">
+            <div className="flex items-center justify-between pt-4 border-t border-slate-200">
               <Button
                 type="button"
                 variant="secondary"
                 onClick={() => setCurrentStep(3)}
-                className="bg-slate-800 text-white hover:bg-slate-700 text-xs flex items-center gap-1.5"
+                className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs flex items-center gap-1.5 shadow-xs"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Add-ons</span>
@@ -1108,7 +1120,7 @@ export function InstitutionalOnboardingFlow() {
                 type="button"
                 variant="primary"
                 onClick={() => setCurrentStep(5)}
-                className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer"
+                className="bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-bold px-6 py-2.5 text-xs flex items-center gap-2 cursor-pointer shadow-sm"
               >
                 <span>Proceed to Payment & Checkout</span>
                 <ArrowRight className="w-4 h-4" />
@@ -1123,11 +1135,13 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 5 && (
           <form onSubmit={handleSubmitOrder} className="space-y-8 max-w-4xl mx-auto animate-in fade-in">
             <div className="text-center space-y-2">
-              <span className="text-xs uppercase font-bold tracking-widest text-emerald-400">Step 5 of 5</span>
-              <h2 className="font-display font-black text-2xl sm:text-3xl text-white">
+              <span className="text-xs uppercase font-bold tracking-widest text-[#163A2B] bg-emerald-50 border border-emerald-200 px-3 py-1 rounded-full inline-block">
+                Step 5 of 5
+              </span>
+              <h2 className="font-display font-black text-2xl sm:text-3xl text-slate-900">
                 Order Review & Instant Payment
               </h2>
-              <p className="text-xs sm:text-sm text-slate-400">
+              <p className="text-xs sm:text-sm text-slate-600">
                 Scan the dynamic UPI QR code, complete payment, and submit your 12-digit UTR and screenshot for super admin approval.
               </p>
             </div>
@@ -1136,86 +1150,86 @@ export function InstitutionalOnboardingFlow() {
               
               {/* Left Column: Itemized Invoice Summary */}
               <div className="md:col-span-6 space-y-4">
-                <Card className="p-5 bg-slate-900 border-slate-800 space-y-4">
-                  <h3 className="font-bold text-sm text-white uppercase tracking-wider border-b border-slate-800 pb-2">
+                <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-4">
+                  <h3 className="font-bold text-sm text-slate-900 uppercase tracking-wider border-b border-slate-100 pb-2">
                     Itemized Investment Breakdown
                   </h3>
 
                   <div className="space-y-2 text-xs">
-                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                    <div className="flex justify-between items-center py-1 border-b border-slate-100">
                       <div>
-                        <span className="font-bold text-white">{planInfo.name} Plan Tier</span>
-                        <span className="text-[10px] text-slate-400 block">({billingCycle === 'monthly' ? 'Monthly' : 'Annual'})</span>
+                        <span className="font-bold text-slate-900">{planInfo.name} Plan Tier</span>
+                        <span className="text-[10px] text-slate-500 block">({billingCycle === 'monthly' ? 'Monthly' : 'Annual'})</span>
                       </div>
-                      <span className="font-mono font-bold text-white">₹{planPrice.toLocaleString('en-IN')}</span>
+                      <span className="font-mono font-bold text-slate-900">₹{planPrice.toLocaleString('en-IN')}</span>
                     </div>
 
-                    <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
+                    <div className="flex justify-between items-center py-1 border-b border-slate-100">
                       <div>
-                        <span className="font-medium text-slate-300">
+                        <span className="font-medium text-slate-700">
                           {domainType === 'subdomain' ? 'Institutional Subdomain' : `Domain: ${customDomainName}${customDomainExt}`}
                         </span>
-                        <span className="text-[10px] text-slate-400 block">
+                        <span className="text-[10px] text-slate-500 block">
                           {domainType === 'subdomain' ? 'Included Free' : '1 Year Registration & DNS'}
                         </span>
                       </div>
-                      <span className="font-mono font-bold text-white">
+                      <span className="font-mono font-bold text-slate-900">
                         {domainPrice > 0 ? `+₹${domainPrice.toLocaleString('en-IN')}` : '₹0 (Free)'}
                       </span>
                     </div>
 
                     {addonGoogleSubmit && (
-                      <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
-                        <span className="text-slate-300">Google Search Console Submission</span>
-                        <span className="font-mono font-bold text-emerald-400">+₹999</span>
+                      <div className="flex justify-between items-center py-1 border-b border-slate-100">
+                        <span className="text-slate-700">Google Search Console Submission</span>
+                        <span className="font-mono font-bold text-[#163A2B]">+₹999</span>
                       </div>
                     )}
 
                     {addonGoogleMaps && (
-                      <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
-                        <span className="text-slate-300">Google Maps GPS Location Pin</span>
-                        <span className="font-mono font-bold text-emerald-400">+₹499</span>
+                      <div className="flex justify-between items-center py-1 border-b border-slate-100">
+                        <span className="text-slate-700">Google Maps GPS Location Pin</span>
+                        <span className="font-mono font-bold text-[#163A2B]">+₹499</span>
                       </div>
                     )}
 
                     {addonPlayStore && (
-                      <div className="flex justify-between items-center py-1 border-b border-slate-800/60">
-                        <span className="text-slate-300">Google Play Store App Publishing</span>
-                        <span className="font-mono font-bold text-purple-400">+₹5,000</span>
+                      <div className="flex justify-between items-center py-1 border-b border-slate-100">
+                        <span className="text-slate-700">Google Play Store App Publishing</span>
+                        <span className="font-mono font-bold text-purple-700">+₹5,000</span>
                       </div>
                     )}
                   </div>
 
-                  <div className="pt-3 border-t-2 border-slate-800 flex justify-between items-baseline">
-                    <span className="font-display font-bold text-base text-white">Total Amount Payable</span>
-                    <span className="font-display font-black text-2xl text-emerald-400">
+                  <div className="pt-3 border-t-2 border-slate-100 flex justify-between items-baseline">
+                    <span className="font-display font-bold text-base text-slate-900">Total Amount Payable</span>
+                    <span className="font-display font-black text-2xl text-[#163A2B]">
                       ₹{totalPayable.toLocaleString('en-IN')}
                     </span>
                   </div>
                 </Card>
 
                 {/* Contact Person Details */}
-                <Card className="p-5 bg-slate-900 border-slate-800 space-y-3 text-xs">
-                  <h4 className="font-bold text-xs text-white uppercase tracking-wider">
+                <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-3 text-xs">
+                  <h4 className="font-bold text-xs text-slate-900 uppercase tracking-wider">
                     School Administrator Contact
                   </h4>
                   <div className="space-y-2">
-                    <label className="text-[11px] text-slate-400">Contact Person Name</label>
+                    <label className="text-[11px] font-semibold text-slate-600">Contact Person Name</label>
                     <Input
                       value={payerName}
                       onChange={(e) => setPayerName(e.target.value)}
                       required
-                      className="bg-slate-950 border-slate-700 text-xs text-white"
+                      className="bg-slate-50 border-slate-300 text-xs text-slate-900 focus:bg-white focus:border-[#163A2B]"
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-[11px] text-slate-400">Mobile / WhatsApp Number (for SMS Alerts)</label>
+                    <label className="text-[11px] font-semibold text-slate-600">Mobile / WhatsApp Number (for SMS Alerts)</label>
                     <Input
                       value={payerPhone}
                       onChange={(e) => setPayerPhone(e.target.value)}
                       required
                       placeholder="9876543210"
-                      className="bg-slate-950 border-slate-700 text-xs text-white"
+                      className="bg-slate-50 border-slate-300 text-xs text-slate-900 focus:bg-white focus:border-[#163A2B]"
                     />
                   </div>
                 </Card>
@@ -1223,13 +1237,13 @@ export function InstitutionalOnboardingFlow() {
 
               {/* Right Column: Dynamic UPI QR Code & Payment Verification Form */}
               <div className="md:col-span-6 space-y-4">
-                <Card className="p-5 bg-slate-900 border-emerald-500/40 text-center space-y-4">
-                  <span className="text-xs font-bold text-emerald-400 uppercase tracking-wider block">
+                <Card className="p-5 bg-white border-emerald-200 shadow-sm text-center space-y-4">
+                  <span className="text-xs font-bold text-[#163A2B] uppercase tracking-wider block">
                     Instant UPI Payment QR Code
                   </span>
 
-                  {/* QR Code Canvas Mock with Real Amount */}
-                  <div className="p-4 bg-white rounded-2xl inline-block shadow-2xl mx-auto border-4 border-emerald-500/30">
+                  {/* QR Code Canvas Frame */}
+                  <div className="p-4 bg-white rounded-2xl inline-block shadow-md mx-auto border-2 border-[#163A2B]/20">
                     <img
                       src={`https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=upi%3A%2F%2Fpay%3Fpa%3Deduportal%40icici%26pn%3DEduPortal%26am%3D${totalPayable}%26cu%3DINR`}
                       alt="UPI Payment QR Code"
@@ -1242,15 +1256,15 @@ export function InstitutionalOnboardingFlow() {
 
                   <div className="space-y-1 text-xs">
                     <div className="flex items-center justify-center gap-2">
-                      <span className="text-slate-400">UPI ID:</span>
-                      <span className="font-mono font-bold text-emerald-400">eduportal@icici</span>
+                      <span className="text-slate-500">UPI ID:</span>
+                      <span className="font-mono font-bold text-[#163A2B]">eduportal@icici</span>
                       <button
                         type="button"
                         onClick={handleCopyUpi}
-                        className="p-1 rounded bg-slate-800 hover:bg-slate-700 text-slate-300"
+                        className="p-1 rounded bg-slate-100 hover:bg-slate-200 text-slate-700 border border-slate-200"
                         title="Copy UPI ID"
                       >
-                        {copiedUpi ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
+                        {copiedUpi ? <Check className="w-3.5 h-3.5 text-[#163A2B]" /> : <Copy className="w-3.5 h-3.5" />}
                       </button>
                     </div>
                     <span className="text-[11px] text-slate-500 block">
@@ -1260,21 +1274,21 @@ export function InstitutionalOnboardingFlow() {
                 </Card>
 
                 {/* Transaction Proof Submission Form */}
-                <Card className="p-5 bg-slate-900 border-slate-800 space-y-3 text-xs">
-                  <h4 className="font-bold text-xs text-white uppercase tracking-wider">
+                <Card className="p-5 bg-white border-slate-200 shadow-sm space-y-3 text-xs">
+                  <h4 className="font-bold text-xs text-slate-900 uppercase tracking-wider">
                     Submit Payment Verification Proof
                   </h4>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-semibold text-slate-300">
-                      12-Digit UPI Transaction ID / UTR Number <span className="text-rose-400">*</span>
+                    <label className="text-[11px] font-semibold text-slate-700">
+                      12-Digit UPI Transaction ID / UTR Number <span className="text-rose-500">*</span>
                     </label>
                     <Input
                       value={transactionId}
                       onChange={(e) => setTransactionId(e.target.value)}
                       placeholder="e.g. 428901847291"
                       required
-                      className="bg-slate-950 border-slate-700 text-emerald-400 font-mono font-bold text-sm tracking-wider"
+                      className="bg-slate-50 border-slate-300 text-[#163A2B] font-mono font-bold text-sm tracking-wider focus:bg-white focus:border-[#163A2B]"
                     />
                     <span className="text-[10px] text-slate-500">
                       Found in your GPay / PhonePe / Paytm receipt details as "UPI Ref ID" or "UTR".
@@ -1282,19 +1296,19 @@ export function InstitutionalOnboardingFlow() {
                   </div>
 
                   <div className="space-y-1.5">
-                    <label className="text-[11px] font-semibold text-slate-300">
-                      Upload Payment Screenshot / Receipt Photo <span className="text-rose-400">*</span>
+                    <label className="text-[11px] font-semibold text-slate-700">
+                      Upload Payment Screenshot / Receipt Photo <span className="text-rose-500">*</span>
                     </label>
                     <input
                       type="file"
                       accept="image/*"
                       onChange={handleReceiptUpload}
-                      className="block w-full text-xs text-slate-400 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-emerald-600 file:text-white hover:file:bg-emerald-700 cursor-pointer"
+                      className="block w-full text-xs text-slate-600 file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border-0 file:text-xs file:font-semibold file:bg-[#163A2B] file:text-white hover:file:bg-[#0F2A1F] cursor-pointer"
                     />
                     {receiptImage && (
-                      <div className="mt-2 p-2 bg-slate-950 rounded-xl border border-slate-800 flex items-center gap-3">
+                      <div className="mt-2 p-2 bg-slate-50 rounded-xl border border-slate-200 flex items-center gap-3">
                         <img src={receiptImage} alt="Receipt preview" className="w-12 h-12 object-cover rounded-lg" />
-                        <span className="text-[11px] text-emerald-400 font-semibold">✓ Payment receipt uploaded</span>
+                        <span className="text-[11px] text-[#163A2B] font-semibold">✓ Payment receipt uploaded</span>
                       </div>
                     )}
                   </div>
@@ -1302,7 +1316,7 @@ export function InstitutionalOnboardingFlow() {
                   <Button
                     type="submit"
                     variant="primary"
-                    className="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-3 text-sm mt-3 shadow-xl cursor-pointer"
+                    className="w-full bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-black py-3 text-sm mt-3 shadow-md cursor-pointer"
                   >
                     Submit Order & Request Instant Activation →
                   </Button>
@@ -1317,7 +1331,7 @@ export function InstitutionalOnboardingFlow() {
                 type="button"
                 variant="secondary"
                 onClick={() => setCurrentStep(4)}
-                className="bg-slate-800 text-white hover:bg-slate-700 text-xs flex items-center gap-1.5"
+                className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs flex items-center gap-1.5 shadow-xs"
               >
                 <ArrowLeft className="w-4 h-4" />
                 <span>Back to Theme & Template</span>
@@ -1332,48 +1346,48 @@ export function InstitutionalOnboardingFlow() {
         {currentStep === 6 && activeOrder && (
           <div className="space-y-8 max-w-2xl mx-auto text-center animate-in fade-in">
             {activeOrder.status === 'pending_approval' ? (
-              <Card className="p-8 bg-slate-900 border-amber-500/40 space-y-6">
-                <div className="w-16 h-16 rounded-full bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center mx-auto text-2xl animate-pulse">
+              <Card className="p-8 bg-white border-amber-300 shadow-md space-y-6">
+                <div className="w-16 h-16 rounded-full bg-amber-50 text-amber-600 border border-amber-200 flex items-center justify-center mx-auto text-2xl animate-pulse">
                   ⏳
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-xs font-mono font-bold text-amber-400 px-3 py-1 rounded-full bg-amber-500/15">
+                  <span className="text-xs font-mono font-bold text-amber-800 px-3 py-1 rounded-full bg-amber-100">
                     Order Ref: {activeOrder.orderId}
                   </span>
-                  <h3 className="font-display font-black text-2xl text-white">
+                  <h3 className="font-display font-black text-2xl text-slate-900">
                     Order Submitted! Waiting for Super Admin Approval
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
-                    Your payment verification proof (UTR: <span className="font-mono text-emerald-400">{activeOrder.transactionId}</span>) has been routed to the Super Admin verification desk.
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
+                    Your payment verification proof (UTR: <span className="font-mono text-[#163A2B] font-bold">{activeOrder.transactionId}</span>) has been routed to the Super Admin verification desk.
                   </p>
                 </div>
 
-                <div className="p-4 bg-slate-950 rounded-2xl border border-slate-800 text-left space-y-2 text-xs">
+                <div className="p-4 bg-slate-50 rounded-2xl border border-slate-200 text-left space-y-2 text-xs">
                   <div className="flex justify-between">
-                    <span className="text-slate-400">School Name:</span>
-                    <span className="font-bold text-white">{activeOrder.schoolName}</span>
+                    <span className="text-slate-500">School Name:</span>
+                    <span className="font-bold text-slate-900">{activeOrder.schoolName}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Plan Tier:</span>
-                    <span className="font-bold text-emerald-400 uppercase">{activeOrder.planTier}</span>
+                    <span className="text-slate-500">Plan Tier:</span>
+                    <span className="font-bold text-[#163A2B] uppercase">{activeOrder.planTier}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Total Paid:</span>
-                    <span className="font-bold text-white font-mono">₹{activeOrder.totalAmount.toLocaleString('en-IN')}</span>
+                    <span className="text-slate-500">Total Paid:</span>
+                    <span className="font-bold text-slate-900 font-mono">₹{activeOrder.totalAmount.toLocaleString('en-IN')}</span>
                   </div>
                   <div className="flex justify-between">
-                    <span className="text-slate-400">Notification Phone:</span>
-                    <span className="font-bold text-white">{activeOrder.payerPhone}</span>
+                    <span className="text-slate-500">Notification Phone:</span>
+                    <span className="font-bold text-slate-900">{activeOrder.payerPhone}</span>
                   </div>
                 </div>
 
-                <div className="p-3 bg-emerald-950/40 rounded-xl border border-emerald-500/30 text-xs text-emerald-300">
+                <div className="p-3 bg-emerald-50 rounded-xl border border-emerald-200 text-xs text-[#163A2B] font-medium">
                   📱 "You will be notified via SMS/WhatsApp once our Super Admin approves your school!"
                 </div>
 
                 {/* Instant Super Admin Approval Demo Trigger */}
-                <div className="pt-4 border-t border-slate-800 space-y-2">
+                <div className="pt-4 border-t border-slate-100 space-y-2">
                   <span className="text-[11px] text-slate-500 block">
                     Developer & Testing Shortcut:
                   </span>
@@ -1381,28 +1395,28 @@ export function InstitutionalOnboardingFlow() {
                     type="button"
                     onClick={handleInstantApprove}
                     variant="primary"
-                    className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-bold py-2.5 text-xs shadow-lg flex items-center justify-center gap-2 cursor-pointer"
+                    className="w-full bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-bold py-2.5 text-xs shadow-md flex items-center justify-center gap-2 cursor-pointer"
                   >
-                    <ShieldCheck className="w-4 h-4" />
+                    <ShieldCheck className="w-4 h-4 text-emerald-300" />
                     <span>Super Admin Instant Approve & Provision School</span>
                   </Button>
                 </div>
               </Card>
             ) : (
               /* Approved State */
-              <Card className="p-8 bg-slate-900 border-emerald-500 space-y-6">
-                <div className="w-16 h-16 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/40 flex items-center justify-center mx-auto text-2xl">
+              <Card className="p-8 bg-white border-emerald-500 shadow-lg space-y-6">
+                <div className="w-16 h-16 rounded-full bg-emerald-50 text-[#163A2B] border border-emerald-200 flex items-center justify-center mx-auto text-2xl">
                   ✓
                 </div>
 
                 <div className="space-y-2">
-                  <span className="text-xs font-mono font-bold text-emerald-400 px-3 py-1 rounded-full bg-emerald-500/15">
+                  <span className="text-xs font-mono font-bold text-[#163A2B] px-3 py-1 rounded-full bg-emerald-100">
                     Tenant Activated: {activeOrder.orderId}
                   </span>
-                  <h3 className="font-display font-black text-2xl text-white">
+                  <h3 className="font-display font-black text-2xl text-slate-900">
                     Congratulations! {activeOrder.schoolName} is Live!
                   </h3>
-                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed max-w-md mx-auto">
+                  <p className="text-xs sm:text-sm text-slate-600 leading-relaxed max-w-md mx-auto">
                     Your institutional workspace has been provisioned with all {PLANS_CONFIG[activeOrder.planTier].modules.length} modules, custom theme, and templates.
                   </p>
                 </div>
@@ -1414,10 +1428,21 @@ export function InstitutionalOnboardingFlow() {
                       setShowGuidedTour(true);
                       setAdminSetupModal(true);
                     }}
-                    className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black px-6 py-2.5 text-xs shadow-xl cursor-pointer"
+                    className="bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-black px-6 py-2.5 text-xs shadow-md cursor-pointer"
                   >
                     Setup School Admin Credentials & Take Tour →
                   </Button>
+
+                  <Link href="/?view=school">
+                    <Button
+                      type="button"
+                      variant="secondary"
+                      className="bg-white hover:bg-slate-50 text-slate-700 border border-slate-200 text-xs px-5 py-2.5 shadow-xs flex items-center gap-1.5"
+                    >
+                      <Globe className="w-3.5 h-3.5 text-[#163A2B]" />
+                      <span>Preview School Website</span>
+                    </Button>
+                  </Link>
                 </div>
               </Card>
             )}
@@ -1430,52 +1455,52 @@ export function InstitutionalOnboardingFlow() {
       {/* GUIDED TOUR & ADMIN CREDENTIAL SETUP MODAL */}
       {/* =================================================================================== */}
       {adminSetupModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-md animate-in fade-in">
-          <div className="relative w-full max-w-md bg-slate-900 border border-emerald-500/40 rounded-2xl shadow-2xl p-6 text-white space-y-5 animate-in zoom-in-95">
-            <div className="flex items-center gap-3 border-b border-slate-800 pb-3">
-              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm animate-in fade-in">
+          <div className="relative w-full max-w-md bg-white border border-slate-200 rounded-2xl shadow-2xl p-6 text-slate-900 space-y-5 animate-in zoom-in-95">
+            <div className="flex items-center gap-3 border-b border-slate-100 pb-3">
+              <div className="w-10 h-10 rounded-xl bg-emerald-50 text-[#163A2B] flex items-center justify-center font-bold text-lg border border-emerald-200">
                 🔐
               </div>
               <div>
-                <h3 className="font-display font-bold text-base text-white">
+                <h3 className="font-display font-bold text-base text-slate-900">
                   Setup School Admin Credentials
                 </h3>
-                <span className="text-[10px] text-emerald-400">Initial Institutional Master Account</span>
+                <span className="text-[10px] text-[#163A2B] font-semibold">Initial Institutional Master Account</span>
               </div>
             </div>
 
             <div className="space-y-3 text-xs">
               <div className="space-y-1">
-                <label className="text-[11px] text-slate-300">Admin Email ID</label>
+                <label className="text-[11px] font-semibold text-slate-700">Admin Email ID</label>
                 <Input
                   type="email"
                   value={adminEmail}
                   onChange={(e) => setAdminEmail(e.target.value)}
-                  className="bg-slate-950 border-slate-700 text-xs text-white"
+                  className="bg-slate-50 border-slate-300 text-xs text-slate-900 focus:bg-white focus:border-[#163A2B]"
                 />
               </div>
 
               <div className="space-y-1">
-                <label className="text-[11px] text-slate-300">Set Admin Password</label>
+                <label className="text-[11px] font-semibold text-slate-700">Set Admin Password</label>
                 <Input
                   type="password"
                   value={adminPassword}
                   onChange={(e) => setAdminPassword(e.target.value)}
                   placeholder="••••••••••••"
-                  className="bg-slate-950 border-slate-700 text-xs text-white"
+                  className="bg-slate-50 border-slate-300 text-xs text-slate-900 focus:bg-white focus:border-[#163A2B]"
                 />
               </div>
             </div>
 
             {/* Guided Tour Tips with Arrows */}
-            <div className="p-3.5 bg-emerald-950/50 rounded-xl border border-emerald-500/30 space-y-2 text-xs">
-              <span className="font-bold text-emerald-300 block">
+            <div className="p-3.5 bg-emerald-50 rounded-xl border border-emerald-200 space-y-2 text-xs">
+              <span className="font-bold text-[#163A2B] block">
                 👉 How to Enter Your Admin Panel:
               </span>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
+              <p className="text-[11px] text-slate-700 leading-relaxed">
                 1. <strong>Secret Gesture:</strong> On the top header, tap your school logo <strong>5 times quickly</strong> to unlock the Secret Admin Gateway!
               </p>
-              <p className="text-[11px] text-slate-300 leading-relaxed">
+              <p className="text-[11px] text-slate-700 leading-relaxed">
                 2. <strong>Dashboard Drawer:</strong> Or click the <strong>[☰ Dashboard]</strong> button on the left to access your Admin Panel, Principal Cockpit, and Student Portal.
               </p>
             </div>
@@ -1486,7 +1511,7 @@ export function InstitutionalOnboardingFlow() {
                 setAdminSetupModal(false);
                 router.push('/admin/dashboard');
               }}
-              className="w-full bg-emerald-500 hover:bg-emerald-600 text-slate-950 font-black py-2.5 text-xs cursor-pointer"
+              className="w-full bg-[#163A2B] hover:bg-[#0F2A1F] text-white font-black py-2.5 text-xs cursor-pointer shadow-md"
             >
               Save Credentials & Enter Admin Panel →
             </Button>
