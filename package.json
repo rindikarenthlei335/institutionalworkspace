@@ -10,7 +10,8 @@
     "lint": "pnpm --recursive run lint",
     "test": "node --test --experimental-strip-types tests/*.test.ts",
     "i18n:check": "node scripts/i18n_check.js",
-    "gen:module": "node scripts/gen-module.js"
+    "gen:module": "node scripts/gen-module.js",
+    "deploy:api": "wrangler deploy --config apps/api/wrangler.json"
   },
   "devDependencies": {
     "@aws-sdk/client-s3": "^3.1143.0",
@@ -18,6 +19,7 @@
     "@types/pg": "^8.23.1",
     "jszip": "^3.10.2",
     "pg": "^8.23.1",
-    "typescript": "^5.7.3"
+    "typescript": "^5.7.3",
+    "wrangler": "^3.102.0"
   }
 }
