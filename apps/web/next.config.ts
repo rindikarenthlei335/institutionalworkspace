@@ -4,6 +4,7 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   transpilePackages: ['@eduportal/shared'],
   images: {
+    unoptimized: true,
     remotePatterns: [
       { protocol: 'https', hostname: '**' }
     ]

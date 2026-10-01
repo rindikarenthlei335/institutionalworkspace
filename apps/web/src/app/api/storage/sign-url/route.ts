@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextRequest, NextResponse } from 'next/server';
 import { getR2SignedUploadUrl, getR2SignedDownloadUrl } from '@/lib/r2';
 

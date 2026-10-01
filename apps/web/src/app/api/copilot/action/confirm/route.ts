@@ -1,3 +1,5 @@
+export const runtime = 'edge';
+
 import { NextResponse } from 'next/server';
 import { applyDraftAction } from '@/features/copilot/lib/action-drafts';
 
