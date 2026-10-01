@@ -137,8 +137,8 @@ export default function PublicHomePage() {
               title: 'SaaS Tier Plans & Pricing',
               badge: 'SAAS TIERS',
               color: 'bg-blue-50 border-blue-200 text-blue-800',
-              href: '/platform/plans',
-              desc: 'Starter, Growth, Ultimate, and Enterprise tiers with live feature gating & module comparison.'
+              href: '/plans',
+              desc: 'Starter, Growth, Ultimate tiers with interactive add-on checkboxes and cost calculator.'
             },
             {
               title: 'Super Admin & Multi-Tenancy',

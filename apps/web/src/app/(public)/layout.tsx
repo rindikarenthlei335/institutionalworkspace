@@ -28,8 +28,8 @@ export default function PublicWebsiteLayout({
           <Link href="/admin/copilot" className="px-2 py-0.5 rounded bg-purple-700/60 hover:bg-purple-600 text-white font-medium border border-purple-500/30">
             ✨ AI Copilot
           </Link>
-          <Link href="/platform/plans" className="px-2 py-0.5 rounded bg-blue-700/60 hover:bg-blue-600 text-white font-medium border border-blue-500/30">
-            ⚡ Tier Plans
+          <Link href="/plans" className="px-2 py-0.5 rounded bg-blue-700/60 hover:bg-blue-600 text-white font-medium border border-blue-500/30">
+            ⚡ Tier Plans & Add-ons
           </Link>
           <Link href="/platform/tenants" className="px-2 py-0.5 rounded bg-indigo-700/60 hover:bg-indigo-600 text-white font-medium border border-indigo-500/30">
             🌐 Super Admin
